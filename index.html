@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJH — Video Editor & Motion Designer</title>
+  <meta name="description" content="UK-based Video Editor & Motion Designer. 6+ years, 100+ projects, 899K+ organic YouTube views. Available for commercial work and full-time roles." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --lime:    #C8F542;
+      --white:   #F2F1EC;
+      --grey:    rgba(242,241,236,0.45);
+      --black:   #0A0A0A;
+      --mid:     #141414;
+      --border:  rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(20px);
+      border-color: var(--border);
+    }
+
+    /* Logo using mix-blend-mode so white art shows, bg disappears */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      height: 36px;
+    }
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      mix-blend-mode: screen;
+      /* screen mode: white shows, black/transparent disappears */
+      filter: brightness(1.1);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .nav-link {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--white); }
+
+    .nav-hire {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--lime);
+      padding: 0.55rem 1.3rem;
+      border-radius: 3px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .nav-hire:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 2.5rem 4rem;
+    }
+
+    /* Self-hosted MP4 as background */
+    .hero-video-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .hero-video-bg video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10,10,10,0.95) 0%,
+        rgba(10,10,10,0.45) 50%,
+        rgba(10,10,10,0.1) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1.25rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-weight: 700;
+      line-height: 0.93;
+      letter-spacing: -0.04em;
+      margin-bottom: 2.5rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--lime);
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.67rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 0.25rem;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+
+    .hero-cta {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--lime);
+      padding: 0.75rem 1.6rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .hero-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 36px;
+      background: var(--grey);
+      transform-origin: top;
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); opacity: 0; }
+      40% { opacity: 1; }
+      100% { transform: scaleY(1); opacity: 0; }
+    }
+
+    /* ── WORK SECTION ── */
+    #work { padding: 0; }
+
+    .work-sep {
+      height: 1px;
+      background: var(--border);
+    }
+
+    .work-panel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+    }
+
+    .work-panel iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 177.78%);
+      height: max(56.25%, 100%);
+      transform: translate(-50%, -50%);
+      border: none;
+      pointer-events: none;
+    }
+
+    .work-panel-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,10,10,0.5);
+      transition: background 0.4s;
+      z-index: 2;
+    }
+    .work-panel:hover .work-panel-overlay {
+      background: rgba(10,10,10,0.08);
+    }
+
+    .work-panel-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      z-index: 3;
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(200,245,66,0.12);
+      border: 2px solid var(--lime);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .work-panel-play svg { fill: var(--lime); width: 24px; height: 24px; margin-left: 4px; }
+    .work-panel:hover .work-panel-play {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .work-more {
+      text-align: center;
+      padding: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .work-more a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .work-more a:hover { color: var(--white); border-color: var(--lime); }
+
+    /* ── MODAL ── */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.94);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal.open { display: flex; }
+    .modal-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1080px;
+      aspect-ratio: 16/9;
+    }
+    .modal-inner iframe { width: 100%; height: 100%; border: none; }
+    .modal-close {
+      position: absolute;
+      top: -2.5rem; right: 0;
+      background: none; border: none;
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .modal-close:hover { opacity: 1; }
+
+    /* ── ABOUT ── */
+    .about-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1.25rem;
+    }
+    .about-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      margin-bottom: 2rem;
+    }
+    .about-body {
+      font-size: 0.92rem;
+      color: var(--grey);
+      line-height: 1.85;
+    }
+    .about-body strong { color: var(--white); font-weight: 500; }
+    .about-body p + p { margin-top: 1rem; }
+
+    .about-available {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: var(--lime);
+      border: 1px solid rgba(200,245,66,0.25);
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+    }
+    .about-available::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+      display: inline-block;
+      animation: blink 2s infinite;
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .stat-box {
+      background: var(--mid);
+      padding: 2rem 1.75rem;
+      transition: background 0.2s;
+    }
+    .stat-box:hover { background: #1a1a1a; }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+    .stat-num.lime { color: var(--lime); }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    /* ── SERVICES ── */
+    .services-wrap {
+      border-top: 1px solid var(--border);
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+    }
+    .services-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+    .services-sub {
+      font-size: 0.85rem;
+      color: var(--grey);
+      max-width: 260px;
+      text-align: right;
+      line-height: 1.65;
+    }
+
+    .service-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.25s;
+    }
+    .service-row:first-of-type { border-top: 1px solid var(--border); }
+    .service-row:hover { padding-left: 0.75rem; }
+
+    .service-left { display: flex; align-items: center; gap: 1.5rem; }
+    .service-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(200,245,66,0.35);
+      min-width: 1.8rem;
+    }
+    .service-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      transition: color 0.2s;
+    }
+    .service-row:hover .service-name { color: var(--lime); }
+    .service-desc {
+      font-size: 0.8rem;
+      color: var(--grey);
+      max-width: 320px;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testi-wrap {
+      border-top: 1px solid var(--border);
+      padding: 5rem 0;
+      overflow: hidden;
+    }
+    .testi-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grey);
+      padding: 0 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .testi-track {
+      display: flex;
+      gap: 1.25rem;
+      width: max-content;
+      animation: scroll 35s linear infinite;
+    }
+    .testi-track:hover { animation-play-state: paused; }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .testi-card {
+      flex-shrink: 0;
+      width: 300px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--mid);
+    }
+    .testi-quote { font-size: 1.6rem; color: var(--lime); font-family: Georgia, serif; line-height: 1; margin-bottom: 0.6rem; }
+    .testi-text { font-size: 0.85rem; color: var(--white); line-height: 1.6; font-style: italic; margin-bottom: 0.75rem; }
+    .testi-by { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); }
+
+    /* ── CONTACT ── */
+    .contact-wrap {
+      border-top: 1px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .contact-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 1.25rem;
+    }
+    .contact-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .contact-title em { font-style: normal; color: var(--lime); }
+
+    .contact-items { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--white);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-row:hover {
+      border-color: rgba(200,245,66,0.3);
+      background: rgba(200,245,66,0.035);
+    }
+    .contact-row-left { display: flex; flex-direction: column; gap: 0.2rem; }
+    .contact-row-label { font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); }
+    .contact-row-val { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 600; }
+    .contact-arrow { color: var(--lime); font-size: 1rem; }
+
+    .contact-btn {
+      display: block;
+      text-align: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--lime);
+      padding: 1.1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      margin-top: 0.25rem;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .contact-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    .footer-wrap {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-logo img {
+      height: 28px;
+      mix-blend-mode: screen;
+      filter: brightness(0.6);
+    }
+    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.on { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
+      .services-wrap { padding: 4rem 1.5rem; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .services-sub { text-align: left; max-width: 100%; }
+      .service-desc { display: none; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-link { display: none; }
+      .hero { padding: 0 1.5rem 3rem; }
+    }
+
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-bottom { gap: 1.25rem; }
+      .footer-wrap { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+      .testi-track { animation: none; }
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="LogoDJH_for_pfp.png" alt="DJH" />
+    </a>
+    <div class="nav-right">
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="mailto:djh.videovisuals@gmail.com" class="nav-hire">Hire Me</a>
+    </div>
+  </nav>
+
+  <!-- HERO — self-hosted MP4 background -->
+  <section class="hero">
+    <div class="hero-video-bg">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="SHOWREEL.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag">UK Based · Available Now</div>
+      <h1 class="hero-title">
+        Video Editor<br/>&amp; <em>Motion</em><br/>Designer
+      </h1>
+      <div class="hero-bottom">
+        <div class="hero-stat">
+          <span class="hero-stat-num">899K</span>
+          <span class="hero-stat-label">Organic YT Views</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">100+</span>
+          <span class="hero-stat-label">Projects</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">&lt;15 Min</span>
+          <span class="hero-stat-label">Slots Fill</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">6+</span>
+          <span class="hero-stat-label">Years</span>
+        </div>
+        <div class="hero-scroll">
+          <div class="hero-scroll-line"></div>
+          Scroll
+        </div>
+        <a href="mailto:djh.videovisuals@gmail.com" class="hero-cta">Get In Touch →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="work-sep"></div>
+
+    <div class="work-panel" onclick="openModal('AKo21_UI-eU')">
+      <div class="work-panel-overlay"></div>
+      <iframe src="https://www.youtube.com/embed/AKo21_UI-eU?autoplay=1&mute=1&loop=1&playlist=AKo21_UI-eU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Work 1"></iframe>
+      <div class="work-panel-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+
+    <div class="work-sep"></div>
+
+    <div class="work-panel" onclick="openModal('KC96HBwx8Hc')">
+      <div class="work-panel-overlay"></div>
+      <iframe src="https://www.youtube.com/embed/KC96HBwx8Hc?autoplay=1&mute=1&loop=1&playlist=KC96HBwx8Hc&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Work 2"></iframe>
+      <div class="work-panel-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+
+    <div class="work-sep"></div>
+
+    <div class="work-panel" onclick="openModal('Ze3OTdAvyrU')">
+      <div class="work-panel-overlay"></div>
+      <iframe src="https://www.youtube.com/embed/Ze3OTdAvyrU?autoplay=1&mute=1&loop=1&playlist=Ze3OTdAvyrU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Work 3"></iframe>
+      <div class="work-panel-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+
+    <div class="work-sep"></div>
+
+    <div class="work-more">
+      <a href="https://www.youtube.com/@DJH_PROD" target="_blank" rel="noopener">View Full Portfolio on YouTube →</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div class="about-wrap reveal">
+      <div>
+        <div class="about-eyebrow">About</div>
+        <h2 class="about-title">Six years.<br/>Self-taught.<br/>No shortcuts.</h2>
+        <div class="about-body">
+          <p>Video editor and motion designer based in Nottinghamshire, UK. Started in May 2020 and built everything from scratch — no film school, no formal training. Just time in the software and a client base that kept coming back.</p>
+          <p>Specialist in <strong>Adobe After Effects</strong> — motion graphics, VFX compositing, 3D integration via Blender. Every project managed end to end, from brief to final delivery.</p>
+          <p>My edits don't just perform — <strong>they convert.</strong> Clients report direct product sales within hours of a video going live. Commission slots are gone in under 15 minutes. The majority of clients return for more work.</p>
+          <p>Open to <strong>commercial commissions and full-time creative roles</strong> — remote or hybrid. £29–40K.</p>
+        </div>
+        <div class="about-available">Available immediately</div>
+      </div>
+      <div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-num">899K</span>
+            <span class="stat-label">Organic YT Views</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">100+</span>
+            <span class="stat-label">Projects Delivered</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num lime">&lt;15m</span>
+            <span class="stat-label">Slots Fill</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">31K</span>
+            <span class="stat-label">Watch Hours</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Clients Served</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num lime">Most</span>
+            <span class="stat-label">Clients Return</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div id="services">
+    <div class="services-wrap reveal">
+      <div class="services-header">
+        <h2 class="services-title">What I Do</h2>
+        <p class="services-sub">Commercial video editing and motion design — brief to final delivery.</p>
+      </div>
+      <div>
+        <div class="service-row">
+          <div class="service-left"><span class="service-num">01</span><span class="service-name">Social Media Reels</span></div>
+          <span class="service-desc">Scroll-stopping short-form for Instagram, TikTok & YouTube Shorts — beat-synced and built to perform.</span>
+        </div>
+        <div class="service-row">
+          <div class="service-left"><span class="service-num">02</span><span class="service-name">Brand & Ad Videos</span></div>
+          <span class="service-desc">Polished commercial edits with motion graphics, colour grading and sound design built in.</span>
+        </div>
+        <div class="service-row">
+          <div class="service-left"><span class="service-num">03</span><span class="service-name">Property Showcases</span></div>
+          <span class="service-desc">Cinematic walkthroughs that sell the space before the viewing.</span>
+        </div>
+        <div class="service-row">
+          <div class="service-left"><span class="service-num">04</span><span class="service-name">Car Edits</span></div>
+          <span class="service-desc">Speed ramps, dramatic grades and VFX that make every car look showroom-ready.</span>
+        </div>
+        <div class="service-row">
+          <div class="service-left"><span class="service-num">05</span><span class="service-name">Music Videos</span></div>
+          <span class="service-desc">Tight beat-sync, creative transitions and motion graphics built around the energy of the track.</span>
+        </div>
+        <div class="service-row">
+          <div class="service-left"><span class="service-num">06</span><span class="service-name">Motion Graphics</span></div>
+          <span class="service-desc">After Effects-powered animation — kinetic type, VFX compositing, 3D integration.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div id="testimonials">
+    <div class="testi-wrap reveal">
+      <div class="testi-label">What Clients Say</div>
+      <div style="overflow:hidden;">
+        <div class="testi-track">
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Your talent never fails to amaze me. Every single time.</p><span class="testi-by">Freelance Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">We've watched this probably four times. It just gets better.</p><span class="testi-by">Freelance Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Your editing style is so satisfying — genuinely cooking. The results are fire.</p><span class="testi-by">Freelance Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">A freaking heater as usual. You never miss.</p><span class="testi-by">Repeat Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Every project comes back better than I imagined it.</p><span class="testi-by">Repeat Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">The attention to detail is insane. Exactly what I asked for, then some.</p><span class="testi-by">Freelance Client</span></div>
+          <!-- Duplicate for seamless loop -->
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Your talent never fails to amaze me. Every single time.</p><span class="testi-by">Freelance Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">We've watched this probably four times. It just gets better.</p><span class="testi-by">Freelance Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Your editing style is so satisfying — genuinely cooking. The results are fire.</p><span class="testi-by">Freelance Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">A freaking heater as usual. You never miss.</p><span class="testi-by">Repeat Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Every project comes back better than I imagined it.</p><span class="testi-by">Repeat Client</span></div>
+          <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">The attention to detail is insane. Exactly what I asked for, then some.</p><span class="testi-by">Freelance Client</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div class="contact-wrap reveal">
+      <div>
+        <div class="contact-eyebrow">Get In Touch</div>
+        <h2 class="contact-title">Let's make<br/>something<br/><em>worth watching.</em></h2>
+      </div>
+      <div class="contact-items">
+        <a href="mailto:djh.videovisuals@gmail.com" class="contact-row">
+          <div class="contact-row-left">
+            <span class="contact-row-label">Email</span>
+            <span class="contact-row-val">djh.videovisuals@gmail.com</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="tel:07432425502" class="contact-row">
+          <div class="contact-row-left">
+            <span class="contact-row-label">Phone</span>
+            <span class="contact-row-val">07432 425 502</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/sam-coupe-0584b5370/" target="_blank" rel="noopener" class="contact-row">
+          <div class="contact-row-left">
+            <span class="contact-row-label">LinkedIn</span>
+            <span class="contact-row-val">Samuel Coupe</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://www.upwork.com/freelancers/~010045612c82d8e210" target="_blank" rel="noopener" class="contact-row">
+          <div class="contact-row-left">
+            <span class="contact-row-label">Upwork</span>
+            <span class="contact-row-val">Book a Project</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="mailto:djh.videovisuals@gmail.com" class="contact-btn">Send Me a Brief →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-logo">
+        <img src="LogoDJH_for_pfp.png" alt="DJH" />
+      </div>
+      <span class="footer-copy">© 2026 · Nottinghamshire, UK · Available for freelance & full-time</span>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" onclick="closeModal(event)">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal()">✕ Close</button>
+      <iframe id="modal-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen title="Project video"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Scroll reveal
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); revObs.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+    // Modal
+    function openModal(id) {
+      document.getElementById('modal-iframe').src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(e) {
+      if (e && e.target !== document.getElementById('modal') && !e.target.classList.contains('modal-close')) return;
+      document.getElementById('modal-iframe').src = '';
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal({ target: document.getElementById('modal') }); });
+  </script>
+</body>
+</html>
