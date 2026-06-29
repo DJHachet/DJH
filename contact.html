@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --gold:     #E9C840;
       --gold-dim: #c9a928;
@@ -21,19 +20,14 @@
       --mid:      #111111;
       --mid2:     #161616;
       --border:   rgba(255,255,255,0.07);
-      --border-focus: rgba(233,200,64,0.45);
     }
-
-    html { scroll-behavior: smooth; height: 100%; }
-
+    html { scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
     /* ── NAV ── */
@@ -49,173 +43,97 @@
       top: 0;
       z-index: 100;
     }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      height: 34px;
-    }
-    .nav-logo img {
-      height: 34px;
-      width: auto;
-      mix-blend-mode: screen;
-      filter: brightness(1) sepia(1) saturate(3) hue-rotate(5deg);
-    }
-    .nav-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; height: 34px; }
+    .nav-logo img { height: 34px; width: auto; mix-blend-mode: screen; filter: brightness(1) sepia(1) saturate(3) hue-rotate(5deg); }
+    .nav-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .nav-back:hover { color: var(--white); }
     .nav-back::before { content: '←'; font-size: 0.9rem; }
 
-    /* ── MAIN LAYOUT ── */
-    main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 68px);
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem 6rem;
     }
 
-    /* ── LEFT PANEL ── */
-    .left-panel {
-      padding: 5rem 4rem 5rem 2.5rem;
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: sticky;
-      top: 68px;
-      height: calc(100vh - 68px);
-    }
-
-    .left-eyebrow {
+    /* ── HEADER ── */
+    .page-eyebrow {
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
-
-    .left-title {
+    .page-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-size: clamp(2.8rem, 6vw, 5rem);
       font-weight: 700;
       letter-spacing: -0.045em;
       line-height: 0.93;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
-    .left-title em { font-style: normal; color: var(--gold); }
-
-    .left-body {
-      font-size: 0.9rem;
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-sub {
+      font-size: 0.92rem;
       color: var(--grey-mid);
-      line-height: 1.8;
-      max-width: 380px;
-      margin-bottom: 2.5rem;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+      max-width: 520px;
     }
 
-    .left-details {
+    /* ── INFO PILLS ROW ── */
+    .info-pills {
       display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
     }
-
-    .left-detail {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.82rem;
-      color: var(--grey);
-    }
-    .left-detail-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 3px;
-      background: var(--mid2);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-    .left-detail-text strong {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 0.1rem;
-    }
-
-    .available-badge {
+    .info-pill {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 2rem;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 500;
-      color: var(--gold);
-      border: 1px solid rgba(233,200,64,0.25);
-      padding: 0.4rem 0.9rem;
-      border-radius: 20px;
-      width: fit-content;
+      color: var(--grey-mid);
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.9rem;
+      border-radius: 3px;
     }
-    .available-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+    .info-pill span { color: var(--white); }
 
-    /* ── RIGHT PANEL (form) ── */
-    .right-panel {
-      padding: 5rem 2.5rem 5rem 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    /* ── POST PRODUCTION NOTE ── */
+    .post-note {
+      font-size: 0.82rem;
+      color: var(--grey-mid);
+      line-height: 1.7;
+      padding: 1rem 1.25rem;
+      background: rgba(233,200,64,0.05);
+      border: 1px solid rgba(233,200,64,0.15);
+      border-left: 3px solid var(--gold);
+      border-radius: 3px;
+      margin-bottom: 2.5rem;
     }
+    .post-note strong { color: var(--white); font-weight: 500; }
 
+    /* ── FORM ── */
     .form-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-bottom: 2.5rem;
       color: var(--white);
+      margin-bottom: 1.75rem;
     }
 
-    /* Form fields */
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
+    .field-group { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 1.5rem; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
 
     label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -236,186 +154,50 @@
       -webkit-appearance: none;
       appearance: none;
     }
-    input::placeholder, textarea::placeholder {
-      color: rgba(240,239,233,0.22);
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--border-focus);
-      background: #161616;
-    }
-    input:focus::placeholder, textarea:focus::placeholder {
-      color: rgba(240,239,233,0.15);
-    }
+    input::placeholder, textarea::placeholder { color: rgba(240,239,233,0.2); }
+    input:focus, select:focus, textarea:focus { border-color: rgba(233,200,64,0.45); background: var(--mid2); }
 
-    /* Select arrow */
-    .select-wrap {
-      position: relative;
-    }
-    .select-wrap::after {
-      content: '↓';
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--grey);
-      font-size: 0.8rem;
-      pointer-events: none;
-    }
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: '↓'; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--grey); font-size: 0.8rem; pointer-events: none; }
     select { cursor: pointer; padding-right: 2.5rem; }
     select option { background: #1a1a1a; color: var(--white); }
 
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-      line-height: 1.6;
-    }
+    textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
 
-    /* Budget radio pills */
-    .budget-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey-mid);
-      margin-bottom: 0.4rem;
-      display: block;
-    }
-    .budget-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    /* Budget pills */
+    .budget-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 0.4rem; display: block; }
+    .budget-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .budget-pills input[type="radio"] { display: none; }
-    .budget-pills label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: none;
-      color: var(--grey-mid);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 0.45rem 0.9rem;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-      background: var(--mid);
-    }
-    .budget-pills input[type="radio"]:checked + label {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(233,200,64,0.06);
-    }
-    .budget-pills label:hover {
-      border-color: rgba(233,200,64,0.3);
-      color: var(--white);
-    }
+    .budget-pills label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.02em; text-transform: none; color: var(--grey-mid); border: 1px solid var(--border); border-radius: 3px; padding: 0.45rem 0.9rem; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; background: var(--mid); }
+    .budget-pills input[type="radio"]:checked + label { border-color: var(--gold); color: var(--gold); background: rgba(233,200,64,0.06); }
+    .budget-pills label:hover { border-color: rgba(233,200,64,0.3); color: var(--white); }
 
-    /* Submit button */
-    .submit-btn {
-      width: 100%;
-      padding: 1rem;
-      background: var(--gold);
-      color: var(--black);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s, opacity 0.2s;
-      margin-top: 0.5rem;
-    }
+    /* Submit */
+    .submit-btn { width: 100%; padding: 1rem; background: var(--gold); color: var(--black); font-family: 'Space Grotesk', sans-serif; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.02em; border: none; border-radius: 3px; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 0.5rem; }
     .submit-btn:hover { background: var(--gold-dim); transform: translateY(-2px); }
     .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .form-note { font-size: 0.72rem; color: var(--grey); text-align: center; margin-top: 1rem; line-height: 1.6; }
 
-    .form-note {
-      font-size: 0.72rem;
-      color: var(--grey);
-      text-align: center;
-      margin-top: 1rem;
-      line-height: 1.6;
-    }
-
-    /* ── SUCCESS STATE ── */
-    .success-screen {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4rem 2rem;
-      flex: 1;
-    }
+    /* ── SUCCESS ── */
+    .success-screen { display: none; flex-direction: column; align-items: center; text-align: center; padding: 4rem 2rem; }
     .success-screen.visible { display: flex; }
-
-    .success-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(233,200,64,0.1);
-      border: 2px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      margin-bottom: 2rem;
-    }
-    .success-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.75rem;
-    }
+    .success-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(233,200,64,0.1); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 2rem; }
+    .success-title { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.75rem; }
     .success-title em { font-style: normal; color: var(--gold); }
-    .success-sub {
-      font-size: 0.9rem;
-      color: var(--grey-mid);
-      line-height: 1.7;
-      max-width: 380px;
-      margin-bottom: 2.5rem;
-    }
-    .success-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--black);
-      background: var(--gold);
-      padding: 0.7rem 1.5rem;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
+    .success-sub { font-size: 0.9rem; color: var(--grey-mid); line-height: 1.7; max-width: 380px; margin-bottom: 2.5rem; }
+    .success-back { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--black); background: var(--gold); padding: 0.7rem 1.5rem; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
     .success-back:hover { background: var(--gold-dim); }
 
     /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.4rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    footer { border-top: 1px solid var(--border); padding: 1.6rem 2.5rem; display: flex; align-items: center; justify-content: space-between; }
     .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.18); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      main { grid-template-columns: 1fr; min-height: unset; }
-      .left-panel {
-        position: static;
-        height: auto;
-        padding: 3.5rem 1.5rem 2.5rem;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-      .right-panel { padding: 3rem 1.5rem; }
-      nav { padding: 1rem 1.5rem; }
+    @media(max-width: 600px) {
+      .page { padding: 3rem 1.25rem 4rem; }
+      nav { padding: 1rem 1.25rem; }
       .field-row { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 500px) {
+      .page-title { font-size: 2.4rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
   </style>
@@ -430,148 +212,99 @@
     <a href="index.html" class="nav-back">Back to Portfolio</a>
   </nav>
 
-  <!-- MAIN -->
-  <main>
+  <!-- PAGE -->
+  <div class="page">
 
-    <!-- LEFT — info panel -->
-    <div class="left-panel">
-      <div class="left-eyebrow">Get In Touch</div>
-      <h1 class="left-title">Let's make<br/>something<br/><em>worth watching.</em></h1>
-      <p class="left-body">Fill in the form and I'll get back to you within 24 hours. Tell me what you need — the more detail the better.</p>
+    <div class="page-eyebrow">Get In Touch</div>
+    <h1 class="page-title">Let's make something<br/><em>worth watching.</em></h1>
+    <p class="page-sub">Fill in the form and I'll get back to you within 24 hours. The more detail you give me, the better — tell me what you need and what it needs to achieve.</p>
 
-      <div class="left-details">
-        <div class="left-detail">
-          <div class="left-detail-icon">⏱</div>
-          <div class="left-detail-text">
-            <strong>7–13 Day Turnaround</strong>
-            Realistic timelines, always communicated upfront
-          </div>
-        </div>
-        <div class="left-detail">
-          <div class="left-detail-icon">🔁</div>
-          <div class="left-detail-text">
-            <strong>Revisions Included</strong>
-            Fine-tuning is part of the process, not an extra
-          </div>
-        </div>
-        <div class="left-detail">
-          <div class="left-detail-icon">✦</div>
-          <div class="left-detail-text">
-            <strong>100% Human. No AI.</strong>
-            Every cut, every keyframe, every decision — by hand
-          </div>
-        </div>
-        <div class="left-detail">
-          <div class="left-detail-icon">📍</div>
-          <div class="left-detail-text">
-            <strong>Based in Nottinghamshire, UK</strong>
-            Working with clients globally, GMT timezone
-          </div>
-        </div>
-        <div class="left-detail">
-          <div class="left-detail-icon">🎬</div>
-          <div class="left-detail-text">
-            <strong>Post-Production Specialist — For Now</strong>
-            I currently work with footage you provide rather than filming on location — though that's something I'm actively working towards as I build out my kit. Not sure what footage you need? Mention it in your brief and I'll point you in the right direction.
-          </div>
-        </div>
-      </div>
-
-      <div class="available-badge">Available for new projects — now</div>
+    <!-- Info pills -->
+    <div class="info-pills">
+      <div class="info-pill">⏱ <span>7–13 Day Turnaround</span></div>
+      <div class="info-pill">🔁 <span>Revisions Included</span></div>
+      <div class="info-pill">✦ <span>100% Human. No AI.</span></div>
+      <div class="info-pill">📍 <span>Nottinghamshire, UK · GMT</span></div>
+      <div class="info-pill">💬 <span>Reply within 24 hours</span></div>
     </div>
 
-    <!-- RIGHT — form -->
-    <div class="right-panel" id="form-panel">
-      <div class="form-title">Tell me about your project</div>
-      <p style="font-size:0.78rem; color:rgba(240,239,233,0.42); margin-bottom:1.75rem; line-height:1.6; padding:0.85rem 1rem; background:rgba(233,200,64,0.05); border:1px solid rgba(233,200,64,0.15); border-radius:3px;">📌 <strong style="color:rgba(240,239,233,0.7); font-weight:500;">Quick note:</strong> I currently specialise in post-production — working with footage you already have or that your videographer captures. On-location filming is something I'm working towards as I build out my kit. Not sure what footage you need? Mention it in your brief and I'll point you in the right direction.</p>
+    <!-- Post production note -->
+    <div class="post-note">
+      🎬 <strong>Quick note:</strong> I currently specialise in post-production — working with footage you already have or that your videographer captures. On-location filming is something I'm actively working towards as I build out my kit. Not sure what footage you need? Mention it in your brief and I'll point you in the right direction.
+    </div>
 
-      <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+    <!-- FORM -->
+    <div class="form-title">Tell me about your project</div>
 
-        <!-- Web3Forms hidden fields -->
-        <input type="hidden" name="access_key" value="62ac2a7a-1cd0-4379-a3f0-49958be0e45d" />
-        <input type="hidden" name="subject" value="New Project Enquiry — DJH Portfolio" />
-        <input type="hidden" name="from_name" value="DJH Contact Form" />
-        <input type="checkbox" name="botcheck" style="display:none;" />
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="62ac2a7a-1cd0-4379-a3f0-49958be0e45d" />
+      <input type="hidden" name="subject" value="New Project Enquiry — DJH Portfolio" />
+      <input type="hidden" name="from_name" value="DJH Contact Form" />
+      <input type="checkbox" name="botcheck" style="display:none;" />
 
-        <div class="field-group">
+      <div class="field-group">
 
-          <!-- Name + Email -->
-          <div class="field-row">
-            <div class="field">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="Sam Smith" required />
-            </div>
-            <div class="field">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="you@email.com" required />
-            </div>
-          </div>
-
-          <!-- Project type -->
+        <div class="field-row">
           <div class="field">
-            <label for="project_type">Project Type</label>
-            <div class="select-wrap">
-              <select id="project_type" name="project_type" required>
-                <option value="" disabled selected>Select a service...</option>
-                <option value="Social Media Reels">Social Media Reels (Instagram / TikTok / Shorts)</option>
-                <option value="Brand & Ad Video">Brand & Ad Video</option>
-                <option value="Property Showcase">Property Showcase</option>
-                <option value="Car Edit">Car Edit</option>
-                <option value="Music Video">Music Video</option>
-                <option value="Motion Graphics">Motion Graphics / VFX</option>
-                <option value="Full-time / Employment">Full-time / Employment Enquiry</option>
-                <option value="Other">Other — I'll explain below</option>
-              </select>
-            </div>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Sam Smith" required />
           </div>
-
-          <!-- Budget -->
           <div class="field">
-            <span class="budget-label">Budget Range</span>
-            <div class="budget-pills">
-              <input type="radio" name="budget" id="b1" value="Under £100" />
-              <label for="b1">Under £100</label>
-
-              <input type="radio" name="budget" id="b2" value="£100 – £300" />
-              <label for="b2">£100 – £300</label>
-
-              <input type="radio" name="budget" id="b3" value="£300 – £600" />
-              <label for="b3">£300 – £600</label>
-
-              <input type="radio" name="budget" id="b4" value="£600 – £1,000" />
-              <label for="b4">£600 – £1,000</label>
-
-              <input type="radio" name="budget" id="b5" value="£1,000+" />
-              <label for="b5">£1,000+</label>
-
-              <input type="radio" name="budget" id="b6" value="Let's discuss" />
-              <label for="b6">Let's discuss</label>
-            </div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" required />
           </div>
-
-          <!-- Message -->
-          <div class="field">
-            <label for="message">Tell Me About Your Project</label>
-            <textarea id="message" name="message" placeholder="What are you looking to create? Share as much detail as you like — style references, deadlines, footage you have, platform it's going on..." required></textarea>
-          </div>
-
         </div>
 
-        <button type="submit" class="submit-btn" id="submit-btn">Send Brief →</button>
-        <p class="form-note">I'll get back to you within 24 hours. No spam, no sales pitch — just a reply.</p>
+        <div class="field">
+          <label for="project_type">Project Type</label>
+          <div class="select-wrap">
+            <select id="project_type" name="project_type" required>
+              <option value="" disabled selected>Select a service...</option>
+              <option value="Social Media Reels">Social Media Reels (Instagram / TikTok / Shorts)</option>
+              <option value="Brand & Ad Video">Brand & Ad Video</option>
+              <option value="Property Showcase">Property Showcase</option>
+              <option value="Car Edit">Car Edit</option>
+              <option value="Music Video">Music Video</option>
+              <option value="Motion Graphics">Motion Graphics / VFX</option>
+              <option value="Full-time / Employment">Full-time / Employment Enquiry</option>
+              <option value="Other">Other — I'll explain below</option>
+            </select>
+          </div>
+        </div>
 
-      </form>
+        <div class="field">
+          <span class="budget-label">Budget Range</span>
+          <div class="budget-pills">
+            <input type="radio" name="budget" id="b1" value="Under £100" /><label for="b1">Under £100</label>
+            <input type="radio" name="budget" id="b2" value="£100 – £300" /><label for="b2">£100 – £300</label>
+            <input type="radio" name="budget" id="b3" value="£300 – £600" /><label for="b3">£300 – £600</label>
+            <input type="radio" name="budget" id="b4" value="£600 – £1,000" /><label for="b4">£600 – £1,000</label>
+            <input type="radio" name="budget" id="b5" value="£1,000+" /><label for="b5">£1,000+</label>
+            <input type="radio" name="budget" id="b6" value="Let's discuss" /><label for="b6">Let's discuss</label>
+          </div>
+        </div>
 
-      <!-- Success screen (hidden by default) -->
-      <div class="success-screen" id="success-screen">
-        <div class="success-icon">✓</div>
-        <h2 class="success-title">Brief <em>received.</em></h2>
-        <p class="success-sub">Thanks for reaching out. I'll review your project details and get back to you within 24 hours at the email you provided.</p>
-        <a href="index.html" class="success-back">← Back to Portfolio</a>
+        <div class="field">
+          <label for="message">Tell Me About Your Project</label>
+          <textarea id="message" name="message" placeholder="What are you looking to create? Share as much detail as you like — style references, deadlines, footage you have, platform it's going on..." required></textarea>
+        </div>
+
       </div>
 
+      <button type="submit" class="submit-btn" id="submit-btn">Send Brief →</button>
+      <p class="form-note">I'll get back to you within 24 hours. No spam, no sales pitch — just a reply.</p>
+
+    </form>
+
+    <!-- Success -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">✓</div>
+      <h2 class="success-title">Brief <em>received.</em></h2>
+      <p class="success-sub">Thanks for reaching out. I'll review your project details and get back to you within 24 hours at the email you provided.</p>
+      <a href="index.html" class="success-back">← Back to Portfolio</a>
     </div>
-  </main>
+
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -586,33 +319,29 @@
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
-
       btn.disabled = true;
       btn.textContent = 'Sending...';
-
-      const data = new FormData(form);
 
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          body: data
+          body: new FormData(form)
         });
         const json = await res.json();
 
         if (json.success) {
           form.style.display = 'none';
+          document.querySelector('.form-title').style.display = 'none';
           success.classList.add('visible');
-          // Scroll to top of right panel on mobile
-          document.getElementById('form-panel').scrollIntoView({ behavior: 'smooth' });
         } else {
           btn.disabled = false;
           btn.textContent = 'Send Brief →';
-          alert('Something went wrong. Please try emailing djh.videovisuals@gmail.com directly.');
+          alert('Something went wrong. Please email djh.videovisuals@gmail.com directly.');
         }
       } catch(err) {
         btn.disabled = false;
         btn.textContent = 'Send Brief →';
-        alert('Connection error. Please try emailing djh.videovisuals@gmail.com directly.');
+        alert('Connection error. Please email djh.videovisuals@gmail.com directly.');
       }
     });
   </script>
