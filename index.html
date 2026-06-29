@@ -10,19 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --gold:   #E9C840;
+      --gold:     #E9C840;
       --gold-dim: #c9a928;
-      --white:  #F0EFE9;
-      --grey:   rgba(240,239,233,0.42);
-      --black:  #090909;
-      --mid:    #111111;
-      --border: rgba(255,255,255,0.07);
+      --gold-faint: rgba(233,200,64,0.07);
+      --white:    #F0EFE9;
+      --grey:     rgba(240,239,233,0.4);
+      --grey-mid: rgba(240,239,233,0.62);
+      --black:    #090909;
+      --mid:      #111111;
+      --mid2:     #161616;
+      --border:   rgba(255,255,255,0.07);
+      --red-faint: rgba(255,80,80,0.06);
+      --red-border: rgba(255,80,80,0.15);
+      --red:      #ff6b6b;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--black);
       color: var(--white);
@@ -33,611 +36,330 @@
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 300;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 1.25rem 2.5rem;
       transition: background 0.5s, border-color 0.5s;
       border-bottom: 1px solid transparent;
     }
-    nav.scrolled {
-      background: rgba(9,9,9,0.94);
-      backdrop-filter: blur(20px);
-      border-color: var(--border);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      height: 34px;
-    }
-    .nav-logo img {
-      height: 34px;
-      width: auto;
-      mix-blend-mode: screen;
-      /* white logo on dark bg — screen mode makes bg transparent */
-      filter: brightness(1) sepia(1) saturate(3) hue-rotate(5deg);
-      /* Tints the white logo towards gold */
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-    }
-    .nav-link {
-      font-size: 0.73rem;
-      font-weight: 400;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--grey);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    nav.scrolled { background: rgba(9,9,9,0.95); backdrop-filter: blur(20px); border-color: var(--border); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; height: 34px; }
+    .nav-logo img { height: 34px; width: auto; mix-blend-mode: screen; filter: brightness(1) sepia(1) saturate(3) hue-rotate(5deg); }
+    .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-link { font-size: 0.73rem; font-weight: 400; letter-spacing: 0.13em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .nav-link:hover { color: var(--white); }
-
-    .nav-hire {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--black);
-      background: var(--gold);
-      padding: 0.5rem 1.25rem;
-      border-radius: 3px;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: background 0.2s, transform 0.15s;
-    }
+    .nav-hire { font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--black); background: var(--gold); padding: 0.5rem 1.25rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .nav-hire:hover { background: var(--gold-dim); transform: translateY(-1px); }
 
     /* ── HERO ── */
     .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 640px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      position: relative; width: 100%; height: 100vh; min-height: 640px;
+      overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
       padding: 0 2.5rem 3.5rem;
     }
-
-    .hero-video-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-    .hero-video-bg video {
-      position: absolute;
-      top: 50%; left: 50%;
-      min-width: 100%; min-height: 100%;
-      width: auto; height: auto;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        170deg,
-        rgba(9,9,9,0.08) 0%,
-        rgba(9,9,9,0.3) 40%,
-        rgba(9,9,9,0.88) 80%,
-        rgba(9,9,9,0.97) 100%
-      );
-      z-index: 1;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-    .hero-tag::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      display: inline-block;
-      animation: pulse 2s infinite;
-    }
+    .hero-video-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-video-bg video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%,-50%); object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(170deg, rgba(9,9,9,0.05) 0%, rgba(9,9,9,0.35) 45%, rgba(9,9,9,0.92) 85%, rgba(9,9,9,0.98) 100%); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); display: inline-block; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
-
-    .hero-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(3.8rem, 9vw, 8.5rem);
-      font-weight: 700;
-      line-height: 0.92;
-      letter-spacing: -0.045em;
-      margin-bottom: 2.5rem;
-    }
+    .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(3.8rem, 9vw, 8.5rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.045em; margin-bottom: 2.5rem; }
     .hero-title em { font-style: normal; color: var(--gold); }
-
-    .hero-bottom {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-      flex-wrap: wrap;
-    }
-
+    .hero-bottom { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
     .h-stat { display: flex; flex-direction: column; }
-    .h-stat-n {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1;
-    }
-    .h-stat-l {
-      font-size: 0.63rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-top: 0.22rem;
-    }
-    .h-div {
-      width: 1px; height: 32px;
-      background: rgba(255,255,255,0.1);
-      flex-shrink: 0;
-    }
-
-    .hero-cta {
-      margin-left: auto;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--black);
-      background: var(--gold);
-      padding: 0.7rem 1.5rem;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
+    .h-stat-n { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--white); line-height: 1; }
+    .h-stat-l { font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-top: 0.22rem; }
+    .h-div { width: 1px; height: 32px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+    .hero-cta { margin-left: auto; font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--black); background: var(--gold); padding: 0.7rem 1.5rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .hero-cta:hover { background: var(--gold-dim); transform: translateY(-2px); }
 
-    /* ── WORK PANELS (full bleed) ── */
-    .work-panel {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      cursor: pointer;
-      border-top: 1px solid var(--border);
+    /* ── NO AI BANNER ── */
+    .no-ai-banner {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 1.75rem 2.5rem; display: flex; align-items: center; justify-content: center;
+      gap: 2.5rem; background: var(--mid); flex-wrap: wrap;
     }
-    .work-panel iframe {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: max(100%, 177.78%);
-      height: max(56.25%, 100%);
-      transform: translate(-50%,-50%);
-      border: none;
-      pointer-events: none;
-    }
-    .work-panel-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(9,9,9,0.48);
-      transition: background 0.45s;
-      z-index: 2;
-    }
-    .work-panel:hover .work-panel-overlay { background: rgba(9,9,9,0.05); }
+    .no-ai-text { font-family: 'Space Grotesk', sans-serif; font-size: clamp(0.9rem, 1.8vw, 1.2rem); font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+    .no-ai-text em { font-style: normal; color: var(--gold); }
+    .no-ai-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.4; flex-shrink: 0; }
 
-    .play-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%) scale(0.78);
-      z-index: 3;
-      width: 76px; height: 76px;
-      border-radius: 50%;
-      background: rgba(233,200,64,0.1);
-      border: 2px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    .play-btn svg { fill: var(--gold); width: 26px; height: 26px; margin-left: 4px; }
-    .work-panel:hover .play-btn { opacity: 1; transform: translate(-50%,-50%) scale(1); }
-
-    /* ── TEXT BREAK PANELS ── */
-    .text-break {
+    /* ── PAIN POINTS — "Sound Familiar?" ── */
+    .pain-section {
       border-top: 1px solid var(--border);
-      padding: 5rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 3rem;
-    }
-    .text-break.centered {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
       padding: 6rem 2.5rem;
     }
+    .pain-eyebrow { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 1.25rem; }
+    .pain-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 3.5rem; }
+    .pain-title em { font-style: normal; color: var(--gold); }
 
-    .tb-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-    .tb-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.0;
-    }
-    .tb-title em { font-style: normal; color: var(--gold); }
-
-    .tb-body {
-      font-size: 0.92rem;
-      color: var(--grey);
-      line-height: 1.85;
-      max-width: 480px;
-    }
-    .tb-body strong { color: var(--white); font-weight: 500; }
-    .tb-body p + p { margin-top: 1rem; }
-
-    /* Big stat callout between videos */
-    .stat-callout {
-      border-top: 1px solid var(--border);
-      padding: 5rem 2.5rem;
+    .pain-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      background: var(--mid);
-    }
-    .sc-item {
-      padding: 2.5rem 2rem;
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-    }
-    .sc-item:last-child { border-right: none; }
-    .sc-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.8rem, 5vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: -0.05em;
-      line-height: 1;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-    .sc-num.gold { color: var(--gold); }
-    .sc-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 0.75rem;
-    }
-    .sc-desc {
-      font-size: 0.82rem;
-      color: var(--grey);
-      line-height: 1.6;
-      margin-top: auto;
-    }
-
-    /* No AI banner */
-    .no-ai-banner {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 2rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      background: var(--mid);
-      overflow: hidden;
-    }
-    .no-ai-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      white-space: nowrap;
-      color: var(--white);
-    }
-    .no-ai-text em { font-style: normal; color: var(--gold); }
-    .no-ai-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-      opacity: 0.5;
-    }
-
-    /* ── ABOUT split ── */
-    .about-split {
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    .about-left {
-      padding: 6rem 3rem 6rem 2.5rem;
-      border-right: 1px solid var(--border);
-    }
-    .about-right {
-      padding: 6rem 2.5rem 6rem 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .about-available {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--gold);
-      border: 1px solid rgba(233,200,64,0.25);
-      padding: 0.4rem 0.9rem;
-      border-radius: 20px;
-      width: fit-content;
-    }
-    .about-available::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2s infinite;
-    }
-
-    /* Stats 2x3 right side */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
+      margin-bottom: 4rem;
     }
-    .sg-box {
+    .pain-card {
       background: var(--mid);
-      padding: 1.75rem;
-      transition: background 0.2s;
+      padding: 2rem;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .sg-box:hover { background: #181818; }
-    .sg-n {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: var(--white);
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-    .sg-n.gold { color: var(--gold); }
-    .sg-l {
-      font-size: 0.68rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--grey);
-    }
+    .pain-card:hover { background: var(--mid2); border-color: var(--red); }
+    .pain-card-icon { font-size: 1.3rem; margin-bottom: 1rem; display: block; }
+    .pain-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; line-height: 1.3; }
+    .pain-card-body { font-size: 0.8rem; color: var(--grey-mid); line-height: 1.65; }
 
-    /* ── SERVICES ── */
-    .services-wrap {
+    /* Scrolling frustration ticker */
+    .frustration-ticker {
+      overflow: hidden;
       border-top: 1px solid var(--border);
-      padding: 5rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+      background: var(--red-faint);
+      margin-bottom: 4rem;
     }
-    .services-hd {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
+    .frustration-track {
+      display: flex; gap: 3rem;
+      width: max-content;
+      animation: ticker 40s linear infinite;
     }
-    .services-hd-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-    }
-    .services-hd-sub {
-      font-size: 0.82rem;
-      color: var(--grey);
-      max-width: 240px;
-      text-align: right;
-      line-height: 1.6;
-    }
-    .svc-row {
+    .frustration-track:hover { animation-play-state: paused; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .f-item { display: flex; align-items: center; gap: 0.75rem; white-space: nowrap; font-size: 0.82rem; color: var(--grey-mid); flex-shrink: 0; }
+    .f-item::before { content: '✗'; color: var(--red); font-size: 0.7rem; font-weight: 700; }
+
+    /* Solution pivot */
+    .solution-pivot {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--border);
-      transition: padding-left 0.22s;
+      gap: 3rem;
+      padding: 3rem 2.5rem;
+      background: var(--gold-faint);
+      border: 1px solid rgba(233,200,64,0.15);
+      border-radius: 4px;
     }
+    .sp-left { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+    .sp-left em { font-style: normal; color: var(--gold); }
+    .sp-right { font-size: 0.88rem; color: var(--grey-mid); line-height: 1.75; max-width: 420px; flex-shrink: 0; }
+    .sp-right strong { color: var(--white); font-weight: 500; }
+
+    /* ── WORK PANELS ── */
+    .work-panel {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      overflow: hidden; cursor: pointer;
+      border-top: 1px solid var(--border);
+    }
+    .work-panel iframe { position: absolute; top: 50%; left: 50%; width: max(100%, 177.78%); height: max(56.25%, 100%); transform: translate(-50%,-50%); border: none; pointer-events: none; }
+    .work-overlay { position: absolute; inset: 0; background: rgba(9,9,9,0.48); transition: background 0.45s; z-index: 2; }
+    .work-panel:hover .work-overlay { background: rgba(9,9,9,0.05); }
+    .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.78); z-index: 3; width: 76px; height: 76px; border-radius: 50%; background: rgba(233,200,64,0.1); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s, transform 0.3s; }
+    .play-btn svg { fill: var(--gold); width: 26px; height: 26px; margin-left: 4px; }
+    .work-panel:hover .play-btn { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+    /* ── DEMAND PROOF CALLOUT ── */
+    .demand-callout {
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--mid);
+    }
+    .dc-item { padding: 3rem 2.5rem; border-right: 1px solid var(--border); }
+    .dc-item:last-child { border-right: none; }
+    .dc-num { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 700; letter-spacing: -0.05em; line-height: 1; color: var(--white); margin-bottom: 0.4rem; display: block; }
+    .dc-num.gold { color: var(--gold); }
+    .dc-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.75rem; display: block; }
+    .dc-desc { font-size: 0.82rem; color: var(--grey-mid); line-height: 1.65; }
+
+    /* ── AI VS CRAFT SECTION ── */
+    .ai-craft-section {
+      border-top: 1px solid var(--border);
+      padding: 6rem 2.5rem;
+    }
+    .ac-eyebrow { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .ac-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 3.5rem; }
+    .ac-title em { font-style: normal; color: var(--gold); }
+
+    .ac-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .ac-col-bad {
+      background: var(--red-faint);
+      border: 1px solid var(--red-border);
+      border-radius: 4px;
+      padding: 2.5rem;
+    }
+    .ac-col-good {
+      background: var(--gold-faint);
+      border: 1px solid rgba(233,200,64,0.2);
+      border-radius: 4px;
+      padding: 2.5rem;
+    }
+    .ac-col-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.75rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .ac-col-bad .ac-col-label { color: var(--red); }
+    .ac-col-good .ac-col-label { color: var(--gold); }
+    .ac-list { display: flex; flex-direction: column; gap: 0.85rem; }
+    .ac-item { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.84rem; line-height: 1.55; }
+    .ac-col-bad .ac-item { color: var(--grey-mid); }
+    .ac-col-good .ac-item { color: var(--white); }
+    .ac-icon { flex-shrink: 0; font-size: 0.75rem; margin-top: 0.15rem; font-weight: 700; }
+    .ac-col-bad .ac-icon { color: var(--red); }
+    .ac-col-good .ac-icon { color: var(--gold); }
+
+    /* AI tool trap ticker */
+    .ai-trap-ticker {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.25rem 0;
+      background: var(--mid);
+    }
+    .ai-trap-track {
+      display: flex; gap: 3rem;
+      width: max-content;
+      animation: ticker 45s linear infinite;
+    }
+    .ai-trap-track:hover { animation-play-state: paused; }
+    .at-item { display: flex; align-items: center; gap: 0.6rem; white-space: nowrap; font-size: 0.8rem; color: var(--grey-mid); flex-shrink: 0; }
+    .at-item::before { content: '⚠'; color: var(--gold); font-size: 0.72rem; }
+
+    /* ── OUTSOURCING VS UK ── */
+    .outsource-section {
+      border-top: 1px solid var(--border);
+      padding: 6rem 2.5rem;
+    }
+    .os-eyebrow { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey); margin-bottom: 1.25rem; }
+    .os-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 3.5rem; }
+    .os-title em { font-style: normal; color: var(--gold); }
+
+    .os-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .os-col { display: flex; flex-direction: column; gap: 0; }
+    .os-col-header {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.6rem;
+      border-radius: 3px 3px 0 0;
+    }
+    .os-col-bad-header { background: rgba(255,107,107,0.1); color: var(--red); border: 1px solid var(--red-border); border-bottom: none; }
+    .os-col-good-header { background: var(--gold-faint); color: var(--gold); border: 1px solid rgba(233,200,64,0.2); border-bottom: none; }
+
+    .os-row {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-left: 1px solid; border-right: 1px solid; border-bottom: 1px solid;
+      font-size: 0.84rem; line-height: 1.5;
+    }
+    .os-col:first-child .os-row { border-color: var(--red-border); color: var(--grey-mid); background: var(--red-faint); }
+    .os-col:last-child .os-row { border-color: rgba(233,200,64,0.15); color: var(--white); background: var(--gold-faint); }
+    .os-row:last-child { border-radius: 0 0 3px 3px; }
+    .os-row-icon { flex-shrink: 0; font-size: 0.75rem; margin-top: 0.18rem; font-weight: 700; }
+    .os-col:first-child .os-row-icon { color: var(--red); }
+    .os-col:last-child .os-row-icon { color: var(--gold); }
+
+    /* ── ABOUT SPLIT ── */
+    .about-split {
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .about-left { padding: 6rem 3rem 6rem 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+    .about-right { padding: 6rem 2.5rem 6rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .about-eyebrow { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .about-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 2rem; }
+    .about-title em { font-style: normal; color: var(--gold); }
+    .about-body { font-size: 0.9rem; color: var(--grey-mid); line-height: 1.85; }
+    .about-body strong { color: var(--white); font-weight: 500; }
+    .about-body p + p { margin-top: 1rem; }
+    .available-badge { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 2rem; font-size: 0.75rem; font-weight: 500; color: var(--gold); border: 1px solid rgba(233,200,64,0.25); padding: 0.4rem 0.9rem; border-radius: 20px; width: fit-content; }
+    .available-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .sg-box { background: var(--mid); padding: 1.75rem; transition: background 0.2s; }
+    .sg-box:hover { background: var(--mid2); }
+    .sg-n { font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--white); display: block; margin-bottom: 0.3rem; }
+    .sg-n.gold { color: var(--gold); }
+    .sg-l { font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--grey); }
+
+    /* ── WHAT I DO FOR YOUR BUSINESS ── */
+    .business-section {
+      border-top: 1px solid var(--border);
+      padding: 6rem 2.5rem;
+      background: var(--mid);
+    }
+    .bs-eyebrow { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .bs-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 3.5rem; }
+    .bs-title em { font-style: normal; color: var(--gold); }
+    .bs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .bs-card { background: var(--black); border: 1px solid var(--border); border-radius: 3px; padding: 2rem; transition: border-color 0.25s, transform 0.2s; }
+    .bs-card:hover { border-color: rgba(233,200,64,0.3); transform: translateY(-3px); }
+    .bs-card-icon { font-size: 1.4rem; margin-bottom: 1rem; display: block; }
+    .bs-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .bs-card-body { font-size: 0.8rem; color: var(--grey-mid); line-height: 1.65; }
+
+    /* ── SERVICES ── */
+    .services-wrap { border-top: 1px solid var(--border); padding: 5rem 2.5rem; }
+    .svc-hd { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+    .svc-hd-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -0.04em; }
+    .svc-hd-sub { font-size: 0.82rem; color: var(--grey); max-width: 240px; text-align: right; line-height: 1.6; }
+    .svc-row { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0; border-bottom: 1px solid var(--border); transition: padding-left 0.22s; }
     .svc-row:first-of-type { border-top: 1px solid var(--border); }
     .svc-row:hover { padding-left: 0.75rem; }
     .svc-left { display: flex; align-items: center; gap: 1.25rem; }
-    .svc-n {
-      font-size: 0.66rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: rgba(233,200,64,0.35);
-      min-width: 1.6rem;
-    }
-    .svc-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(0.95rem, 1.8vw, 1.35rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      transition: color 0.2s;
-    }
+    .svc-n { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; color: rgba(233,200,64,0.35); min-width: 1.6rem; }
+    .svc-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(0.95rem, 1.8vw, 1.35rem); font-weight: 600; letter-spacing: -0.02em; transition: color 0.2s; }
     .svc-row:hover .svc-name { color: var(--gold); }
-    .svc-desc {
-      font-size: 0.78rem;
-      color: var(--grey);
-      max-width: 300px;
-      text-align: right;
-      line-height: 1.5;
-    }
+    .svc-desc { font-size: 0.78rem; color: var(--grey); max-width: 300px; text-align: right; line-height: 1.5; }
 
     /* ── TESTIMONIALS ── */
-    .testi-wrap {
-      border-top: 1px solid var(--border);
-      padding: 4rem 0;
-      overflow: hidden;
-    }
-    .testi-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--grey);
-      padding: 0 2.5rem;
-      margin-bottom: 2.25rem;
-    }
-    .testi-track {
-      display: flex;
-      gap: 1rem;
-      width: max-content;
-      animation: ticker 38s linear infinite;
-    }
+    .testi-wrap { border-top: 1px solid var(--border); padding: 4rem 0; overflow: hidden; }
+    .testi-label { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey); padding: 0 2.5rem; margin-bottom: 2.25rem; }
+    .testi-track { display: flex; gap: 1rem; width: max-content; animation: ticker 38s linear infinite; }
     .testi-track:hover { animation-play-state: paused; }
-    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    .t-card {
-      flex-shrink: 0;
-      width: 290px;
-      padding: 1.4rem 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      background: var(--mid);
-    }
+    .t-card { flex-shrink: 0; width: 290px; padding: 1.4rem 1.5rem; border: 1px solid var(--border); border-radius: 3px; background: var(--mid); }
     .t-q { font-size: 1.5rem; color: var(--gold); font-family: Georgia,serif; line-height:1; margin-bottom:0.5rem; }
     .t-text { font-size: 0.83rem; color: var(--white); line-height:1.6; font-style:italic; margin-bottom:0.65rem; }
     .t-by { font-size: 0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); }
 
     /* ── CONTACT ── */
-    .contact-wrap {
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    .contact-left {
-      padding: 6rem 3rem 6rem 2.5rem;
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .contact-eyebrow {
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 1.25rem;
-    }
-    .contact-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      font-weight: 700;
-      letter-spacing: -0.045em;
-      line-height: 0.93;
-    }
+    .contact-wrap { border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; }
+    .contact-left { padding: 6rem 3rem 6rem 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+    .contact-eyebrow { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey); margin-bottom: 1.25rem; }
+    .contact-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 700; letter-spacing: -0.045em; line-height: 0.93; }
     .contact-title em { font-style:normal; color:var(--gold); }
-
-    .contact-right {
-      padding: 6rem 2.5rem 6rem 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      justify-content: center;
-    }
-    .c-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.25rem;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      text-decoration: none;
-      color: var(--white);
-      transition: border-color 0.2s, background 0.2s;
-    }
+    .contact-right { padding: 6rem 2.5rem 6rem 3rem; display: flex; flex-direction: column; gap: 0.7rem; justify-content: center; }
+    .c-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 3px; text-decoration: none; color: var(--white); transition: border-color 0.2s, background 0.2s; }
     .c-row:hover { border-color: rgba(233,200,64,0.35); background: rgba(233,200,64,0.03); }
     .c-row-l { display:flex; flex-direction:column; gap:0.18rem; }
     .c-lbl { font-size:0.63rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); }
     .c-val { font-family:'Space Grotesk',sans-serif; font-size:0.88rem; font-weight:600; }
     .c-arr { color:var(--gold); font-size:0.95rem; }
-
-    .c-btn {
-      display:block;
-      text-align:center;
-      font-family:'Space Grotesk',sans-serif;
-      font-size:0.88rem;
-      font-weight:700;
-      color:var(--black);
-      background:var(--gold);
-      padding:1rem;
-      border-radius:3px;
-      text-decoration:none;
-      margin-top:0.3rem;
-      transition:background 0.2s, transform 0.15s;
-    }
+    .c-btn { display:block; text-align:center; font-family:'Space Grotesk',sans-serif; font-size:0.88rem; font-weight:700; color:var(--black); background:var(--gold); padding:1rem; border-radius:3px; text-decoration:none; margin-top:0.3rem; transition:background 0.2s, transform 0.15s; }
     .c-btn:hover { background:var(--gold-dim); transform:translateY(-2px); }
 
     /* ── FOOTER ── */
-    .footer-inner {
-      border-top: 1px solid var(--border);
-      padding: 1.6rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .footer-logo img {
-      height: 26px;
-      mix-blend-mode: screen;
-      filter: brightness(1) sepia(1) saturate(3) hue-rotate(5deg);
-      opacity: 0.5;
-    }
+    .footer-inner { border-top: 1px solid var(--border); padding: 1.6rem 2.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo img { height: 24px; mix-blend-mode: screen; filter: brightness(1) sepia(1) saturate(3) hue-rotate(5deg); opacity: 0.45; }
     .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.18); }
 
     /* ── MODAL ── */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,0.95);
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    .modal.open { display: flex; }
+    .modal { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; padding:2rem; }
+    .modal.open { display:flex; }
     .modal-inner { position:relative; width:100%; max-width:1080px; aspect-ratio:16/9; }
     .modal-inner iframe { width:100%; height:100%; border:none; }
-    .modal-close {
-      position:absolute; top:-2.5rem; right:0;
-      background:none; border:none;
-      color:var(--white);
-      font-family:'Space Grotesk',sans-serif;
-      font-size:0.75rem; font-weight:600;
-      letter-spacing:0.1em; text-transform:uppercase;
-      cursor:pointer; opacity:0.45;
-      transition:opacity 0.2s;
-    }
+    .modal-close { position:absolute; top:-2.5rem; right:0; background:none; border:none; color:var(--white); font-family:'Space Grotesk',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; opacity:0.45; transition:opacity 0.2s; }
     .modal-close:hover { opacity:1; }
 
     /* ── REVEAL ── */
@@ -645,35 +367,43 @@
     .reveal.on { opacity:1; transform:none; }
 
     /* ── RESPONSIVE ── */
-    @media(max-width:900px){
+    @media(max-width:1024px) {
+      .pain-grid { grid-template-columns: 1fr 1fr; }
+      .bs-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:900px) {
       nav { padding:1rem 1.5rem; }
       .nav-link { display:none; }
       .hero { padding:0 1.5rem 3rem; }
-      .text-break { flex-direction:column; padding:4rem 1.5rem; }
-      .tb-body { max-width:100%; }
-      .stat-callout { grid-template-columns:1fr; padding:3rem 1.5rem; }
-      .sc-item { border-right:none; border-bottom:1px solid var(--border); padding:2rem 0; }
-      .sc-item:last-child { border-bottom:none; }
+      .pain-section, .ai-craft-section, .outsource-section, .services-wrap, .business-section { padding:4rem 1.5rem; }
+      .pain-grid { grid-template-columns:1fr; }
+      .ac-grid { grid-template-columns:1fr; }
+      .os-table { grid-template-columns:1fr; }
+      .demand-callout { grid-template-columns:1fr; }
+      .dc-item { border-right:none; border-bottom:1px solid var(--border); }
+      .dc-item:last-child { border-bottom:none; }
       .about-split { grid-template-columns:1fr; }
       .about-left { border-right:none; border-bottom:1px solid var(--border); padding:4rem 1.5rem; }
       .about-right { padding:4rem 1.5rem; }
-      .services-wrap { padding:4rem 1.5rem; }
-      .services-hd { flex-direction:column; align-items:flex-start; gap:0.5rem; }
-      .services-hd-sub { text-align:left; max-width:100%; }
+      .bs-grid { grid-template-columns:1fr; }
+      .svc-hd { flex-direction:column; align-items:flex-start; gap:0.5rem; }
+      .svc-hd-sub { text-align:left; max-width:100%; }
       .svc-desc { display:none; }
-      .no-ai-banner { flex-wrap:wrap; gap:1.5rem; padding:2rem 1.5rem; }
       .contact-wrap { grid-template-columns:1fr; }
       .contact-left { border-right:none; border-bottom:1px solid var(--border); padding:4rem 1.5rem; }
       .contact-right { padding:4rem 1.5rem; }
+      .solution-pivot { flex-direction:column; }
+      .no-ai-banner { gap:1.5rem; padding:1.5rem; }
     }
-    @media(max-width:600px){
+    @media(max-width:600px) {
       .stats-grid { grid-template-columns:1fr; }
       .footer-inner { flex-direction:column; gap:0.6rem; text-align:center; }
       .hero-bottom { gap:1rem; }
+      .hero-cta { margin-left:0; }
     }
-    @media(prefers-reduced-motion:reduce){
+    @media(prefers-reduced-motion:reduce) {
       .reveal{opacity:1;transform:none;}
-      .testi-track{animation:none;}
+      .testi-track,.frustration-track,.ai-trap-track{animation:none;}
       *{transition-duration:0.01ms!important;animation-duration:0.01ms!important;}
     }
   </style>
@@ -682,9 +412,7 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a href="#" class="nav-logo">
-      <img src="LogoDJH_for_pfp.png" alt="DJH" />
-    </a>
+    <a href="#" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
     <div class="nav-right">
       <a href="#work" class="nav-link">Work</a>
       <a href="#about" class="nav-link">About</a>
@@ -693,7 +421,7 @@
     </div>
   </nav>
 
-  <!-- HERO — MP4 full bleed background -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-video-bg">
       <video autoplay muted loop playsinline preload="auto">
@@ -703,29 +431,15 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-tag">UK Based · Available Now</div>
-      <h1 class="hero-title">
-        Video Editor<br/>&amp; <em>Motion</em><br/>Designer
-      </h1>
+      <h1 class="hero-title">Video Editor<br/>&amp; <em>Motion</em><br/>Designer</h1>
       <div class="hero-bottom">
-        <div class="h-stat">
-          <span class="h-stat-n">899K</span>
-          <span class="h-stat-l">Organic YT Views</span>
-        </div>
+        <div class="h-stat"><span class="h-stat-n">899K</span><span class="h-stat-l">Organic YT Views</span></div>
         <div class="h-div"></div>
-        <div class="h-stat">
-          <span class="h-stat-n">100+</span>
-          <span class="h-stat-l">Projects</span>
-        </div>
+        <div class="h-stat"><span class="h-stat-n">100+</span><span class="h-stat-l">Projects</span></div>
         <div class="h-div"></div>
-        <div class="h-stat">
-          <span class="h-stat-n">&lt;15 Min</span>
-          <span class="h-stat-l">Slots Fill</span>
-        </div>
+        <div class="h-stat"><span class="h-stat-n">&lt;15 Min</span><span class="h-stat-l">Slots Fill</span></div>
         <div class="h-div"></div>
-        <div class="h-stat">
-          <span class="h-stat-n">6+</span>
-          <span class="h-stat-l">Years</span>
-        </div>
+        <div class="h-stat"><span class="h-stat-n">6+</span><span class="h-stat-l">Years</span></div>
         <a href="contact.html" class="hero-cta">Get In Touch →</a>
       </div>
     </div>
@@ -742,73 +456,276 @@
     <span class="no-ai-text">Just craft.</span>
   </div>
 
+  <!-- PAIN POINTS -->
+  <section class="pain-section reveal">
+    <div class="pain-eyebrow">Sound Familiar?</div>
+    <h2 class="pain-title">Tired of settling for<br/><em>less than you paid for?</em></h2>
+
+    <!-- Frustration ticker -->
+    <div class="frustration-ticker">
+      <div class="frustration-track">
+        <span class="f-item">Tired of the same feeling with every video you receive back</span>
+        <span class="f-item">Sick of rushed looking work that makes your brand look cheap</span>
+        <span class="f-item">Fed up with editors who disappear mid-project</span>
+        <span class="f-item">Tired of cookie-cutter edits that look like everyone else's content</span>
+        <span class="f-item">Sick of paying for revisions that cost extra every time</span>
+        <span class="f-item">Fed up with chasing for updates and hearing nothing back</span>
+        <span class="f-item">Tired of getting back a rough cut that looks nothing like the brief</span>
+        <span class="f-item">Sick of editors who can only do one style and force everything into it</span>
+        <span class="f-item">Fed up with work that clearly didn't understand what you asked for</span>
+        <span class="f-item">Tired of paying upfront and being ghosted</span>
+        <span class="f-item">Sick of hitting the AI tool limit halfway through your project and being forced to pay more</span>
+        <span class="f-item">Fed up with AI transitions that announce themselves to every viewer</span>
+        <!-- duplicate -->
+        <span class="f-item">Tired of the same feeling with every video you receive back</span>
+        <span class="f-item">Sick of rushed looking work that makes your brand look cheap</span>
+        <span class="f-item">Fed up with editors who disappear mid-project</span>
+        <span class="f-item">Tired of cookie-cutter edits that look like everyone else's content</span>
+        <span class="f-item">Sick of paying for revisions that cost extra every time</span>
+        <span class="f-item">Fed up with chasing for updates and hearing nothing back</span>
+        <span class="f-item">Tired of getting back a rough cut that looks nothing like the brief</span>
+        <span class="f-item">Sick of editors who can only do one style and force everything into it</span>
+        <span class="f-item">Fed up with work that clearly didn't understand what you asked for</span>
+        <span class="f-item">Tired of paying upfront and being ghosted</span>
+        <span class="f-item">Sick of hitting the AI tool limit halfway through your project and being forced to pay more</span>
+        <span class="f-item">Fed up with AI transitions that announce themselves to every viewer</span>
+      </div>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-card-icon">💸</span>
+        <div class="pain-card-title">Charging an arm and a leg for the basics</div>
+        <p class="pain-card-body">Fundamental editing skills dressed up with a big price tag. Cut, colour, export — and somehow that costs £500.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-card-icon">🤖</span>
+        <div class="pain-card-title">AI-generated work passed off as custom</div>
+        <p class="pain-card-body">Prompt, generate, export. No craft, no decisions, no understanding of your brand. Just output with an invoice attached.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-card-icon">⏰</span>
+        <div class="pain-card-title">Missed deadlines with no explanation</div>
+        <p class="pain-card-body">Your campaign is live, your content isn't ready. And the editor isn't responding. Again.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-card-icon">📋</span>
+        <div class="pain-card-title">Briefs that get lost in translation</div>
+        <p class="pain-card-body">You explained exactly what you wanted. What came back looked nothing like it. Repeat. Repeat. Repeat.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-card-icon">🔄</span>
+        <div class="pain-card-title">Revisions that never actually fix it</div>
+        <p class="pain-card-body">Round three. Still not right. And now they're hinting that another revision costs extra.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-card-icon">📉</span>
+        <div class="pain-card-title">Content that doesn't convert</div>
+        <p class="pain-card-body">Looks okay. Gets posted. Nobody buys. Your product deserved better than a video that just exists.</p>
+      </div>
+    </div>
+
+    <!-- Solution pivot -->
+    <div class="solution-pivot">
+      <div class="sp-left">There's a better way.<br/><em>One brief. One editor.<br/>Gets it right.</em></div>
+      <div class="sp-right">
+        <p><strong>One conversation and I understand your brand, your audience, and what the video needs to do.</strong> Not just what it needs to look like — what it needs to achieve. Slots fill in under 15 minutes because the work speaks for itself. Most clients don't leave once they've worked with me — because they don't need to.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- WORK 1 -->
   <div id="work" class="work-panel" onclick="openModal('AKo21_UI-eU')">
-    <div class="work-panel-overlay"></div>
+    <div class="work-overlay"></div>
     <iframe src="https://www.youtube.com/embed/AKo21_UI-eU?autoplay=1&mute=1&loop=1&playlist=AKo21_UI-eU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Work 1"></iframe>
     <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
   </div>
 
-  <!-- TEXT BREAK 1 — demand proof -->
-  <div class="stat-callout reveal">
-    <div class="sc-item">
-      <span class="sc-num gold">&lt;15 Min</span>
-      <span class="sc-label">Commission Slots Fill</span>
-      <span class="sc-desc">Slots open. Slots close. Demand isn't manufactured — it's earned through consistent quality.</span>
+  <!-- DEMAND PROOF -->
+  <div class="demand-callout reveal">
+    <div class="dc-item">
+      <span class="dc-num gold">&lt;15 Min</span>
+      <span class="dc-label">Commission Slots Fill</span>
+      <span class="dc-desc">Slots open. Slots close. Demand isn't manufactured — it's earned through consistent quality that people come back for.</span>
     </div>
-    <div class="sc-item">
-      <span class="sc-num">Majority</span>
-      <span class="sc-label">Of Clients Return</span>
-      <span class="sc-desc">Repeat business is the only metric that matters. Most clients don't just come back — they stay.</span>
+    <div class="dc-item">
+      <span class="dc-num">Majority</span>
+      <span class="dc-label">Of Clients Return</span>
+      <span class="dc-desc">Most clients don't just come back — they stay. That's not luck. That's what happens when the work is right and the communication is clear.</span>
     </div>
-    <div class="sc-item">
-      <span class="sc-num gold">Same Day</span>
-      <span class="sc-label">Client Sales After Publishing</span>
-      <span class="sc-desc">Clients report direct product sales within hours of a video going live. Edits that convert, not just impress.</span>
+    <div class="dc-item">
+      <span class="dc-num gold">Same Day</span>
+      <span class="dc-label">Client Sales After Posting</span>
+      <span class="dc-desc">Clients report direct product sales within hours of a video going live. Edits that convert, not just impress.</span>
     </div>
   </div>
 
+  <!-- AI VS CRAFT -->
+  <section class="ai-craft-section reveal">
+    <div class="ac-eyebrow">The Craft Difference</div>
+    <h2 class="ac-title">When a viewer can tell it's AI,<br/>they've already <em>scrolled past.</em></h2>
+
+    <div class="ac-grid">
+      <div class="ac-col-bad">
+        <div class="ac-col-label">✗ &nbsp;AI Generated Editing</div>
+        <div class="ac-list">
+          <div class="ac-item"><span class="ac-icon">✗</span>Same transitions appear on thousands of other videos — viewers tune out instantly</div>
+          <div class="ac-item"><span class="ac-icon">✗</span>Cuts on the beat mechanically — no feel, no momentum, no intention</div>
+          <div class="ac-item"><span class="ac-icon">✗</span>Colour grades flatten footage — everything ends up looking like the same filter</div>
+          <div class="ac-item"><span class="ac-icon">✗</span>No understanding of your brand, your audience, or what makes your product desirable</div>
+          <div class="ac-item"><span class="ac-icon">✗</span>When your product video looks AI-generated, buyers assume you don't care — and if you don't care, why should they</div>
+          <div class="ac-item"><span class="ac-icon">✗</span>Hit the limit. Upgrade to continue. Hit the limit again.</div>
+          <div class="ac-item"><span class="ac-icon">✗</span>AI starts from zero every session — no memory of your brand or past work</div>
+        </div>
+      </div>
+      <div class="ac-col-good">
+        <div class="ac-col-label">✓ &nbsp;Hand-Crafted Editing</div>
+        <div class="ac-list">
+          <div class="ac-item"><span class="ac-icon">✓</span>Transitions are invisible — viewers feel the momentum without noticing how it happened</div>
+          <div class="ac-item"><span class="ac-icon">✓</span>Cuts made on feel — knowing which exact frame to cut on is a skill developed over years</div>
+          <div class="ac-item"><span class="ac-icon">✓</span>Colour grades that enhance footage and reinforce your brand identity</div>
+          <div class="ac-item"><span class="ac-icon">✓</span>Every project treated differently because every project IS different</div>
+          <div class="ac-item"><span class="ac-icon">✓</span>Handcrafted work feels considered — viewers trust brands whose content looks like someone cared</div>
+          <div class="ac-item"><span class="ac-icon">✓</span>One price. One brief. One revision round. Gets it right.</div>
+          <div class="ac-item"><span class="ac-icon">✓</span>I remember your brand between projects — consistency you can build on</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI trap ticker -->
+    <div class="ai-trap-ticker">
+      <div class="ai-trap-track">
+        <span class="at-item">You've hit your generation limit — upgrade to continue</span>
+        <span class="at-item">Generated 10 versions, none of them exactly right</span>
+        <span class="at-item">Free tier adds a watermark — can't actually use it</span>
+        <span class="at-item">Spent 3 hours prompting what a 5-minute brief would have solved</span>
+        <span class="at-item">Paid for the AI tool AND an editor to fix what it produced</span>
+        <span class="at-item">The output learned from everyone else's work — your video looks like everyone else's</span>
+        <span class="at-item">Every new session forgets everything you told it before</span>
+        <span class="at-item">By the time you've paid the subscription, upgrades and export fees — you've spent more than hiring someone properly</span>
+        <!-- duplicate -->
+        <span class="at-item">You've hit your generation limit — upgrade to continue</span>
+        <span class="at-item">Generated 10 versions, none of them exactly right</span>
+        <span class="at-item">Free tier adds a watermark — can't actually use it</span>
+        <span class="at-item">Spent 3 hours prompting what a 5-minute brief would have solved</span>
+        <span class="at-item">Paid for the AI tool AND an editor to fix what it produced</span>
+        <span class="at-item">The output learned from everyone else's work — your video looks like everyone else's</span>
+        <span class="at-item">Every new session forgets everything you told it before</span>
+        <span class="at-item">By the time you've paid the subscription, upgrades and export fees — you've spent more than hiring someone properly</span>
+      </div>
+    </div>
+  </section>
+
   <!-- WORK 2 -->
   <div class="work-panel" onclick="openModal('KC96HBwx8Hc')">
-    <div class="work-panel-overlay"></div>
+    <div class="work-overlay"></div>
     <iframe src="https://www.youtube.com/embed/KC96HBwx8Hc?autoplay=1&mute=1&loop=1&playlist=KC96HBwx8Hc&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Work 2"></iframe>
     <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
   </div>
 
-  <!-- TEXT BREAK 2 — about -->
-  <div id="about" class="about-split reveal">
-    <div class="about-left">
-      <div class="tb-eyebrow">About</div>
-      <h2 class="tb-title">Six years.<br/>Self-taught.<br/><em>No shortcuts.</em></h2>
-      <div class="about-available">Available immediately</div>
-    </div>
-    <div class="about-right">
-      <div class="tb-body">
-        <p>Video editor and motion designer based in Nottinghamshire, UK. Started in May 2020 and built everything from scratch — no film school, no formal training. Just time in the software and a client base that kept coming back.</p>
-        <p>Specialist in <strong>Adobe After Effects</strong> — motion graphics, VFX compositing, 3D integration via Blender. Every project taken from brief to final delivery, independently, on time.</p>
-        <p>Open to <strong>commercial commissions and full-time creative roles</strong> — remote or hybrid. £29–40K.</p>
+  <!-- OUTSOURCING VS UK -->
+  <section class="outsource-section reveal">
+    <div class="os-eyebrow">Why It Matters Where Your Editor Is</div>
+    <h2 class="os-title">Cheap and fast overseas<br/>almost always comes with <em>a cost.</em></h2>
+    <div class="os-table">
+      <div class="os-col">
+        <div class="os-col-header os-col-bad-header">✗ &nbsp;Outsourcing Overseas</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>Different timezones — you're asleep when they're working, awake when they're gone</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>Language barriers mean briefs get lost in translation — you get back something close, never exact</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>No legal recourse if they take payment and disappear</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>Cheap quotes that quietly balloon with hidden revision fees</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>Template work dressed up as custom editing — the same project, different name on it</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>No understanding of UK culture, trends, platforms or audiences</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>Your project is one of 50 they're running simultaneously</div>
+        <div class="os-row"><span class="os-row-icon">✗</span>Inconsistent quality — great first project, disappointing second</div>
       </div>
-      <div class="stats-grid" style="margin-top:2.5rem;">
-        <div class="sg-box"><span class="sg-n">899K</span><span class="sg-l">Organic YT Views</span></div>
-        <div class="sg-box"><span class="sg-n">100+</span><span class="sg-l">Projects</span></div>
-        <div class="sg-box"><span class="sg-n gold">31K</span><span class="sg-l">Watch Hours</span></div>
-        <div class="sg-box"><span class="sg-n">50+</span><span class="sg-l">Clients</span></div>
+      <div class="os-col">
+        <div class="os-col-header os-col-good-header">✓ &nbsp;Working with DJH — UK Based</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>Same timezone — replies same day, updates throughout, no 18-hour silence</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>Same language, same cultural context — your brief lands exactly as intended</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>UK-based, accountable, professional — you know who you're dealing with</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>Clear pricing upfront — no surprises, no hidden fees, no revision traps</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>Every project built from scratch around your brief — not recycled from the last one</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>Understands UK platforms, audiences, trends and what actually performs here</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>Limited slots — your project gets full attention, not split across 50 others</div>
+        <div class="os-row"><span class="os-row-icon">✓</span>Majority of clients return — consistency you can actually plan your content around</div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- WORK 3 -->
   <div class="work-panel" onclick="openModal('Ze3OTdAvyrU')">
-    <div class="work-panel-overlay"></div>
+    <div class="work-overlay"></div>
     <iframe src="https://www.youtube.com/embed/Ze3OTdAvyrU?autoplay=1&mute=1&loop=1&playlist=Ze3OTdAvyrU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Work 3"></iframe>
     <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
   </div>
 
-  <!-- TEXT BREAK 3 — services -->
+  <!-- ABOUT -->
+  <div id="about" class="about-split reveal">
+    <div class="about-left">
+      <div class="about-eyebrow">About</div>
+      <h2 class="about-title">Six years.<br/>Self-taught.<br/><em>No shortcuts.</em></h2>
+      <div class="available-badge">Available for new projects — now</div>
+    </div>
+    <div class="about-right">
+      <div class="about-body">
+        <p>Video editor and motion designer based in Nottinghamshire, UK. Started in May 2020 and built everything from scratch — no film school, no formal training. Just time in the software and a client base that kept coming back.</p>
+        <p>Specialist in <strong>Adobe After Effects</strong> — motion graphics, VFX compositing, 3D integration via Blender. Every project taken from brief to final delivery, independently, on time.</p>
+        <p>My edits don't just look good — <strong>they convert.</strong> Clients report direct product sales within hours of a video going live. Commission slots are gone in under 15 minutes. The majority of clients return for more work. That's not coincidence.</p>
+        <p>Open to <strong>commercial commissions and full-time creative roles</strong> — remote or hybrid. £29–40K.</p>
+      </div>
+      <div class="stats-grid" style="margin-top:2.5rem;">
+        <div class="sg-box"><span class="sg-n">899K</span><span class="sg-l">Organic YT Views</span></div>
+        <div class="sg-box"><span class="sg-n">100+</span><span class="sg-l">Projects Delivered</span></div>
+        <div class="sg-box"><span class="sg-n gold">31K</span><span class="sg-l">Watch Hours</span></div>
+        <div class="sg-box"><span class="sg-n">50+</span><span class="sg-l">Clients Served</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT I DO FOR YOUR BUSINESS -->
+  <section class="business-section reveal">
+    <div class="bs-eyebrow">Built for Businesses</div>
+    <h2 class="bs-title">What good editing<br/><em>actually does for you</em></h2>
+    <div class="bs-grid">
+      <div class="bs-card">
+        <span class="bs-card-icon">📈</span>
+        <div class="bs-card-title">Content That Converts</div>
+        <p class="bs-card-body">Every video is an investment. If it doesn't convert, it's just an expense. I edit with performance in mind — not just aesthetics.</p>
+      </div>
+      <div class="bs-card">
+        <span class="bs-card-icon">🔁</span>
+        <div class="bs-card-title">Consistent Brand Identity</div>
+        <p class="bs-card-body">One viral video means nothing if the next one looks completely different. I learn your brand and maintain it across every project.</p>
+      </div>
+      <div class="bs-card">
+        <span class="bs-card-icon">📅</span>
+        <div class="bs-card-title">Reliable Content Pipeline</div>
+        <p class="bs-card-body">Algorithms punish inconsistency. Having a reliable editor who delivers on time means you can actually plan your content calendar.</p>
+      </div>
+      <div class="bs-card">
+        <span class="bs-card-icon">🔒</span>
+        <div class="bs-card-title">Trust & Confidentiality</div>
+        <p class="bs-card-body">You're sharing unreleased products and campaigns. UK-based means UK law, accountability, and a real person you can actually reach.</p>
+      </div>
+      <div class="bs-card">
+        <span class="bs-card-icon">💬</span>
+        <div class="bs-card-title">One Point of Contact</div>
+        <p class="bs-card-body">No handoffs. No account managers. One person who knows your project from brief to delivery and responds when you message.</p>
+      </div>
+      <div class="bs-card">
+        <span class="bs-card-icon">📦</span>
+        <div class="bs-card-title">Scales With You</div>
+        <p class="bs-card-body">As your business grows and needs more content, an editor who already knows your brand is infinitely more valuable than starting from scratch every time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
   <div id="services" class="services-wrap reveal">
-    <div class="services-hd">
-      <h2 class="services-hd-title">What I Do</h2>
-      <p class="services-hd-sub">Commercial video editing and motion design — brief to final delivery.</p>
+    <div class="svc-hd">
+      <h2 class="svc-hd-title">What I Do</h2>
+      <p class="svc-hd-sub">Commercial video editing and motion design — brief to final delivery.</p>
     </div>
     <div class="svc-row"><div class="svc-left"><span class="svc-n">01</span><span class="svc-name">Social Media Reels</span></div><span class="svc-desc">Scroll-stopping short-form for Instagram, TikTok & YouTube Shorts.</span></div>
     <div class="svc-row"><div class="svc-left"><span class="svc-n">02</span><span class="svc-name">Brand & Ad Videos</span></div><span class="svc-desc">Polished commercial edits with motion graphics and sound design built in.</span></div>
@@ -829,7 +746,6 @@
         <div class="t-card"><div class="t-q">"</div><p class="t-text">A freaking heater as usual. You never miss.</p><span class="t-by">Repeat Client</span></div>
         <div class="t-card"><div class="t-q">"</div><p class="t-text">Every project comes back better than I imagined it.</p><span class="t-by">Repeat Client</span></div>
         <div class="t-card"><div class="t-q">"</div><p class="t-text">The attention to detail is insane. Exactly what I asked for, then some.</p><span class="t-by">Freelance Client</span></div>
-        <!-- duplicate for loop -->
         <div class="t-card"><div class="t-q">"</div><p class="t-text">Your talent never fails to amaze me. Every single time.</p><span class="t-by">Freelance Client</span></div>
         <div class="t-card"><div class="t-q">"</div><p class="t-text">We've watched this probably four times. It just gets better.</p><span class="t-by">Freelance Client</span></div>
         <div class="t-card"><div class="t-q">"</div><p class="t-text">Your editing style is so satisfying — genuinely cooking. The results are fire.</p><span class="t-by">Freelance Client</span></div>
@@ -847,8 +763,8 @@
       <h2 class="contact-title">Let's make<br/>something<br/><em>worth watching.</em></h2>
     </div>
     <div class="contact-right">
-      <a href="mailto:djh.videovisuals@gmail.com" class="c-row">
-        <div class="c-row-l"><span class="c-lbl">Email</span><span class="c-val">djh.videovisuals@gmail.com</span></div>
+      <a href="contact.html" class="c-row">
+        <div class="c-row-l"><span class="c-lbl">Send a Brief</span><span class="c-val">Start a Project</span></div>
         <span class="c-arr">→</span>
       </a>
       <a href="tel:07432425502" class="c-row">
@@ -859,8 +775,8 @@
         <div class="c-row-l"><span class="c-lbl">LinkedIn</span><span class="c-val">Samuel Coupe</span></div>
         <span class="c-arr">→</span>
       </a>
-      <a href="https://www.upwork.com/freelancers/~010045612c82d8e210" target="_blank" rel="noopener" class="c-row">
-        <div class="c-row-l"><span class="c-lbl">Upwork</span><span class="c-val">Book a Project</span></div>
+      <a href="https://www.youtube.com/@DJH_PROD" target="_blank" rel="noopener" class="c-row">
+        <div class="c-row-l"><span class="c-lbl">Full Portfolio</span><span class="c-val">YouTube — DJH_PROD</span></div>
         <span class="c-arr">→</span>
       </a>
       <a href="contact.html" class="c-btn">Send Me a Brief →</a>
@@ -870,7 +786,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <div><img src="LogoDJH_for_pfp.png" alt="DJH" style="height:24px;mix-blend-mode:screen;filter:brightness(1) sepia(1) saturate(3) hue-rotate(5deg);opacity:0.45;" /></div>
+      <div><img src="LogoDJH_for_pfp.png" alt="DJH" /></div>
       <span class="footer-copy">© 2026 · Nottinghamshire, UK · Available for freelance & full-time roles</span>
     </div>
   </footer>
@@ -885,26 +801,11 @@
 
   <script>
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
-
-    const ro = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
-    }, { threshold: 0.07 });
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+    const ro = new IntersectionObserver((e) => { e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); ro.unobserve(x.target); } }); }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-    function openModal(id) {
-      document.getElementById('modal-iframe').src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
-      document.getElementById('modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal(e) {
-      if(e && e.target !== document.getElementById('modal') && !e.target.classList.contains('modal-close')) return;
-      document.getElementById('modal-iframe').src = '';
-      document.getElementById('modal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    function openModal(id) { document.getElementById('modal-iframe').src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`; document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeModal(e) { if(e&&e.target!==document.getElementById('modal')&&!e.target.classList.contains('modal-close'))return; document.getElementById('modal-iframe').src=''; document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
     document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal({target:document.getElementById('modal')}); });
   </script>
 </body>
