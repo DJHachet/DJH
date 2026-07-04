@@ -228,7 +228,7 @@
     /* Top row */
     .car-top {
       display: grid;
-      grid-template-columns: 320px 320px 1fr;
+      grid-template-columns: 320px 1fr;
       gap: 0;
       border-bottom: 1px solid var(--border);
     }
@@ -300,27 +300,28 @@
 
     /* Sound design */
     .sound-wrap {
-      padding: 2rem 3.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      padding: 1.5rem 3.5rem 2rem;
+      display: flex;
       gap: 2rem;
-      align-items: center;
+      align-items: flex-start;
+      border-top: 1px solid var(--border);
     }
-    .sound-header { display: flex; flex-direction: column; gap: 0.75rem; }
     .sound-label {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.88rem; font-weight: 700;
+      font-size: 0.78rem; font-weight: 700;
       letter-spacing: 0.06em;
       color: var(--gold);
+      margin-bottom: 0.5rem;
     }
     .sound-desc {
-      font-size: 0.82rem; color: var(--grey-mid);
-      line-height: 1.65;
-      max-width: 320px;
+      font-size: 0.8rem; color: var(--grey-mid);
+      line-height: 1.6;
+      margin-bottom: 0;
     }
     .sound-video {
       position: relative;
-      width: 100%;
+      width: 220px;
+      flex-shrink: 0;
       aspect-ratio: 9/16;
       overflow: hidden;
       cursor: pointer;
@@ -486,7 +487,7 @@
   <!-- CAR EDIT + SOUND DESIGN + PROCESS -->
   <div class="car-section reveal">
 
-    <!-- Top row: car edit + sfx same size side by side -->
+    <!-- Top row: car edit left, text+sfx right -->
     <div class="car-top">
 
       <!-- Car edit — static thumbnail -->
@@ -501,26 +502,24 @@
         </div>
       </div>
 
-      <!-- SFX preview — same size as car edit -->
-      <div class="car-video-wrap" style="border-left:1px solid var(--border);">
-        <div class="car-label-top">
-          <span class="work-label">🎧 Sound Design Preview</span>
-        </div>
-        <div class="car-video" onclick="openModal('FApIoRqIEHQ', true)">
-          <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
-          <div class="car-video-overlay"></div>
-          <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-      </div>
-
-      <!-- Right side: text -->
-      <div class="car-right" style="border-left:1px solid var(--border);">
-        <div class="car-text" style="border-bottom:none;">
+      <!-- Right side: text top, SFX preview bottom -->
+      <div class="car-right">
+        <div class="car-text">
           <div class="work-index">04</div>
           <h2 class="work-title">Mercedes-AMG<br/>Car Edit</h2>
-          <p class="work-desc">Cinematic car edit shot in a multi-storey. Custom DJH logo composited onto the vehicle, layered effects, speed ramps and a full colour grade — built from raw footage up.</p>
-          <p class="work-desc" style="margin-top:0.75rem; font-size:0.8rem;">The SFX preview alongside shows the audio layering — every cut has a sound, built from scratch.</p>
+          <p class="work-desc">Cinematic car edit shot in a multi-storey. Custom DJH logo composited onto the vehicle, layered effects, speed ramps and a full colour grade built from raw footage up.</p>
           <button class="work-watch" onclick="openModal('1mJH5hJKHwc', true)">Watch ↗</button>
+        </div>
+
+        <!-- SFX preview — bigger, fills the bottom half -->
+        <div class="sound-wrap">
+          <div class="sound-label">🎧 Sound Design Preview</div>
+          <p class="sound-desc">Every cut has a sound. Here's an isolated look at the audio layering — effects, impacts and atmosphere built from scratch.</p>
+          <div class="sound-video" onclick="openModal('FApIoRqIEHQ', true)">
+            <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
+            <div class="car-video-overlay"></div>
+            <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
         </div>
       </div>
 
