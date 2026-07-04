@@ -228,7 +228,7 @@
     /* Top row */
     .car-top {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 320px 320px 1fr;
       gap: 0;
       border-bottom: 1px solid var(--border);
     }
@@ -486,43 +486,44 @@
   <!-- CAR EDIT + SOUND DESIGN + PROCESS -->
   <div class="car-section reveal">
 
-    <!-- Top row: finished edit + sound design -->
+    <!-- Top row: car edit + sfx same size side by side -->
     <div class="car-top">
 
-      <!-- Finished vertical edit — static thumbnail, opens modal -->
+      <!-- Car edit — static thumbnail -->
       <div class="car-video-wrap">
         <div class="car-label-top">
           <span class="work-label">Car Edit · Mercedes-AMG GT Black Series</span>
         </div>
         <div class="car-video" onclick="openModal('1mJH5hJKHwc', true)">
-          <img src="v1.png" alt="Mercedes-AMG Car Edit" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          <img src="v1.png" alt="Mercedes-AMG Car Edit" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" />
           <div class="car-video-overlay"></div>
           <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
 
-      <!-- Right side: text + sound design -->
-      <div class="car-right">
-        <div class="car-text">
-          <div class="work-index">04</div>
-          <h2 class="work-title">Mercedes-AMG<br/>Car Edit</h2>
-          <p class="work-desc">Cinematic car edit shot in a multi-storey. Custom DJH logo composited onto the vehicle, layered effects, speed ramps and a full colour grade built from raw footage up.</p>
-          <button class="work-watch" onclick="openModal('1mJH5hJKHwc', true)">Watch ↗</button>
+      <!-- SFX preview — same size as car edit -->
+      <div class="car-video-wrap" style="border-left:1px solid var(--border);">
+        <div class="car-label-top">
+          <span class="work-label">🎧 Sound Design Preview</span>
         </div>
-
-        <!-- Sound design preview — larger, centred -->
-        <div class="sound-wrap">
-          <div class="sound-header">
-            <div class="sound-label">🎧 Sound Design Preview</div>
-            <p class="sound-desc">Every cut has a sound. Here's an isolated look at the audio layering — effects, impacts and atmosphere built from scratch.</p>
-          </div>
-          <div class="sound-video" onclick="openModal('FApIoRqIEHQ', true)">
-            <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
-            <div class="car-video-overlay"></div>
-            <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
+        <div class="car-video" onclick="openModal('FApIoRqIEHQ', true)">
+          <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
+          <div class="car-video-overlay"></div>
+          <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
+
+      <!-- Right side: text -->
+      <div class="car-right" style="border-left:1px solid var(--border);">
+        <div class="car-text" style="border-bottom:none;">
+          <div class="work-index">04</div>
+          <h2 class="work-title">Mercedes-AMG<br/>Car Edit</h2>
+          <p class="work-desc">Cinematic car edit shot in a multi-storey. Custom DJH logo composited onto the vehicle, layered effects, speed ramps and a full colour grade — built from raw footage up.</p>
+          <p class="work-desc" style="margin-top:0.75rem; font-size:0.8rem;">The SFX preview alongside shows the audio layering — every cut has a sound, built from scratch.</p>
+          <button class="work-watch" onclick="openModal('1mJH5hJKHwc', true)">Watch ↗</button>
+        </div>
+      </div>
+
     </div>
 
     <!-- Process strip: V4 → V3 → V2 → V1 -->
