@@ -302,33 +302,30 @@
     .sound-wrap {
       padding: 2rem 3.5rem;
       display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-rows: auto auto;
-      gap: 0.5rem 2rem;
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
     }
+    .sound-header { display: flex; flex-direction: column; gap: 0.75rem; }
     .sound-label {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.78rem; font-weight: 700;
+      font-size: 0.88rem; font-weight: 700;
       letter-spacing: 0.06em;
       color: var(--gold);
-      grid-column: 1; grid-row: 1;
     }
     .sound-desc {
-      font-size: 0.8rem; color: var(--grey-mid);
-      line-height: 1.6;
-      grid-column: 1; grid-row: 2;
-      max-width: 360px;
+      font-size: 0.82rem; color: var(--grey-mid);
+      line-height: 1.65;
+      max-width: 320px;
     }
     .sound-video {
       position: relative;
-      width: 140px;
+      width: 100%;
       aspect-ratio: 9/16;
       overflow: hidden;
       cursor: pointer;
       border-radius: 4px;
       border: 1px solid var(--border);
-      grid-column: 2; grid-row: 1 / 3;
     }
     .sound-video iframe {
       position: absolute;
@@ -492,14 +489,14 @@
     <!-- Top row: finished edit + sound design -->
     <div class="car-top">
 
-      <!-- Finished vertical edit -->
+      <!-- Finished vertical edit — static thumbnail, opens modal -->
       <div class="car-video-wrap">
         <div class="car-label-top">
           <span class="work-label">Car Edit · Mercedes-AMG GT Black Series</span>
         </div>
         <div class="car-video" onclick="openModal('1mJH5hJKHwc', true)">
+          <img src="v1.png" alt="Mercedes-AMG Car Edit" style="width:100%;height:100%;object-fit:cover;display:block;" />
           <div class="car-video-overlay"></div>
-          <iframe src="https://www.youtube.com/embed/1mJH5hJKHwc?autoplay=1&mute=1&loop=1&playlist=1mJH5hJKHwc&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&start=0" allow="autoplay; encrypted-media" title="Car Edit"></iframe>
           <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
@@ -513,13 +510,15 @@
           <button class="work-watch" onclick="openModal('1mJH5hJKHwc', true)">Watch ↗</button>
         </div>
 
-        <!-- Sound design preview -->
+        <!-- Sound design preview — larger, centred -->
         <div class="sound-wrap">
-          <div class="sound-label">🎧 Sound Design Preview</div>
-          <p class="sound-desc">Every cut has a sound. Here's an isolated look at the audio layering — effects, impacts and atmosphere built from scratch.</p>
+          <div class="sound-header">
+            <div class="sound-label">🎧 Sound Design Preview</div>
+            <p class="sound-desc">Every cut has a sound. Here's an isolated look at the audio layering — effects, impacts and atmosphere built from scratch.</p>
+          </div>
           <div class="sound-video" onclick="openModal('FApIoRqIEHQ', true)">
+            <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
             <div class="car-video-overlay"></div>
-            <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&start=0" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
             <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
@@ -731,8 +730,19 @@
     const ro = new IntersectionObserver((e) => { e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); ro.unobserve(x.target); } }); }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
     function openModal(id, isShort) {
-      const base = isShort ? 'https://www.youtube.com/embed/' : 'https://www.youtube.com/embed/';
-      document.getElementById('modal-iframe').src = base + id + '?autoplay=1&rel=0&modestbranding=1';
+      const src = isShort
+        ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+        : `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      document.getElementById('modal-iframe').src = src;
+      // For shorts use portrait aspect ratio
+      const inner = document.querySelector('.modal-inner');
+      if (isShort) {
+        inner.style.aspectRatio = '9/16';
+        inner.style.maxWidth = '400px';
+      } else {
+        inner.style.aspectRatio = '16/9';
+        inner.style.maxWidth = '1080px';
+      }
       document.getElementById('modal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
