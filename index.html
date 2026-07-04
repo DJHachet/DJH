@@ -302,10 +302,12 @@
     .sound-wrap {
       padding: 1.5rem 3.5rem 2rem;
       display: flex;
-      gap: 2rem;
       align-items: flex-start;
+      justify-content: flex-end;
+      gap: 2rem;
       border-top: 1px solid var(--border);
     }
+    .sound-text { text-align: right; }
     .sound-label {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.78rem; font-weight: 700;
@@ -316,7 +318,7 @@
     .sound-desc {
       font-size: 0.8rem; color: var(--grey-mid);
       line-height: 1.6;
-      margin-bottom: 0;
+      max-width: 260px;
     }
     .sound-video {
       position: relative;
@@ -496,7 +498,7 @@
           <span class="work-label">Car Edit · Mercedes-AMG GT Black Series</span>
         </div>
         <div class="car-video" onclick="openModal('1mJH5hJKHwc', true)">
-          <img src="v1.png" alt="Mercedes-AMG Car Edit" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" />
+          <iframe src="https://www.youtube.com/embed/1mJH5hJKHwc?autoplay=1&mute=1&loop=1&playlist=1mJH5hJKHwc&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="Car Edit"></iframe>
           <div class="car-video-overlay"></div>
           <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
@@ -513,8 +515,10 @@
 
         <!-- SFX preview — bigger, fills the bottom half -->
         <div class="sound-wrap">
-          <div class="sound-label">🎧 Sound Design Preview</div>
-          <p class="sound-desc">Every cut has a sound. Here's an isolated look at the audio layering — effects, impacts and atmosphere built from scratch.</p>
+          <div class="sound-text">
+            <div class="sound-label">🎧 Sound Design Preview</div>
+            <p class="sound-desc">Every cut has a sound. Here's an isolated look at the audio layering — effects, impacts and atmosphere built from scratch.</p>
+          </div>
           <div class="sound-video" onclick="openModal('FApIoRqIEHQ', true)">
             <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
             <div class="car-video-overlay"></div>
