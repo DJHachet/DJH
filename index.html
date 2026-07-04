@@ -372,7 +372,6 @@
     }
     .stage {
       flex: 1;
-      cursor: pointer;
       transition: transform 0.2s;
     }
     .stage:hover { transform: translateY(-3px); }
@@ -399,16 +398,11 @@
     .stage:hover .stage-overlay { background: rgba(9,9,9,0.15); }
     .stage-overlay svg { fill: var(--gold); width: 20px; height: 20px; margin-left: 2px; opacity: 0.8; }
     .stage-info { display: flex; flex-direction: column; gap: 0.2rem; }
-    .stage-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold);
-    }
+
     .stage-name {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.82rem; font-weight: 700;
-      color: var(--white); letter-spacing: -0.01em;
+      color: var(--gold); letter-spacing: -0.01em;
     }
     .stage-desc {
       font-size: 0.72rem; color: var(--grey); line-height: 1.4;
@@ -503,9 +497,9 @@
         <div class="car-label-top">
           <span class="work-label">Car Edit · Mercedes-AMG GT Black Series</span>
         </div>
-        <div class="car-video" onclick="openModal('1mJH5hJKHwc')">
+        <div class="car-video" onclick="openModal('1mJH5hJKHwc', true)">
           <div class="car-video-overlay"></div>
-          <iframe src="https://www.youtube.com/embed/1mJH5hJKHwc?autoplay=1&mute=1&loop=1&playlist=1mJH5hJKHwc&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Car Edit"></iframe>
+          <iframe src="https://www.youtube.com/embed/1mJH5hJKHwc?autoplay=1&mute=1&loop=1&playlist=1mJH5hJKHwc&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&start=0" allow="autoplay; encrypted-media" title="Car Edit"></iframe>
           <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
@@ -516,16 +510,16 @@
           <div class="work-index">04</div>
           <h2 class="work-title">Mercedes-AMG<br/>Car Edit</h2>
           <p class="work-desc">Cinematic car edit shot in a multi-storey. Custom DJH logo composited onto the vehicle, layered effects, speed ramps and a full colour grade built from raw footage up.</p>
-          <button class="work-watch" onclick="openModal('1mJH5hJKHwc')">Watch ↗</button>
+          <button class="work-watch" onclick="openModal('1mJH5hJKHwc', true)">Watch ↗</button>
         </div>
 
         <!-- Sound design preview -->
         <div class="sound-wrap">
           <div class="sound-label">🎧 Sound Design Preview</div>
           <p class="sound-desc">Every cut has a sound. Here's an isolated look at the audio layering — effects, impacts and atmosphere built from scratch.</p>
-          <div class="sound-video" onclick="openModal('FApIoRqIEHQ')">
+          <div class="sound-video" onclick="openModal('FApIoRqIEHQ', true)">
             <div class="car-video-overlay"></div>
-            <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
+            <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&mute=1&loop=1&playlist=FApIoRqIEHQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&start=0" allow="autoplay; encrypted-media" title="Sound Design"></iframe>
             <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
@@ -540,7 +534,7 @@
       </div>
       <div class="process-stages">
 
-        <div class="stage" onclick="openModal('1mJH5hJKHwc')">
+        <div class="stage" onclick="openModal('1mJH5hJKHwc', true)">
           <div class="stage-thumb">
             <img src="v4.png" alt="V4 Raw Footage" />
             <div class="stage-overlay">
@@ -556,7 +550,7 @@
 
         <div class="stage-arrow">→</div>
 
-        <div class="stage" onclick="openModal('1mJH5hJKHwc')">
+        <div class="stage" onclick="openModal('1mJH5hJKHwc', true)">
           <div class="stage-thumb">
             <img src="v3.png" alt="V3 Logo Added" />
             <div class="stage-overlay">
@@ -572,7 +566,7 @@
 
         <div class="stage-arrow">→</div>
 
-        <div class="stage" onclick="openModal('1mJH5hJKHwc')">
+        <div class="stage" onclick="openModal('1mJH5hJKHwc', true)">
           <div class="stage-thumb">
             <img src="v2.png" alt="V2 Design & Effects" />
             <div class="stage-overlay">
@@ -588,7 +582,7 @@
 
         <div class="stage-arrow">→</div>
 
-        <div class="stage" onclick="openModal('1mJH5hJKHwc')">
+        <div class="stage" onclick="openModal('1mJH5hJKHwc', true)">
           <div class="stage-thumb">
             <img src="v1.png" alt="V1 Final" />
             <div class="stage-overlay">
@@ -760,7 +754,12 @@
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
     const ro = new IntersectionObserver((e) => { e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); ro.unobserve(x.target); } }); }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-    function openModal(id) { document.getElementById('modal-iframe').src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`; document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+    function openModal(id, isShort) {
+      const base = isShort ? 'https://www.youtube.com/embed/' : 'https://www.youtube.com/embed/';
+      document.getElementById('modal-iframe').src = base + id + '?autoplay=1&rel=0&modestbranding=1';
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
     function closeModal(e) { if(e&&e.target!==document.getElementById('modal')&&!e.target.classList.contains('modal-close'))return; document.getElementById('modal-iframe').src=''; document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
     document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal({target:document.getElementById('modal')}); });
   </script>
