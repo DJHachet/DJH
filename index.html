@@ -7,7 +7,7 @@
   <meta name="description" content="UK-based Video Editor & Motion Designer. 6+ years, 100+ projects, 899K organic YouTube views." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Arimo:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -21,7 +21,7 @@
       --border:   rgba(255,255,255,0.07);
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body { background: var(--black); color: var(--white); font-family: 'Arimo', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
     /* ── NAV ── */
     nav {
@@ -37,7 +37,7 @@
     .nav-right { display: flex; align-items: center; gap: 2.5rem; }
     .nav-link { font-size: 0.73rem; font-weight: 400; letter-spacing: 0.13em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .nav-link:hover { color: var(--white); }
-    .nav-hire { font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--black); background: var(--gold); padding: 0.5rem 1.25rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .nav-hire { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); background: var(--gold); padding: 0.65rem 1.75rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .nav-hire:hover { background: var(--gold-dim); transform: translateY(-1px); }
 
     /* ── HERO ── */
@@ -53,14 +53,14 @@
     .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
     .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); display: inline-block; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
-    .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(3.8rem, 9vw, 8.5rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.045em; margin-bottom: 2.5rem; }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 400; line-height: 1.0; letter-spacing: 0.03em; margin-bottom: 2.5rem; }
     .hero-title em { font-style: normal; color: var(--gold); }
     .hero-bottom { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
     .h-stat { display: flex; flex-direction: column; }
-    .h-stat-n { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--white); line-height: 1; }
+    .h-stat-n { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; font-weight: 400; color: var(--white); line-height: 1; letter-spacing: 0.01em; }
     .h-stat-l { font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-top: 0.22rem; }
     .h-div { width: 1px; height: 32px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
-    .hero-cta { margin-left: auto; font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--black); background: var(--gold); padding: 0.7rem 1.5rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .hero-cta { margin-left: auto; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); background: var(--gold); padding: 0.8rem 2rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .hero-cta:hover { background: var(--gold-dim); transform: translateY(-2px); }
 
     /* ── WORK PANELS ── */
@@ -88,13 +88,13 @@
 
     .work-index { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(233,200,64,0.4); margin-bottom: 1.5rem; }
     .work-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
-    .work-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 1.25rem; }
+    .work-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 400; letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 1.25rem; }
     .work-desc { font-size: 0.88rem; color: var(--grey-mid); line-height: 1.8; max-width: 360px; margin-bottom: 2rem; }
-    .work-watch { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); cursor: pointer; background: none; border: none; padding: 0; transition: gap 0.2s; }
+    .work-watch { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); cursor: pointer; background: none; border: none; padding: 0; transition: gap 0.2s; }
     .work-watch:hover { gap: 0.8rem; }
 
     .work-more { padding: 2.5rem; text-align: center; border-bottom: 1px solid var(--border); }
-    .work-more a { font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 0.2rem; transition: color 0.2s, border-color 0.2s; }
+    .work-more a { font-family: 'Bebas Neue', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 0.2rem; transition: color 0.2s, border-color 0.2s; }
     .work-more a:hover { color: var(--white); border-color: var(--gold); }
 
     /* ── ABOUT ── */
@@ -107,7 +107,7 @@
     .about-right { padding: 6rem 2.5rem 6rem 3rem; display: flex; flex-direction: column; justify-content: center; }
 
     .about-eyebrow { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-    .about-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 2rem; }
+    .about-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 400; letter-spacing: 0.04em; line-height: 1.2; margin-bottom: 2rem; }
 
     /* Rierra-style discipline blocks */
     .discipline-list { display: flex; flex-direction: column; gap: 0; }
@@ -120,11 +120,11 @@
       gap: 2rem;
     }
     .discipline-item:first-child { border-top: 1px solid var(--border); }
-    .discipline-name { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; color: var(--white); }
+    .discipline-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.06em; color: var(--white); }
     .discipline-desc { font-size: 0.8rem; color: var(--grey-mid); line-height: 1.6; max-width: 220px; text-align: right; }
 
     .about-body { font-size: 0.9rem; color: var(--grey-mid); line-height: 1.85; margin-bottom: 2.5rem; }
-    .about-body strong { color: var(--white); font-weight: 500; }
+    .about-body strong { color: var(--white); font-weight: 700; }
     .about-body p + p { margin-top: 1rem; }
 
     .about-available { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; color: var(--gold); border: 1px solid rgba(233,200,64,0.25); padding: 0.4rem 0.9rem; border-radius: 20px; width: fit-content; margin-bottom: 2.5rem; }
@@ -133,7 +133,7 @@
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
     .sg-box { background: var(--mid); padding: 1.5rem 1.75rem; transition: background 0.2s; }
     .sg-box:hover { background: #161616; }
-    .sg-n { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--white); display: block; margin-bottom: 0.3rem; }
+    .sg-n { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; font-weight: 400; letter-spacing: 0.01em; line-height: 1; color: var(--white); display: block; margin-bottom: 0.3rem; }
     .sg-n.gold { color: var(--gold); }
     .sg-l { font-size: 0.65rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--grey); }
 
@@ -156,7 +156,7 @@
     }
     .contact-left { padding: 6rem 3rem 6rem 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
     .contact-eyebrow { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey); margin-bottom: 1.25rem; }
-    .contact-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 700; letter-spacing: -0.045em; line-height: 0.93; margin-bottom: 2rem; }
+    .contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 400; letter-spacing: 0.04em; line-height: 1.15; margin-bottom: 2rem; }
     .contact-title em { font-style:normal; color:var(--gold); }
     .contact-social { display: flex; gap: 0.75rem; flex-wrap: wrap; }
     .social-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 3px; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
@@ -167,7 +167,7 @@
     .c-row:hover { border-color: rgba(233,200,64,0.35); background: rgba(233,200,64,0.03); }
     .c-row-l { display:flex; flex-direction:column; gap:0.18rem; }
     .c-lbl { font-size:0.63rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); }
-    .c-val { font-family:'Space Grotesk',sans-serif; font-size:0.88rem; font-weight:600; }
+    .c-val { font-family:'Bebas Neue',sans-serif; font-size:1rem; font-weight:400; letter-spacing:0.05em; }
     .c-arr { color:var(--gold); font-size:0.95rem; }
     .c-btn { display:block; text-align:center; font-family:'Space Grotesk',sans-serif; font-size:0.88rem; font-weight:700; color:var(--black); background:var(--gold); padding:1rem; border-radius:3px; text-decoration:none; margin-top:0.3rem; transition:background 0.2s, transform 0.15s; }
     .c-btn:hover { background:var(--gold-dim); transform:translateY(-2px); }
@@ -309,7 +309,7 @@
     }
     .sound-text { text-align: right; }
     .sound-label {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Bebas Neue', sans-serif;
       font-size: 0.78rem; font-weight: 700;
       letter-spacing: 0.06em;
       color: var(--gold);
@@ -351,7 +351,7 @@
       margin-bottom: 2rem;
     }
     .process-title {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Bebas Neue', sans-serif;
       font-size: 0.82rem; font-weight: 700;
       letter-spacing: 0.08em; text-transform: uppercase;
       color: var(--white);
@@ -400,9 +400,9 @@
     .stage-info { display: flex; flex-direction: column; gap: 0.2rem; }
 
     .stage-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.82rem; font-weight: 700;
-      color: var(--gold); letter-spacing: -0.01em;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem; font-weight: 400;
+      color: var(--gold); letter-spacing: 0.08em;
     }
     .stage-desc {
       font-size: 0.72rem; color: var(--grey); line-height: 1.4;
@@ -693,10 +693,7 @@
         <div class="c-row-l"><span class="c-lbl">Start a Project</span><span class="c-val">Send a Brief</span></div>
         <span class="c-arr">→</span>
       </a>
-      <a href="tel:07432425502" class="c-row">
-        <div class="c-row-l"><span class="c-lbl">Phone</span><span class="c-val">07432 425 502</span></div>
-        <span class="c-arr">→</span>
-      </a>
+
       <a href="https://www.linkedin.com/in/sam-coupe-0584b5370/" target="_blank" rel="noopener" class="c-row">
         <div class="c-row-l"><span class="c-lbl">LinkedIn</span><span class="c-val">Samuel Coupe</span></div>
         <span class="c-arr">→</span>
