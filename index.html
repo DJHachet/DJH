@@ -194,6 +194,14 @@
     .reveal.on { opacity:1; transform:none; }
 
     /* ── RESPONSIVE ── */
+    /* ── BMW PANEL — text left, vertical video right ── */
+    .bmw-top {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 0;
+    }
+    .bmw-top .car-video-wrap { border-right: none; border-left: 1px solid var(--border); }
+
     @media(max-width:900px) {
       nav { padding:1rem 1.5rem; }
       .nav-link { display:none; }
@@ -216,6 +224,34 @@
       .footer-right { flex-direction:column; gap:0.5rem; }
       .hero-bottom { gap:1rem; }
       .hero-cta { margin-left:0; }
+    }
+
+    /* ── AUTOMOTIVE SECTION HEADER ── */
+    .car-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      padding: 3rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .car-section-eyebrow {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .car-section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400; letter-spacing: 0.04em; line-height: 1.1;
+      color: var(--white);
+    }
+    .car-section-sub {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.88rem; color: var(--grey-mid);
+      line-height: 1.75; max-width: 380px;
+      text-align: right;
     }
 
     /* ── CAR EDIT SECTION ── */
@@ -489,6 +525,15 @@
   <!-- CAR EDIT + SOUND DESIGN + PROCESS -->
   <div class="car-section reveal">
 
+    <!-- Automotive section header -->
+    <div class="car-section-header">
+      <div>
+        <div class="car-section-eyebrow">Automotive</div>
+        <h2 class="car-section-title">Built for Car Dealers,<br/>Detailers &amp; Brands</h2>
+      </div>
+      <p class="car-section-sub">Two different styles — one fast and VFX-driven, one slow and cinematic. Shot and edited to make cars look exceptional. On-location filming available across the East Midlands: no crew, no disruption, in and out fast.</p>
+    </div>
+
     <!-- Top row: car edit left, text+sfx right -->
     <div class="car-top">
 
@@ -507,7 +552,7 @@
       <!-- Right side: text top, SFX preview bottom -->
       <div class="car-right">
         <div class="car-text">
-          <div class="work-index">04</div>
+          <div class="work-index">02</div>
           <h2 class="work-title">Mercedes-AMG<br/>Car Edit</h2>
           <p class="work-desc">Cinematic car edit shot in a multi-storey. Custom DJH logo composited onto the vehicle, layered effects, speed ramps and a full colour grade built from raw footage up.</p>
           <button class="work-watch" onclick="openModal('1mJH5hJKHwc', true)">Watch ↗</button>
@@ -524,6 +569,34 @@
             <div class="car-video-overlay"></div>
             <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BMW M3 CS — cinematic panel, vertical 9:16 -->
+    <div class="bmw-top" style="border-top:1px solid var(--border);">
+
+      <!-- Text left -->
+      <div class="car-right" style="border-right:1px solid var(--border);">
+        <div class="car-text" style="border-bottom:none;">
+          <div class="work-index">03</div>
+          <div class="work-label">Cinematic · Infographics · Custom Audio</div>
+          <h2 class="work-title">BMW M3 CS<br/>Cinematic Showcase</h2>
+          <p class="work-desc">A slow-burn cinematic piece for the BMW M3 CS. Custom audio edit, infographic overlays highlighting wheel and light detail — the kind of content that sells a car before the test drive.</p>
+          <button class="work-watch" onclick="openModal('_WWuDzIR6B0', true)">Watch ↗</button>
+        </div>
+      </div>
+
+      <!-- Vertical video right -->
+      <div class="car-video-wrap">
+        <div class="car-label-top">
+          <span class="work-label">Car Edit · BMW M3 CS</span>
+        </div>
+        <div class="car-video" onclick="openModal('_WWuDzIR6B0', true)">
+          <iframe src="https://www.youtube.com/embed/_WWuDzIR6B0?autoplay=1&mute=1&loop=1&playlist=_WWuDzIR6B0&controls=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" title="BMW M3 CS Cinematic"></iframe>
+          <div class="car-video-overlay"></div>
+          <div class="car-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
       </div>
 
@@ -599,6 +672,10 @@
           <span class="discipline-desc">YouTube, Instagram Reels, TikTok and short-form video</span>
         </div>
         <div class="discipline-item">
+          <span class="discipline-name">Videography</span>
+          <span class="discipline-desc">Stabilised 4K capture across the East Midlands — compact, discreet setup that works around your customers, not against them</span>
+        </div>
+        <div class="discipline-item">
           <span class="discipline-name">Post-Production</span>
           <span class="discipline-desc">Colour grading, sound design, titles and delivery</span>
         </div>
@@ -609,8 +686,8 @@
       <div class="about-body">
         <p>Based in Nottinghamshire, UK. Started editing in May 2020 — self-taught, no shortcuts. Six years later the client base speaks for itself.</p>
         <p>I work across <strong>motion graphics, VFX, brand film and content creation</strong> — taking every project from brief to final delivery, independently. Commission slots fill in under 15 minutes. Most clients don't leave once they've worked with me.</p>
-        <p>Currently a post-production specialist — I work with footage you provide. On-location filming is something I'm actively working towards.</p>
-        <p>Open to <strong>commercial commissions and full-time creative roles</strong> — remote or hybrid.</p>
+        <p>I offer <strong>both filming and post-production</strong> — stabilised 4K capture on location across Nottinghamshire and the East Midlands, or working with footage you provide from anywhere. Either way, everything is graded, sound designed and finished in-house.</p>
+        <p>Open to <strong>commercial commissions and part-time or full-time creative roles</strong> — remote or hybrid, while continuing freelance work.</p>
       </div>
       <div class="stats-grid">
         <div class="sg-box"><span class="sg-n">899K</span><span class="sg-l">Organic YT Views</span></div>
@@ -629,7 +706,7 @@
       <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
     </div>
     <div class="work-text">
-      <div class="work-index">02</div>
+      <div class="work-index">04</div>
       <div class="work-label">Concept Commercial · Sony</div>
       <h2 class="work-title">Sony Camera<br/>Concept Ad</h2>
       <p class="work-desc">A self-initiated concept commercial for Sony. Fully animated 3D camera with custom dial animation, moving light, cinematic motion graphics and sound design — graded and finished to broadcast standard.</p>
@@ -645,7 +722,7 @@
       <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
     </div>
     <div class="work-text">
-      <div class="work-index">03</div>
+      <div class="work-index">05</div>
       <div class="work-label">Concept Brand Film · Stayly</div>
       <h2 class="work-title">Stayly<br/>Brand Film</h2>
       <p class="work-desc">Concept brand film for Stayly — an AI-powered hotel search platform. Motion graphics, storytelling and brand identity woven into a single edit.</p>
