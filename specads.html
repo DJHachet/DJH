@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spec Ads &mdash; DJH</title>
+  <meta name="description" content="Self-initiated commercial concepts built to broadcast standard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Arimo:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #E9C840; --gold-dim: #c9a928; --white: #F0EFE9;
+      --grey: rgba(240,239,233,0.4); --grey-mid: rgba(240,239,233,0.62);
+      --black: #090909; --mid: #111111; --mid2: #161616;
+      --border: rgba(255,255,255,0.07);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Arimo', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    nav { position: fixed; top:0; left:0; right:0; z-index:300; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 2.5rem; transition:background .5s,border-color .5s; border-bottom:1px solid transparent; }
+    nav.scrolled, nav.solid { background: rgba(9,9,9,0.95); backdrop-filter: blur(20px); border-color: var(--border); }
+    .nav-logo { display:flex; align-items:center; text-decoration:none; height:34px; }
+    .nav-logo img { height:34px; width:auto; mix-blend-mode:screen; filter:brightness(1) sepia(1) saturate(3) hue-rotate(5deg); }
+    .nav-right { display:flex; align-items:center; gap:2.5rem; }
+    .nav-link { font-size:.73rem; letter-spacing:.13em; text-transform:uppercase; color:var(--grey); text-decoration:none; transition:color .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-book { font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.1em; color:var(--black); background:var(--gold); padding:.6rem 1.6rem; border-radius:3px; text-decoration:none; transition:background .2s,transform .15s; }
+    .nav-book:hover { background:var(--gold-dim); transform:translateY(-1px); }
+    .btn-gold { display:inline-block; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--black); background:var(--gold); padding:.8rem 2rem; border-radius:3px; text-decoration:none; border:none; cursor:pointer; transition:background .2s,transform .15s; }
+    .btn-gold:hover { background:var(--gold-dim); transform:translateY(-2px); }
+    .btn-ghost { display:inline-flex; align-items:center; gap:.5rem; font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.1em; color:var(--gold); background:none; border:1px solid rgba(233,200,64,.35); padding:.7rem 1.6rem; border-radius:3px; text-decoration:none; cursor:pointer; transition:background .2s,gap .2s,border-color .2s; }
+    .btn-ghost:hover { background:rgba(233,200,64,.07); gap:.85rem; border-color:var(--gold); }
+    .vid-16-9 { position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; cursor:pointer; background:var(--mid); }
+    .vid-16-9 iframe { position:absolute; top:50%; left:50%; width:max(100%,177.78%); height:max(56.25%,100%); transform:translate(-50%,-50%); border:none; pointer-events:none; }
+    .vid-9-16 { position:relative; width:100%; aspect-ratio:9/16; overflow:hidden; cursor:pointer; background:var(--mid); border-radius:4px; border:1px solid var(--border); }
+    .vid-9-16 iframe { position:absolute; top:50%; left:50%; height:100%; width:calc(100% * 16 / 9); transform:translate(-50%,-50%); border:none; pointer-events:none; }
+    .vid-overlay { position:absolute; inset:0; z-index:2; background:rgba(9,9,9,.38); transition:background .4s; }
+    .vid-16-9:hover .vid-overlay, .vid-9-16:hover .vid-overlay { background:rgba(9,9,9,.05); }
+    .play-btn { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.82); z-index:3; width:66px; height:66px; border-radius:50%; background:rgba(233,200,64,.1); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s,transform .3s; }
+    .play-btn svg { fill:var(--gold); width:22px; height:22px; margin-left:4px; }
+    .vid-16-9:hover .play-btn, .vid-9-16:hover .play-btn { opacity:1; transform:translate(-50%,-50%) scale(1); }
+    .eyebrow { font-size:.68rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+    .h-xl { font-family:'Bebas Neue',sans-serif; font-size:clamp(3.5rem,8vw,7.5rem); line-height:1; letter-spacing:.03em; }
+    .h-lg { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.4rem,5vw,4rem); line-height:1.1; letter-spacing:.04em; }
+    .h-md { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.7rem,2.8vw,2.6rem); line-height:1.15; letter-spacing:.04em; }
+    .gold { color:var(--gold); }
+    .body-txt { font-size:.9rem; color:var(--grey-mid); line-height:1.8; }
+    .body-txt strong { color:var(--white); font-weight:700; }
+    .credit { font-size:.72rem; color:var(--grey); letter-spacing:.04em; margin-top:.75rem; }
+    .credit a { color:var(--grey-mid); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.15); }
+    .credit a:hover { color:var(--gold); border-color:var(--gold); }
+    footer { border-top:1px solid var(--border); }
+    .footer-inner { padding:1.6rem 2.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+    .footer-inner img { height:24px; mix-blend-mode:screen; filter:brightness(1) sepia(1) saturate(3) hue-rotate(5deg); opacity:.45; }
+    .footer-right { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .footer-social { display:flex; gap:1rem; }
+    .footer-social a { font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.2); text-decoration:none; transition:color .2s; }
+    .footer-social a:hover { color:var(--grey); }
+    .footer-copy { font-size:.7rem; color:rgba(255,255,255,.18); }
+    .modal { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.95); align-items:center; justify-content:center; padding:2rem; }
+    .modal.open { display:flex; }
+    .modal-inner { position:relative; width:100%; max-width:1080px; aspect-ratio:16/9; }
+    .modal-inner iframe { width:100%; height:100%; border:none; }
+    .modal-close { position:absolute; top:-2.5rem; right:0; background:none; border:none; color:var(--white); font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; opacity:.45; transition:opacity .2s; }
+    .modal-close:hover { opacity:1; }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .65s ease,transform .65s ease; }
+    .reveal.on { opacity:1; transform:none; }
+    @media(max-width:900px){ nav{padding:1rem 1.5rem;} .nav-link{display:none;} .nav-right{gap:1rem;} }
+    @media(max-width:600px){ .footer-inner{flex-direction:column;text-align:center;} .footer-right{flex-direction:column;gap:.6rem;} }
+    @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;} *{transition-duration:.01ms!important;animation-duration:.01ms!important;} }
+    .page-hero { padding:9rem 2.5rem 3.5rem; border-bottom:1px solid var(--border); }
+    .page-hero .eyebrow { margin-bottom:1rem; }
+    .page-hero h1 { margin-bottom:1.5rem; }
+    .page-hero p { max-width:560px; }
+    .back-link { display:inline-flex; align-items:center; gap:.5rem; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--grey); text-decoration:none; margin-bottom:1.5rem; transition:color .2s,gap .2s; }
+    .back-link:hover { color:var(--white); gap:.8rem; }
+    .work { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border); min-height:520px; }
+    .work.flip { direction:rtl; }
+    .work.flip > * { direction:ltr; }
+    .work-media { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--mid); }
+    .work-media.portrait { padding:3rem; }
+    .work-media.portrait .vid-9-16 { max-width:300px; }
+    .work-text { padding:4rem 3.5rem; display:flex; flex-direction:column; justify-content:center; border-left:1px solid var(--border); }
+    .work.flip .work-text { border-left:none; border-right:1px solid var(--border); }
+    .work-num { font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:.2em; color:rgba(233,200,64,.4); margin-bottom:1rem; }
+    .work-tag { font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
+    .work-title { margin-bottom:1.1rem; }
+    .work-desc { max-width:380px; }
+    .proc { padding:4rem 2.5rem; border-bottom:1px solid var(--border); }
+    .proc-head { display:flex; align-items:baseline; gap:1rem; margin-bottom:2.25rem; flex-wrap:wrap; }
+    .proc-title { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); }
+    .proc-sub { font-size:.78rem; color:var(--grey); }
+    .proc-stages { display:flex; align-items:flex-start; gap:1rem; }
+    .stage { flex:1; }
+    .stage-thumb { position:relative; aspect-ratio:9/16; border-radius:4px; overflow:hidden; border:1px solid var(--border); margin-bottom:.75rem; background:#000; }
+    .stage-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .stage-name { font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.08em; color:var(--gold); display:block; margin-bottom:.15rem; }
+    .stage-desc { font-size:.72rem; color:var(--grey); line-height:1.45; }
+    .stage-arrow { color:rgba(233,200,64,.4); font-size:1.2rem; align-self:center; flex-shrink:0; padding-bottom:2rem; }
+    .cta-strip { padding:5rem 2.5rem; text-align:center; }
+    .cta-strip h2 { margin-bottom:1.25rem; }
+    .cta-strip p { max-width:440px; margin:0 auto 2rem; }
+    .empty-note { padding:3rem 2.5rem; border-bottom:1px solid var(--border); text-align:center; }
+    .empty-note p { font-size:.85rem; color:var(--grey); max-width:520px; margin:0 auto; line-height:1.8; }
+    @media(max-width:900px){
+      .page-hero { padding:7rem 1.5rem 2.5rem; }
+      .work { grid-template-columns:1fr; min-height:unset; direction:ltr; }
+      .work.flip { direction:ltr; }
+      .work-text { border-left:none!important; border-right:none!important; border-top:1px solid var(--border); padding:2.5rem 1.5rem; }
+      .work-media.portrait { padding:2rem 1.5rem; }
+      .work-media.portrait .vid-9-16 { max-width:240px; margin:0 auto; }
+      .proc { padding:3rem 1.5rem; }
+      .proc-stages { gap:.5rem; }
+      .stage-desc { display:none; }
+      .stage-arrow { font-size:.9rem; }
+      .cta-strip { padding:4rem 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+  <nav id="nav" class="solid">
+    <a href="index.html" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
+    <div class="nav-right">
+      <a href="cars.html" class="nav-link">Cars</a>
+      <a href="motion.html" class="nav-link">Motion</a>
+      <a href="specads.html" class="nav-link active">Spec Ads</a>
+      <a href="contact.html" class="nav-book">Book This</a>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+    <div class="eyebrow">Spec Ads</div>
+    <h1 class="h-xl">Spec Ads</h1>
+    <p class="body-txt">Self-initiated commercial concepts built to broadcast standard &mdash; what the work looks like when there&rsquo;s no brief holding it back.</p>
+  </section>
+
+  <section class="work reveal">
+    <div class="work-media">
+      <div class="vid-16-9" onclick="openModal('KC96HBwx8Hc')">
+        <iframe src="https://www.youtube.com/embed/KC96HBwx8Hc?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=KC96HBwx8Hc&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" allow="autoplay; encrypted-media" title="Sony Camera"></iframe>
+        <div class="vid-overlay"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+    </div>
+    <div class="work-text">
+      <div class="work-num">01</div>
+      <div class="work-tag">Concept Commercial &middot; 3D Animation</div>
+      <h2 class="h-md work-title">Sony Camera</h2>
+      <p class="body-txt work-desc">A self-initiated concept commercial. Fully animated 3D camera with custom dial animation, moving light, cinematic motion graphics and sound design &mdash; graded and finished to broadcast standard.</p>
+    </div>
+  </section>
+
+  <section class="work flip reveal">
+    <div class="work-media">
+      <div class="vid-16-9" onclick="openModal('Ze3OTdAvyrU')">
+        <iframe src="https://www.youtube.com/embed/Ze3OTdAvyrU?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=Ze3OTdAvyrU&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" allow="autoplay; encrypted-media" title="Stayly"></iframe>
+        <div class="vid-overlay"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+    </div>
+    <div class="work-text">
+      <div class="work-num">02</div>
+      <div class="work-tag">Concept Brand Film</div>
+      <h2 class="h-md work-title">Stayly</h2>
+      <p class="body-txt work-desc">Concept brand film for an AI-powered hotel search platform &mdash; built as a spec piece to show how a young tech brand could be introduced through motion and story.</p>
+    </div>
+  </section>
+
+  <section class="cta-strip reveal">
+    <h2 class="h-lg">Want something<br/><span class="gold">like this?</span></h2>
+    <p class="body-txt">Filming and editing available across the East Midlands, or send me your footage from anywhere. 2&ndash;8 day turnaround after filming.</p>
+    <a href="contact.html" class="btn-gold">Book This &rarr;</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div><img src="LogoDJH_for_pfp.png" alt="DJH" /></div>
+      <div class="footer-right">
+        <div class="footer-social">
+          <a href="cars.html">Cars</a>
+          <a href="motion.html">Motion</a>
+          <a href="specads.html">Spec Ads</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <span class="footer-copy">&copy; 2026 &middot; Nottinghamshire, UK</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="modal" onclick="closeModal(event)">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal()">&#10005; Close</button>
+      <iframe id="modal-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen title="Project video"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const nav = document.getElementById('nav');
+    if (nav && !nav.classList.contains('solid')) {
+      window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+    }
+    const ro = new IntersectionObserver((e) => { e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); ro.unobserve(x.target); } }); }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    function openModal(id, isShort) {
+      document.getElementById('modal-iframe').src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      const inner = document.querySelector('.modal-inner');
+      if (isShort) { inner.style.aspectRatio = '9/16'; inner.style.maxWidth = '400px'; }
+      else { inner.style.aspectRatio = '16/9'; inner.style.maxWidth = '1080px'; }
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(e) {
+      if(e && e.target !== document.getElementById('modal') && !e.target.classList.contains('modal-close')) return;
+      document.getElementById('modal-iframe').src='';
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal({target:document.getElementById('modal')}); });
+  </script>
+</body>
+</html>
