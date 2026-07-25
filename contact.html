@@ -57,7 +57,7 @@
     .nav-logo img { height: 34px; width: auto; mix-blend-mode: screen; filter: brightness(1) sepia(1) saturate(3) hue-rotate(5deg); }
     .nav-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .nav-back:hover { color: var(--white); }
-    .nav-back::before { content: '←'; font-size: 0.9rem; }
+    .nav-home::before { content: '←'; font-size: 0.9rem; }
 
     /* ── PAGE WRAPPER ── */
     .page {
@@ -220,12 +220,14 @@
     <a href="index.html" class="nav-logo">
       <img src="LogoDJH_for_pfp.png" alt="DJH" />
     </a>
-    <div style="display:flex;align-items:center;gap:2rem;">
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <a href="services.html" class="nav-back" style="font-size:0.72rem;">Services</a>
+      <a href="about.html" class="nav-back" style="font-size:0.72rem;">About</a>
       <a href="cars.html" class="nav-back" style="font-size:0.72rem;">Cars</a>
       <a href="motion.html" class="nav-back" style="font-size:0.72rem;">Motion</a>
       <a href="specads.html" class="nav-back" style="font-size:0.72rem;">Spec Ads</a>
       <a href="bts.html" class="nav-back" style="font-size:0.72rem;">BTS</a>
-      <a href="index.html" class="nav-back">Back to Portfolio</a>
+      <a href="index.html" class="nav-back nav-home">Home</a>
     </div>
   </nav>
 

@@ -158,6 +158,10 @@
       .disc-desc{display:none;}
     }
     @media(max-width:600px){ .stats-grid{grid-template-columns:1fr;} .hero-bottom{gap:1rem;} .hero-cta{margin-left:0;} }
+    .about-strip { border-top:1px solid var(--border); padding:5rem 2.5rem; }
+    .about-strip-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1400px; margin:0 auto; }
+    .about-strip .stats-grid { margin-top:0; }
+    @media(max-width:900px){ .about-strip{padding:3.5rem 1.5rem;} .about-strip-inner{grid-template-columns:1fr;gap:2.5rem;} }
 
   </style>
 </head>
@@ -166,11 +170,12 @@
   <nav id="nav">
     <a href="index.html" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
     <div class="nav-right">
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="about.html" class="nav-link">About</a>
       <a href="cars.html" class="nav-link">Cars</a>
       <a href="motion.html" class="nav-link">Motion</a>
       <a href="specads.html" class="nav-link">Spec Ads</a>
       <a href="bts.html" class="nav-link">BTS</a>
-      <a href="#about" class="nav-link">About</a>
       <a href="contact.html" class="nav-book">Hire Me</a>
     </div>
   </nav>
@@ -191,7 +196,7 @@
         <div class="h-stat"><span class="h-stat-n">2&ndash;8 Days</span><span class="h-stat-l">Turnaround</span></div>
         <div class="h-div"></div>
         <div class="h-stat"><span class="h-stat-n">6+</span><span class="h-stat-l">Years</span></div>
-        <a href="contact.html" class="btn-gold hero-cta">Hire Me &rarr;</a>
+        <a href="services.html" class="btn-gold hero-cta">Services &rarr;</a>
       </div>
     </div>
   </section>
@@ -247,24 +252,30 @@
     </div>
   </section>
 
-  <section id="about" class="about-wrap reveal">
-    <div class="about-left">
-      <div class="eyebrow">About</div>
-      <h2 class="h-md" style="margin-bottom:2rem;">Motion. Film.<br/>Craft.</h2>
-      <div class="disc-list">
-        <div class="disc-item"><span class="disc-name">Motion &amp; Visual Effects</span><span class="disc-desc">After Effects, Blender, compositing, VFX and animation</span></div>
-        <div class="disc-item"><span class="disc-name">Automotive Content</span><span class="disc-desc">Cinematic car edits, dealership social and event coverage</span></div>
-        <div class="disc-item"><span class="disc-name">Videography</span><span class="disc-desc">Gimbal-stabilised 4K in 10-bit D-Log across the East Midlands</span></div>
-        <div class="disc-item"><span class="disc-name">Post-Production</span><span class="disc-desc">Colour grading, sound design, titles and delivery</span></div>
+  <section class="cat flip reveal">
+    <div class="cat-media portrait">
+      <div class="vid-9-16" onclick="openModal('FApIoRqIEHQ', true)">
+        <iframe src="https://www.youtube.com/embed/FApIoRqIEHQ?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=FApIoRqIEHQ&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" allow="autoplay; encrypted-media" title="Behind The Scenes"></iframe>
+        <div class="vid-overlay"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
     </div>
-    <div class="about-right">
-      <div class="available">Available for new projects &mdash; now</div>
-      <div class="body-txt">
-        <p>Based in Nottinghamshire, UK. Started editing in May 2020 &mdash; self-taught, no shortcuts. Six years later the client base speaks for itself.</p>
-        <p style="margin-top:1rem;">I offer <strong>both filming and post-production</strong> &mdash; stabilised 4K capture on location across the East Midlands, or working with footage you provide from anywhere. Everything is graded, sound designed and finished in-house.</p>
-        <p style="margin-top:1rem;">Compact, discreet setup that works around your customers, not against them. No crew, no disruption, in and out fast.</p>
-        <p style="margin-top:1rem;">Open to <strong>commercial commissions and part-time creative roles</strong> &mdash; remote or hybrid, while continuing freelance work.</p>
+    <div class="cat-text">
+      <div class="cat-num">04</div>
+      <h2 class="h-lg cat-title">Behind The Scenes</h2>
+      <p class="body-txt cat-desc">How the work actually gets made &mdash; process breakdowns from raw footage to final grade, plus the sound design passes most edits never show.</p>
+      <p class="cat-includes"><span>Inside:</span> full process breakdowns &middot; sound design &middot; raw &rarr; final comparisons</p>
+      <a href="bts.html" class="btn-ghost">View More &#8599;</a>
+    </div>
+  </section>
+
+  <section class="about-strip reveal">
+    <div class="about-strip-inner">
+      <div class="about-strip-left">
+        <div class="eyebrow">About DJH</div>
+        <h2 class="h-md" style="margin-bottom:1.25rem;">Motion. Film.<br/>Craft.</h2>
+        <p class="body-txt" style="max-width:420px;">Nottinghamshire-based video editor, motion designer and videographer. Self-taught since 2020 &mdash; six years of building content that performs, now focused on automotive and commercial work. Filming and full post-production, in-house.</p>
+        <a href="about.html" class="btn-ghost" style="margin-top:1.75rem;">More About Me &#8599;</a>
       </div>
       <div class="stats-grid">
         <div class="sg-box"><span class="sg-n">899K</span><span class="sg-l">Organic YT Views</span></div>
@@ -318,10 +329,12 @@
       <div><img src="LogoDJH_for_pfp.png" alt="DJH" /></div>
       <div class="footer-right">
         <div class="footer-social">
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
           <a href="cars.html">Cars</a>
           <a href="motion.html">Motion</a>
           <a href="specads.html">Spec Ads</a>
-          <a href="bts.html">Behind The Scenes</a>
+          <a href="bts.html">BTS</a>
           <a href="contact.html">Contact</a>
         </div>
         <span class="footer-copy">contact@djhvsuls.uk</span>
