@@ -37,7 +37,6 @@
       --mid2:     #161616;
       --border:   rgba(255,255,255,0.07);
     }
-    html { scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
@@ -549,29 +548,6 @@
     });
   </script>
 
-<script>
-(function(){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-  let target = window.scrollY, current = target, raf = null;
-  const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
-  window.addEventListener('wheel', (e) => {
-    if (e.ctrlKey) return;
-    e.preventDefault();
-    target = Math.max(0, Math.min(maxScroll(), target + e.deltaY));
-    if (!raf) step();
-  }, { passive: false });
-  function step(){
-    raf = requestAnimationFrame(() => {
-      current += (target - current) * 0.11;
-      if (Math.abs(target - current) < 0.5) { current = target; window.scrollTo(0, current); raf = null; return; }
-      window.scrollTo(0, current);
-      step();
-    });
-  }
-  window.addEventListener('scroll', () => { if (!raf) { target = window.scrollY; current = target; } }, { passive: true });
-})();
-</script>
   <script>
     (function(){
       const navToggle = document.querySelector('.nav-toggle');
