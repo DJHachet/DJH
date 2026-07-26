@@ -160,7 +160,7 @@
 
     .nav-overlay-extra{
       display:flex; flex-direction:column; gap:.45rem;
-      position:absolute; bottom:clamp(2.5rem,8vh,5rem); left:clamp(2rem,14vw,12rem);
+      position:absolute; bottom:clamp(2.5rem,8vh,5rem); right:clamp(2rem,10vw,7rem); align-items:flex-start; text-align:left;
       opacity:0; transform:translateY(24px);
       transition:opacity .6s ease .68s, transform .6s ease .68s;
     }
@@ -171,10 +171,19 @@
     .nav-overlay-social{ display:flex; gap:1.5rem; margin-top:.7rem; }
     .nav-overlay-social a{ font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--grey); text-decoration:none; transition:color .25s; }
     .nav-overlay-social a:hover{ color:var(--gold); }
+    .nav-overlay-signup{ margin-top:1.6rem; max-width:300px; }
+    .nav-overlay-signup .nos-label{ font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:var(--grey); margin-bottom:.6rem; display:block; }
+    .nav-overlay-signup form{ display:flex; gap:.5rem; }
+    .nav-overlay-signup input[type="email"]{ flex:1; min-width:0; background:#141414; border:1px solid #262626; border-radius:3px; color:var(--white); font-family:'Arimo',sans-serif; font-size:.8rem; padding:.6rem .75rem; outline:none; transition:border-color .2s; }
+    .nav-overlay-signup input[type="email"]:focus{ border-color:var(--gold); }
+    .nav-overlay-signup input::placeholder{ color:#9A998F; opacity:.6; }
+    .nav-overlay-signup button{ background:var(--gold); color:var(--black); border:none; border-radius:3px; font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:.06em; padding:.6rem 1rem; cursor:pointer; white-space:nowrap; transition:background .2s; }
+    .nav-overlay-signup button:hover{ background:var(--gold-dim); }
+    .nav-overlay-signup .nos-hp{ display:none !important; }
 
     @media(max-width:600px){
       .nav-right{ padding:clamp(2.5rem,8vh,5rem) 1.75rem; }
-      .nav-overlay-extra{ left:1.75rem; }
+      .nav-overlay-extra{ right:auto; left:1.75rem; }
       .nav-right .nav-link::after{ left:0; }
       .nav-right .nav-link:hover::after{ width:100%; }
     }
@@ -290,6 +299,15 @@
         <div class="nav-overlay-social">
           <a href="https://instagram.com/djh.vsul" target="_blank" rel="noopener">Instagram</a>
           <a href="https://youtube.com/@DJH_PROD" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <div class="nav-overlay-signup">
+          <span class="nos-label">Stay in the loop</span>
+          <form method="POST" action="https://d3725b92.sibforms.com/serve/MUIFAAHochpj0uRrZ-rcpG2CZ8VugLs3qT6jr4WUdmoobVe4fRKrEcJVvmM-fOSmHld_TBDiNsc-VEFxcMkP1jxjBXEB_YXiGztGLRAX8iDejk6VbbNYiZCv5uTtMnmbZHW_XifZatMbcpNEjRSYmtFLEeTcuencvFBYOt7PGQMUAyBR7PXOV5-AXUclRbZE6RjHUfpwKWU5Hz4f6w==">
+            <input type="email" name="EMAIL" placeholder="you@email.com" required autocomplete="email" />
+            <button type="submit">Sign Up</button>
+            <input type="text" name="email_address_check" value="" class="nos-hp" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="locale" value="en" />
+          </form>
         </div>
       </div>
     </div>
