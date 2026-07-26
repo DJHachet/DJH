@@ -189,10 +189,23 @@
     .submit-btn:hover { background: var(--gold-dim); transform: translateY(-2px); }
     .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .agree-check { display: flex; align-items: flex-start; gap: 0.65rem; margin-bottom: 1.25rem; cursor: pointer; }
-    .agree-check input { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--gold); cursor: pointer; }
+    .agree-check input[type="checkbox"] {
+      -webkit-appearance: auto !important;
+      appearance: auto !important;
+      width: 16px !important;
+      height: 16px;
+      min-width: 16px;
+      margin-top: 2px;
+      padding: 0;
+      flex-shrink: 0;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
     .agree-check span { font-size: 0.72rem; color: var(--grey); line-height: 1.6; }
     .agree-check a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(233,200,64,0.3); }
     .agree-check a:hover { border-color: var(--gold); }
+    .agree-check.agree-error span { color: #e07a5f; }
+    .agree-check.agree-error input[type="checkbox"] { outline: 2px solid #e07a5f; outline-offset: 2px; }
     .whn { margin: 2.5rem 0; padding: 1.75rem; border: 1px solid var(--border); border-radius: 4px; background: var(--mid); }
     .whn-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 1.25rem; }
     .whn-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -289,10 +302,9 @@
 
     <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="62ac2a7a-1cd0-4379-a3f0-49958be0e45d" />
-      <input type="checkbox" name="botcheck" id="" style="display:none;" tabindex="-1" autocomplete="off" />
       <input type="hidden" name="subject" value="New Project Enquiry — DJH Portfolio" />
       <input type="hidden" name="from_name" value="DJH Contact Form" />
-      <input type="checkbox" name="botcheck" style="display:none;" />
+      <input type="checkbox" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off" />
 
       <div class="field-group">
 
@@ -383,6 +395,17 @@
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
+
+      // Require the agreement checkbox to be ticked
+      const agree = document.getElementById('agree');
+      if (!agree.checked) {
+        agree.focus();
+        const box = document.querySelector('.agree-check');
+        box.classList.add('agree-error');
+        setTimeout(() => box.classList.remove('agree-error'), 2500);
+        return;
+      }
+
       btn.disabled = true;
       btn.textContent = 'Sending...';
 
