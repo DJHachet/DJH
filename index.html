@@ -303,14 +303,66 @@
     .grad-blur .gb2 { backdrop-filter:blur(1.5px); -webkit-backdrop-filter:blur(1.5px); mask:linear-gradient(to top, #000 0%, #000 25%, transparent 48%); -webkit-mask:linear-gradient(to top, #000 0%, #000 25%, transparent 48%); }
     .grad-blur .gb3 { backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); mask:linear-gradient(to top, #000 0%, #000 40%, transparent 65%); -webkit-mask:linear-gradient(to top, #000 0%, #000 40%, transparent 65%); }
     .grad-blur .gb4 { backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); mask:linear-gradient(to top, #000 0%, #000 60%, transparent 85%); -webkit-mask:linear-gradient(to top, #000 0%, #000 60%, transparent 85%); }
+    /* ── Staggered side-panel menu (Option B) ── */
+    .sm-prelayers { position:fixed; top:0; right:0; bottom:0; width:min(74vw,440px); z-index:404; pointer-events:none; }
+    .sm-prelayer { position:absolute; inset:0; transform:translateX(100%); transition:transform .6s cubic-bezier(.5,0,.15,1); }
+    .sm-prelayer-1 { background:#1a1712; transition-delay:.05s; }
+    .sm-prelayer-2 { background:#2a2418; transition-delay:.1s; }
+    body.menu-open .sm-prelayer { transform:translateX(0); }
+    body.menu-open .sm-prelayer-1 { transition-delay:0s; }
+    body.menu-open .sm-prelayer-2 { transition-delay:.06s; }
+
+    .nav-right.sm-panel {
+      position:fixed; top:0; right:0; bottom:0; left:auto;
+      width:min(74vw,440px); height:100dvh;
+      flex-direction:column; align-items:flex-start; justify-content:center;
+      gap:0; padding:clamp(3rem,8vh,5rem) clamp(2rem,5vw,3.5rem);
+      background:#0d0b08;
+      transform:translateX(100%);
+      opacity:1; visibility:visible; pointer-events:none;
+      transition:transform .6s cubic-bezier(.5,0,.15,1) .12s, visibility .6s;
+      z-index:406; overflow-y:auto;
+    }
+    .nav-right.sm-panel::before { display:none; }
+    body.menu-open .nav-right.sm-panel { transform:translateX(0); pointer-events:auto; }
+
+    .nav-right.sm-panel .nav-link {
+      font-size:clamp(2rem,5vw,3.2rem);
+      opacity:0; transform:translateX(40px);
+      transition:opacity .5s ease, transform .5s cubic-bezier(.5,0,.15,1), color .3s, letter-spacing .3s;
+    }
+    body.menu-open .nav-right.sm-panel .nav-link { opacity:1; transform:translateX(0); }
+    body.menu-open .sm-panel .nav-link:nth-child(1){ transition-delay:.32s; }
+    body.menu-open .sm-panel .nav-link:nth-child(2){ transition-delay:.37s; }
+    body.menu-open .sm-panel .nav-link:nth-child(3){ transition-delay:.42s; }
+    body.menu-open .sm-panel .nav-link:nth-child(4){ transition-delay:.47s; }
+    body.menu-open .sm-panel .nav-link:nth-child(5){ transition-delay:.52s; }
+    body.menu-open .sm-panel .nav-link:nth-child(6){ transition-delay:.57s; }
+    body.menu-open .sm-panel .nav-link:nth-child(7){ transition-delay:.62s; }
+    .nav-right.sm-panel .nav-link::after { left:2.4rem; }
+    .nav-right.sm-panel .nav-book {
+      opacity:0; transform:translateX(40px);
+      transition:opacity .5s ease .66s, transform .5s ease .66s, background .2s;
+    }
+    body.menu-open .nav-right.sm-panel .nav-book { opacity:1; transform:translateX(0); }
+    .nav-right.sm-panel .nav-overlay-extra {
+      position:static; margin-top:2.5rem; left:auto; bottom:auto;
+      opacity:0; transform:translateX(40px);
+      transition:opacity .5s ease .72s, transform .5s ease .72s;
+    }
+    body.menu-open .nav-right.sm-panel .nav-overlay-extra { opacity:1; transform:translateX(0); }
   </style>
-<!-- v20260806160538 --></head>
+<!-- v20260806162242 --></head>
 <body>
 
   <nav id="nav">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
     <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-    <div class="nav-right">
+    <div class="sm-prelayers" aria-hidden="true">
+      <div class="sm-prelayer sm-prelayer-1"></div>
+      <div class="sm-prelayer sm-prelayer-2"></div>
+    </div>
+    <div class="nav-right sm-panel">
       <a href="services" class="nav-link" data-num="01">Services</a>
       <a href="shop" class="nav-link" data-num="02">Shop</a>
       <a href="about" class="nav-link" data-num="03">About</a>
@@ -534,17 +586,27 @@
       document.body.style.overflow='';
     }
     document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal({target:document.getElementById('modal')}); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+        document.querySelector('.nav-toggle').classList.remove('open');
+        document.querySelector('.nav-right').classList.remove('open');
+        document.body.classList.remove('menu-open');
+        document.body.style.overflow = '';
+      }
+    });
     const navToggle = document.querySelector('.nav-toggle');
     const navRight = document.querySelector('.nav-right');
     if (navToggle && navRight) {
       navToggle.addEventListener('click', () => {
         const open = navToggle.classList.toggle('open');
         navRight.classList.toggle('open');
+        document.body.classList.toggle('menu-open', open);
         document.body.style.overflow = open ? 'hidden' : '';
       });
       navRight.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
         navToggle.classList.remove('open');
         navRight.classList.remove('open');
+        document.body.classList.remove('menu-open');
         document.body.style.overflow = '';
       }));
     }
