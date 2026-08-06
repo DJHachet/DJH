@@ -197,7 +197,7 @@
     .hero-bg { position:absolute; inset:0; z-index:0; }
     .hero-bg video { position:absolute; top:50%; left:50%; min-width:100%; min-height:100%; width:auto; height:auto; transform:translate(-50%,-50%); object-fit:cover; }
     .hero-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(170deg,rgba(9,9,9,.05) 0%,rgba(9,9,9,.3) 45%,rgba(9,9,9,.9) 82%,rgba(9,9,9,.97) 100%); }
-    .hero-content { position:relative; z-index:2; }
+    .hero-content { position:relative; z-index:3; }
     .hero-tag { display:inline-flex; align-items:center; gap:.5rem; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:1.4rem; }
     .hero-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
@@ -208,7 +208,8 @@
     .h-stat-l { font-size:.63rem; letter-spacing:.1em; text-transform:uppercase; color:var(--grey); margin-top:.22rem; }
     .h-div { width:1px; height:32px; background:rgba(255,255,255,.1); flex-shrink:0; }
     .hero-cta { margin-left:auto; }
-    .cat { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border); min-height:540px; }
+    .cat { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border); min-height:540px; position:relative; z-index:1; }
+    .cat.section-lifted, .work.section-lifted { z-index:60 !important; }
     .cat.flip { direction:rtl; }
     .cat.flip > * { direction:ltr; }
     .cat-media { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--mid); }
@@ -287,8 +288,7 @@
       will-change: transform;
     }
     .tilt-active {
-      z-index: 50 !important;
-      overflow: visible !important;
+      z-index: 60 !important;
       transition: transform .12s ease-out !important, box-shadow .3s ease !important;
       box-shadow: 0 40px 80px -24px rgba(0,0,0,.75), 0 0 0 1px rgba(233,200,64,.18) !important;
     }
@@ -296,8 +296,15 @@
     .tilt-shine { position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.14), transparent 42%); z-index:4; border-radius:inherit; }
     .tilt-active .tilt-shine { opacity:1; }
     @media (hover: none) { .tilt-wrap { perspective:none; } }
+    /* ── Gradual blur (cinematic edge defocus) ── */
+    .grad-blur { position:absolute; left:0; right:0; bottom:0; height:32%; z-index:2; pointer-events:none; }
+    .grad-blur > div { position:absolute; inset:0; }
+    .grad-blur .gb1 { backdrop-filter:blur(0.5px); -webkit-backdrop-filter:blur(0.5px); mask:linear-gradient(to top, #000 0%, #000 12%, transparent 30%); -webkit-mask:linear-gradient(to top, #000 0%, #000 12%, transparent 30%); }
+    .grad-blur .gb2 { backdrop-filter:blur(1.5px); -webkit-backdrop-filter:blur(1.5px); mask:linear-gradient(to top, #000 0%, #000 25%, transparent 48%); -webkit-mask:linear-gradient(to top, #000 0%, #000 25%, transparent 48%); }
+    .grad-blur .gb3 { backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); mask:linear-gradient(to top, #000 0%, #000 40%, transparent 65%); -webkit-mask:linear-gradient(to top, #000 0%, #000 40%, transparent 65%); }
+    .grad-blur .gb4 { backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); mask:linear-gradient(to top, #000 0%, #000 60%, transparent 85%); -webkit-mask:linear-gradient(to top, #000 0%, #000 60%, transparent 85%); }
   </style>
-<!-- v20260806041851 --></head>
+<!-- v20260806160538 --></head>
 <body>
 
   <nav id="nav">
@@ -551,7 +558,7 @@
       cards.forEach(card => {
         const isVertical = card.classList.contains('vid-9-16');
         const AMP = isVertical ? 6 : 9;          // tilt degrees
-        const POP = isVertical ? 1.05 : 1.12;    // scale (horizontal pops more)
+        const POP = isVertical ? 1.04 : 1.08;    // scale (horizontal pops more)
         if (card.parentElement) card.parentElement.classList.add('tilt-wrap');
         const shine = document.createElement('div');
         shine.className = 'tilt-shine';
@@ -570,10 +577,15 @@
             shine.style.setProperty('--my', (py*100).toFixed(1)+'%');
           });
         });
-        card.addEventListener('mouseenter', () => card.classList.add('tilt-active'));
+        const section = card.closest('.cat, .work');
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('tilt-active');
+          if (section) section.classList.add('section-lifted');
+        });
         card.addEventListener('mouseleave', () => {
           card.classList.remove('tilt-active');
           card.style.transform = '';
+          if (section) section.classList.remove('section-lifted');
         });
       });
     })();
