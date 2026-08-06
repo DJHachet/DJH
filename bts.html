@@ -241,13 +241,121 @@
       .cta-strip { padding:4rem 1.5rem; }
     }
 
+    .cat-media, .work-media { overflow: visible !important; }
+    .tilt-wrap { overflow: visible !important; }
+    /* ── Pop-out tilt on video cards ── */
+    .tilt-wrap { perspective: 1100px; }
+    .cat-media .vid-9-16, .cat-media .vid-16-9, .work-media .vid-9-16, .work-media .vid-16-9 {
+      transform-style: preserve-3d;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease, border-radius .4s ease;
+      will-change: transform;
+    }
+    .tilt-active {
+      z-index: 60 !important;
+      transition: transform .12s ease-out !important, box-shadow .3s ease !important;
+      box-shadow: 0 40px 80px -24px rgba(0,0,0,.75), 0 0 0 1px rgba(233,200,64,.18) !important;
+    }
+    .tilt-active iframe { border-radius: 6px; }
+    .tilt-shine { position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.14), transparent 42%); z-index:4; border-radius:inherit; }
+    .tilt-active .tilt-shine { opacity:1; }
+    @media (hover: none) { .tilt-wrap { perspective:none; } }
+    .work.section-lifted { z-index:60 !important; }
+    .work { position:relative; z-index:1; }
+    /* ── Floating social button ── */
+    .social-float { position:fixed; bottom:1.75rem; right:1.75rem; z-index:300; display:flex; flex-direction:column-reverse; align-items:center; gap:.75rem; }
+    .sf-toggle { width:52px; height:52px; border-radius:50%; border:1px solid rgba(233,200,64,.35); background:#0d0b08; color:var(--gold); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .3s, background .3s, box-shadow .3s; box-shadow:0 8px 24px -6px rgba(0,0,0,.6); }
+    .sf-toggle:hover { transform:scale(1.08); background:#141109; box-shadow:0 10px 28px -6px rgba(0,0,0,.7), 0 0 0 1px rgba(233,200,64,.2); }
+    .sf-toggle svg { width:22px; height:22px; position:absolute; transition:opacity .3s, transform .4s; }
+    .sf-close { opacity:0; transform:rotate(-90deg); }
+    .sf-open { opacity:1; transform:rotate(0); }
+    .social-float.open .sf-open { opacity:0; transform:rotate(90deg); }
+    .social-float.open .sf-close { opacity:1; transform:rotate(0); }
+    .social-float.open .sf-toggle { border-color:var(--gold); }
+    .sf-items { display:flex; flex-direction:column; align-items:center; gap:.6rem; }
+    .sf-item { width:46px; height:46px; border-radius:50%; border:1px solid rgba(255,255,255,.08); background:#111; color:var(--gold); display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transform:translateY(20px) scale(.6); pointer-events:none; transition:opacity .35s, transform .35s, background .25s, border-color .25s; }
+    .sf-item svg { width:20px; height:20px; }
+    .sf-item:hover { background:var(--gold); color:#0d0b08; border-color:var(--gold); transform:translateY(0) scale(1.1); }
+    .social-float.open .sf-item { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; transition-delay:calc(var(--i) * .05s); }
+    @media(max-width:600px){ .social-float { bottom:1.25rem; right:1.25rem; } .sf-toggle { width:48px; height:48px; } }
+    @media (prefers-reduced-motion: reduce){ .sf-item, .sf-toggle svg { transition:opacity .2s !important; transform:none !important; } }
+    /* ── Staggered side-panel menu (Option B) ── */
+    .sm-prelayers { position:fixed; top:0; right:0; bottom:0; width:min(74vw,440px); z-index:404; pointer-events:none; }
+    .sm-prelayer { position:absolute; inset:0; transform:translateX(100%); transition:transform .6s cubic-bezier(.5,0,.15,1); }
+    .sm-prelayer-1 { background:#1a1712; transition-delay:.05s; }
+    .sm-prelayer-2 { background:#2a2418; transition-delay:.1s; }
+    body.menu-open .sm-prelayer { transform:translateX(0); }
+    body.menu-open .sm-prelayer-1 { transition-delay:0s; }
+    body.menu-open .sm-prelayer-2 { transition-delay:.06s; }
+
+    .nav-right.sm-panel {
+      position:fixed; top:0; right:0; bottom:0; left:auto;
+      width:min(74vw,440px); height:100dvh;
+      flex-direction:column; align-items:flex-start; justify-content:center;
+      gap:0; padding:clamp(3rem,8vh,5rem) clamp(2rem,5vw,3.5rem);
+      background:#0d0b08;
+      transform:translateX(100%);
+      opacity:1; visibility:visible; pointer-events:none;
+      transition:transform .6s cubic-bezier(.5,0,.15,1) .12s, visibility .6s;
+      z-index:406; overflow-y:auto;
+    }
+    .nav-right.sm-panel::before { display:none; }
+    body.menu-open .nav-right.sm-panel { transform:translateX(0); pointer-events:auto; }
+
+    .nav-right.sm-panel .nav-link {
+      font-size:clamp(2rem,5vw,3.2rem);
+      opacity:0; transform:translateX(40px);
+      transition:opacity .5s ease, transform .5s cubic-bezier(.5,0,.15,1), color .3s, letter-spacing .3s;
+    }
+    body.menu-open .nav-right.sm-panel .nav-link { opacity:1; transform:translateX(0); }
+    body.menu-open .sm-panel .nav-link:nth-child(1){ transition-delay:.32s; }
+    body.menu-open .sm-panel .nav-link:nth-child(2){ transition-delay:.37s; }
+    body.menu-open .sm-panel .nav-link:nth-child(3){ transition-delay:.42s; }
+    body.menu-open .sm-panel .nav-link:nth-child(4){ transition-delay:.47s; }
+    body.menu-open .sm-panel .nav-link:nth-child(5){ transition-delay:.52s; }
+    body.menu-open .sm-panel .nav-link:nth-child(6){ transition-delay:.57s; }
+    body.menu-open .sm-panel .nav-link:nth-child(7){ transition-delay:.62s; }
+    .nav-right.sm-panel .nav-link::after { left:2.4rem; }
+    .nav-right.sm-panel .nav-book {
+      opacity:0; transform:translateX(40px);
+      transition:opacity .5s ease .66s, transform .5s ease .66s, background .2s;
+    }
+    body.menu-open .nav-right.sm-panel .nav-book { opacity:1; transform:translateX(0); }
+    .nav-right.sm-panel .nav-overlay-extra {
+      position:static; margin-top:2.5rem; left:auto; bottom:auto;
+      opacity:0; transform:translateX(40px);
+      transition:opacity .5s ease .72s, transform .5s ease .72s;
+    }
+    body.menu-open .nav-right.sm-panel .nav-overlay-extra { opacity:1; transform:translateX(0); }
+    /* ── Accordion gallery ── */
+    .accordion-gallery { display:flex; gap:.5rem; height:460px; max-width:1100px; margin:0 auto; padding:0 1rem; }
+    .acc-panel { position:relative; flex:1; border-radius:6px; overflow:hidden; cursor:pointer; background-size:cover; background-position:center; filter:grayscale(.7) brightness(.7); transition:flex .55s cubic-bezier(.5,0,.15,1), filter .55s ease; min-width:0; }
+    .acc-panel.active { flex:5; filter:grayscale(0) brightness(1); }
+    .acc-shade { position:absolute; inset:0; background:linear-gradient(to top, rgba(9,9,9,.85) 0%, rgba(9,9,9,.1) 45%, transparent 70%); z-index:1; }
+    .acc-panel::before { content:attr(data-num); position:absolute; top:1rem; left:1rem; z-index:3; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold); opacity:0; transition:opacity .4s ease .15s; }
+    .acc-panel.active::before { opacity:1; }
+    .acc-label { position:absolute; left:0; right:0; bottom:0; padding:1.5rem; z-index:2; opacity:0; transform:translateY(12px); transition:opacity .4s ease .2s, transform .4s ease .2s; }
+    .acc-panel.active .acc-label { opacity:1; transform:translateY(0); }
+    .acc-stage { display:block; font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.04em; color:var(--white); line-height:1.1; }
+    .acc-desc { display:block; font-size:.82rem; color:var(--grey-mid); margin-top:.3rem; max-width:340px; }
+    .acc-vert { position:absolute; bottom:1.5rem; left:50%; transform:translateX(-50%) rotate(180deg); writing-mode:vertical-rl; z-index:2; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.15em; color:var(--white); white-space:nowrap; transition:opacity .4s ease; text-shadow:0 2px 8px rgba(0,0,0,.6); }
+    .acc-panel.active .acc-vert { opacity:0; }
+    @media(max-width:700px){
+      .accordion-gallery { flex-direction:column; height:auto; gap:.4rem; }
+      .acc-panel { height:64px; flex:none; }
+      .acc-panel.active { height:320px; flex:none; }
+      .acc-vert { writing-mode:horizontal-tb; transform:translateX(-50%); bottom:auto; top:50%; margin-top:-.5rem; }
+    }
   </style>
-</head>
+<!-- v20260806171427 --></head>
 <body>
   <nav id="nav" class="solid">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
     <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-    <div class="nav-right">
+    <div class="sm-prelayers" aria-hidden="true">
+      <div class="sm-prelayer sm-prelayer-1"></div>
+      <div class="sm-prelayer sm-prelayer-2"></div>
+    </div>
+    <div class="nav-right sm-panel">
       <a href="services" class="nav-link" data-num="01">Services</a>
       <a href="shop" class="nav-link" data-num="02">Shop</a>
       <a href="about" class="nav-link" data-num="03">About</a>
@@ -258,10 +366,6 @@
       <div class="nav-overlay-extra">
         <span class="noe-label">Get in touch</span>
         <a href="mailto:contact@djhvsuls.uk">contact@djhvsuls.uk</a>
-        <div class="nav-overlay-social">
-          <a href="https://instagram.com/djh.vsul" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://youtube.com/@DJH_PROD" target="_blank" rel="noopener">YouTube</a>
-        </div>
         <div class="nav-overlay-signup">
           <span class="nos-label">Stay in the loop</span>
           <form method="POST" action="https://d3725b92.sibforms.com/serve/MUIFAAHochpj0uRrZ-rcpG2CZ8VugLs3qT6jr4WUdmoobVe4fRKrEcJVvmM-fOSmHld_TBDiNsc-VEFxcMkP1jxjBXEB_YXiGztGLRAX8iDejk6VbbNYiZCv5uTtMnmbZHW_XifZatMbcpNEjRSYmtFLEeTcuencvFBYOt7PGQMUAyBR7PXOV5-AXUclRbZE6RjHUfpwKWU5Hz4f6w==">
@@ -288,14 +392,39 @@
       <span class="proc-title">The Process</span>
       <span class="proc-sub">Raw footage to final grade &mdash; every stage of a car edit</span>
     </div>
-    <div class="proc-stages">
-      <div class="stage"><div class="stage-thumb"><img src="v4.png" alt="Raw Footage" /></div><span class="stage-name">Raw Footage</span><span class="stage-desc">Unedited &mdash; straight off the camera</span></div>
-      <div class="stage-arrow">&rarr;</div>
-      <div class="stage"><div class="stage-thumb"><img src="v3.png" alt="Logo Added" /></div><span class="stage-name">Logo Added</span><span class="stage-desc">Custom logo composited onto the vehicle</span></div>
-      <div class="stage-arrow">&rarr;</div>
-      <div class="stage"><div class="stage-thumb"><img src="v2.png" alt="Design &amp; Effects" /></div><span class="stage-name">Design &amp; Effects</span><span class="stage-desc">Motion graphics, speed ramps and VFX layered in</span></div>
-      <div class="stage-arrow">&rarr;</div>
-      <div class="stage"><div class="stage-thumb"><img src="v1.png" alt="Final Cut" /></div><span class="stage-name">Final Cut</span><span class="stage-desc">Colour graded and complete</span></div>
+    <div class="accordion-gallery" id="procAccordion">
+      <div class="acc-panel" data-num="01" style="background-image:url('v4.png')">
+        <div class="acc-shade"></div>
+        <div class="acc-label">
+          <span class="acc-stage">Raw Footage</span>
+          <span class="acc-desc">Unedited &mdash; straight off the camera</span>
+        </div>
+        <span class="acc-vert">Raw</span>
+      </div>
+      <div class="acc-panel active" data-num="02" style="background-image:url('v3.png')">
+        <div class="acc-shade"></div>
+        <div class="acc-label">
+          <span class="acc-stage">Logo Added</span>
+          <span class="acc-desc">Custom logo composited onto the vehicle</span>
+        </div>
+        <span class="acc-vert">Logo</span>
+      </div>
+      <div class="acc-panel" data-num="03" style="background-image:url('v2.png')">
+        <div class="acc-shade"></div>
+        <div class="acc-label">
+          <span class="acc-stage">Design &amp; Effects</span>
+          <span class="acc-desc">Motion graphics, speed ramps and VFX layered in</span>
+        </div>
+        <span class="acc-vert">Design</span>
+      </div>
+      <div class="acc-panel" data-num="04" style="background-image:url('v1.png')">
+        <div class="acc-shade"></div>
+        <div class="acc-label">
+          <span class="acc-stage">Final Cut</span>
+          <span class="acc-desc">Colour graded and complete</span>
+        </div>
+        <span class="acc-vert">Final</span>
+      </div>
     </div>
   </section>
 
@@ -394,15 +523,102 @@
       navToggle.addEventListener('click', () => {
         const open = navToggle.classList.toggle('open');
         navRight.classList.toggle('open');
+        document.body.classList.toggle('menu-open', open);
         document.body.style.overflow = open ? 'hidden' : '';
       });
       navRight.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
         navToggle.classList.remove('open');
         navRight.classList.remove('open');
+        document.body.classList.remove('menu-open');
         document.body.style.overflow = '';
       }));
     }
 
+  </script>
+  <script>
+    (function(){
+      if (window.matchMedia('(hover: none)').matches) return;
+      const cards = document.querySelectorAll('.cat-media .vid-9-16, .cat-media .vid-16-9, .work-media .vid-9-16, .work-media .vid-16-9');
+      cards.forEach(card => {
+        const isVertical = card.classList.contains('vid-9-16');
+        const AMP = isVertical ? 6 : 9;          // tilt degrees
+        const POP = isVertical ? 1.04 : 1.08;    // scale (horizontal pops more)
+        if (card.parentElement) card.parentElement.classList.add('tilt-wrap');
+        const shine = document.createElement('div');
+        shine.className = 'tilt-shine';
+        card.appendChild(shine);
+        let raf = null;
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rx = (py - 0.5) * -2 * AMP;
+          const ry = (px - 0.5) * 2 * AMP;
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            card.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(${POP})`;
+            shine.style.setProperty('--mx', (px*100).toFixed(1)+'%');
+            shine.style.setProperty('--my', (py*100).toFixed(1)+'%');
+          });
+        });
+        const section = card.closest('.cat, .work');
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('tilt-active');
+          if (section) section.classList.add('section-lifted');
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('tilt-active');
+          card.style.transform = '';
+          if (section) section.classList.remove('section-lifted');
+        });
+      });
+    })();
+  </script>
+  <!-- Floating socials -->
+  <div class="social-float" id="socialFloat">
+    <div class="sf-items">
+      <a href="https://instagram.com/djh.vsul" target="_blank" rel="noopener" class="sf-item" aria-label="Instagram" style="--i:1">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56-.79.31-1.46.72-2.13 1.38C1.34 2.68.93 3.35.63 4.14c-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84M12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+      </a>
+      <a href="https://youtube.com/@DJH_PROD" target="_blank" rel="noopener" class="sf-item" aria-label="YouTube" style="--i:2">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81zM9.6 15.6V8.4l6.24 3.6z"/></svg>
+      </a>
+      <a href="https://facebook.com/profile.php?id=61591720670716" target="_blank" rel="noopener" class="sf-item" aria-label="Facebook" style="--i:3">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.685 4.53-4.685 1.31 0 2.68.235 2.68.235v2.97h-1.51c-1.49 0-1.96.93-1.96 1.885v2.255h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/sam-coupe-0584b5370" target="_blank" rel="noopener" class="sf-item" aria-label="LinkedIn" style="--i:4">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 0 1-2.07-2.07 2.07 2.07 0 1 1 2.07 2.07zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+      </a>
+    </div>
+    <button class="sf-toggle" id="sfToggle" aria-label="Social links">
+      <svg class="sf-open" viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+      <svg class="sf-close" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+  </div>
+
+  <script>
+    (function(){
+      const float = document.getElementById('socialFloat');
+      const toggle = document.getElementById('sfToggle');
+      if (float && toggle) {
+        toggle.addEventListener('click', e => { e.stopPropagation(); float.classList.toggle('open'); });
+        document.addEventListener('click', e => { if (!float.contains(e.target)) float.classList.remove('open'); });
+      }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const acc = document.getElementById('procAccordion');
+      if (!acc) return;
+      const panels = Array.from(acc.querySelectorAll('.acc-panel'));
+      const isTouch = window.matchMedia('(hover: none)').matches;
+      panels.forEach(panel => {
+        const activate = () => { panels.forEach(p => p.classList.remove('active')); panel.classList.add('active'); };
+        if (isTouch) panel.addEventListener('click', activate);
+        else panel.addEventListener('mouseenter', activate);
+      });
+    })();
   </script>
 </body>
 </html>
