@@ -260,7 +260,52 @@
     }
     body.menu-open .nav-right.sm-panel .nav-overlay-extra { opacity:1; transform:translateX(0); }
   </style>
-<!-- v20260806171323 --></head>
+  <style>
+    /* ===== PAGE TRANSITION (box expands from center → page name → reveal next) ===== */
+    /* incoming page just fades up softly */
+    #pagewrap.page-tx{ will-change:opacity; }
+    #pagewrap.tx-enter{ opacity:0; }
+    #pagewrap.tx-in{ opacity:1; transition:opacity .7s ease .35s; }
+
+    /* the expanding box overlay */
+    .tx-cover{ position:fixed; inset:0; z-index:9998; pointer-events:none;
+      display:flex; align-items:center; justify-content:center; }
+    .tx-cover.show{ pointer-events:all; }
+    .tx-box{
+      position:relative;
+      width:0; height:0;
+      background:#0d0b08;
+      border:1px solid rgba(233,200,64,0);
+      display:flex; align-items:center; justify-content:center;
+      transition:width 1.05s cubic-bezier(.7,0,.2,1),
+                 height 1.05s cubic-bezier(.7,0,.2,1),
+                 border-color .4s ease;
+      overflow:visible;
+    }
+    .tx-cover.show .tx-box{ width:100vw; height:100vh; border-color:rgba(233,200,64,.0); }
+    /* mid-expansion the box is a contained panel with a visible gold edge */
+    .tx-cover.grow .tx-box{ width:min(340px,60vw); height:min(200px,34vh); border-color:rgba(233,200,64,.55); }
+    .tx-cover.full .tx-box{ width:100vw; height:100vh; border-color:rgba(233,200,64,0); }
+
+    .tx-label{ font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,6vw,4.2rem);
+      letter-spacing:.12em; color:var(--gold); white-space:nowrap;
+      opacity:0; transform:translateY(8px); transition:opacity .4s ease, transform .4s ease; }
+    .tx-cover.grow .tx-label, .tx-cover.full .tx-label{ opacity:1; transform:translateY(0); }
+
+    /* thin gold corner ticks on the box (camera-frame nod) */
+    .tx-box::before, .tx-box::after{ content:""; position:absolute; width:16px; height:16px;
+      border:1px solid rgba(233,200,64,.7); opacity:0; transition:opacity .4s ease; }
+    .tx-box::before{ top:10px; left:10px; border-right:none; border-bottom:none; }
+    .tx-box::after{ bottom:10px; right:10px; border-left:none; border-top:none; }
+    .tx-cover.grow .tx-box::before, .tx-cover.grow .tx-box::after{ opacity:1; }
+    .tx-cover.full .tx-box::before, .tx-cover.full .tx-box::after{ opacity:0; }
+
+    @media (prefers-reduced-motion:reduce){
+      #pagewrap.tx-enter,#pagewrap.tx-in{ opacity:1 !important; transition:none !important; }
+      .tx-box,.tx-label,.tx-box::before,.tx-box::after{ transition:none !important; }
+    }
+  </style>
+  <!-- v20260807200000 --></head>
 <body>
   <nav id="nav" class="solid">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
@@ -294,6 +339,7 @@
     </div>
   </nav>
 
+  <div id="pagewrap" class="page-tx">
   <section class="page-hero">
     <a href="/" class="back-link">&larr; Back to Home</a>
     <div class="eyebrow">Legal</div>
@@ -378,6 +424,7 @@
       <span class="footer-copy">contact@djhvsuls.uk &middot; &copy; 2026 &middot; Nottinghamshire, UK</span>
     </div>
   </footer>
+  </div><!-- /#pagewrap -->
 
   <div class="modal" id="modal" onclick="closeModal(event)">
     <div class="modal-inner">
@@ -426,5 +473,97 @@
     }
 
   </script>
+  <script>
+    /* ===== PAGE TRANSITION ENGINE — expanding box (shared, identical on every page) ===== */
+    (function(){
+      var wrap = document.getElementById('pagewrap');
+      if (!wrap) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      if (reduce) return;
+
+      var cover = document.createElement('div'); cover.className = 'tx-cover';
+      var box = document.createElement('div'); box.className = 'tx-box';
+      var lbl = document.createElement('div'); lbl.className = 'tx-label';
+      box.appendChild(lbl); cover.appendChild(box);
+      document.body.appendChild(cover);
+
+      // Arrival trigger set up after PAGE_LABELS is defined (below)
+      wrap.classList.add('tx-enter');
+
+      var PAGE_LABELS = {
+        '':'HOME','/':'HOME','index':'HOME','index.html':'HOME',
+        'services':'SERVICES','shop':'SHOP','about':'ABOUT','cars':'CARS',
+        'motion':'MOTION','specads':'SPEC ADS','bts':'BTS','contact':'CONTACT',
+        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS'
+      };
+      function labelFor(a){
+        var href=(a.getAttribute('href')||'').replace(/^\//,'').replace(/\.html$/,'').split(/[?#]/)[0];
+        if (PAGE_LABELS[href]) return PAGE_LABELS[href];
+        var t=(a.textContent||'').trim().replace(/[\s\u2192\u2197\u2190\u2191\u2193\u00bb\u00ab\-]+$/,'').trim();
+        return t.toUpperCase();
+      }
+      function internalTarget(a){
+        if (!a) return null;
+        if (a.target==='_blank' || a.hasAttribute('download')) return null;
+        var href=a.getAttribute('href'); if (!href) return null;
+        if (href.charAt(0)==='#') return null;
+        if (/^(mailto:|tel:)/i.test(href)) return null;
+        if (/^https?:/i.test(href) && a.hostname!==location.hostname) return null;
+        return href;
+      }
+
+      // Arrival: show the covering box with THIS page's name, hold, then open to reveal page
+      (function(){
+        var seg=location.pathname.replace(/\/$/,'').split('/').pop().replace(/\.html$/,'');
+        lbl.textContent = PAGE_LABELS[seg] || PAGE_LABELS[''];
+      })();
+      cover.classList.add('show','full');
+      window.setTimeout(function(){
+        wrap.classList.remove('tx-enter'); wrap.classList.add('tx-in');
+        cover.classList.remove('full');
+        box.style.transition='width .8s cubic-bezier(.7,0,.2,1), height .8s cubic-bezier(.7,0,.2,1)';
+        box.style.width='0'; box.style.height='0';
+      }, 550);
+      window.setTimeout(function(){
+        cover.classList.remove('show'); wrap.classList.remove('tx-in');
+        box.removeAttribute('style'); lbl.textContent='';
+      }, 550 + 850);
+
+      var navigating=false;
+      function go(href,label){
+        if (navigating) return; navigating=true;
+        document.body.classList.remove('menu-open');
+        var tog=document.querySelector('.nav-toggle'); if (tog) tog.classList.remove('open');
+        lbl.textContent=label||'';
+        box.removeAttribute('style');
+        cover.classList.add('show');
+        requestAnimationFrame(function(){
+          cover.classList.add('grow');
+          window.setTimeout(function(){
+            cover.classList.remove('grow'); cover.classList.add('full');
+          }, 900);
+        });
+        window.setTimeout(function(){ location.href=href; }, 900 + 1050 + 1500);
+      }
+
+      document.addEventListener('click', function(e){
+        var a=e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        var href=internalTarget(a); if (!href) return;
+        e.preventDefault(); go(href, labelFor(a));
+      });
+
+      window.addEventListener('pageshow', function(ev){
+        if (ev.persisted){
+          navigating=false;
+          cover.classList.remove('show','grow','full');
+          box.removeAttribute('style');
+          wrap.classList.remove('tx-enter'); wrap.classList.add('tx-in');
+          window.setTimeout(function(){ wrap.classList.remove('tx-in'); }, 50);
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>

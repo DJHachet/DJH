@@ -315,7 +315,69 @@
     }
     body.menu-open .nav-right.sm-panel .nav-overlay-extra { opacity:1; transform:translateX(0); }
   </style>
-<!-- v20260806171322 --></head>
+  <!-- Leaflet (map) — free, no API key, works on static GitHub Pages -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <style>
+    .area-section { max-width:1080px; margin:0 auto; padding:1rem 2rem 4rem; }
+    .area-map-wrap { position:relative; width:100%; border-radius:14px; overflow:hidden; border:1px solid var(--border); background:var(--mid); margin-top:1.75rem; }
+    #areaMap { width:100%; height:clamp(340px,52vh,520px); background:var(--black); z-index:1; }
+    /* dark UI to match DJH */
+    #areaMap .leaflet-control-zoom a { background:#141414; color:var(--white); border:1px solid var(--border); }
+    #areaMap .leaflet-control-zoom a:hover { background:#1d1d1d; color:var(--gold); }
+    #areaMap .leaflet-bar { border:none; box-shadow:0 2px 10px rgba(0,0,0,.5); }
+    #areaMap .leaflet-control-attribution { background:rgba(9,9,9,.7); color:rgba(240,239,233,.4); font-size:10px; }
+    #areaMap .leaflet-control-attribution a { color:rgba(240,239,233,.6); }
+    .area-pin-label { background:none; border:none; box-shadow:none; }
+    .area-pin-label span { font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.08em; color:var(--white); text-shadow:0 1px 4px rgba(0,0,0,.9); white-space:nowrap; }
+    .area-note { font-size:.72rem; color:var(--grey); letter-spacing:.04em; margin-top:1rem; }
+  </style>
+  <style>
+    /* ===== PAGE TRANSITION (box expands from center → page name → reveal next) ===== */
+    /* incoming page just fades up softly */
+    #pagewrap.page-tx{ will-change:opacity; }
+    #pagewrap.tx-enter{ opacity:0; }
+    #pagewrap.tx-in{ opacity:1; transition:opacity .7s ease .35s; }
+
+    /* the expanding box overlay */
+    .tx-cover{ position:fixed; inset:0; z-index:9998; pointer-events:none;
+      display:flex; align-items:center; justify-content:center; }
+    .tx-cover.show{ pointer-events:all; }
+    .tx-box{
+      position:relative;
+      width:0; height:0;
+      background:#0d0b08;
+      border:1px solid rgba(233,200,64,0);
+      display:flex; align-items:center; justify-content:center;
+      transition:width 1.05s cubic-bezier(.7,0,.2,1),
+                 height 1.05s cubic-bezier(.7,0,.2,1),
+                 border-color .4s ease;
+      overflow:visible;
+    }
+    .tx-cover.show .tx-box{ width:100vw; height:100vh; border-color:rgba(233,200,64,.0); }
+    /* mid-expansion the box is a contained panel with a visible gold edge */
+    .tx-cover.grow .tx-box{ width:min(340px,60vw); height:min(200px,34vh); border-color:rgba(233,200,64,.55); }
+    .tx-cover.full .tx-box{ width:100vw; height:100vh; border-color:rgba(233,200,64,0); }
+
+    .tx-label{ font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,6vw,4.2rem);
+      letter-spacing:.12em; color:var(--gold); white-space:nowrap;
+      opacity:0; transform:translateY(8px); transition:opacity .4s ease, transform .4s ease; }
+    .tx-cover.grow .tx-label, .tx-cover.full .tx-label{ opacity:1; transform:translateY(0); }
+
+    /* thin gold corner ticks on the box (camera-frame nod) */
+    .tx-box::before, .tx-box::after{ content:""; position:absolute; width:16px; height:16px;
+      border:1px solid rgba(233,200,64,.7); opacity:0; transition:opacity .4s ease; }
+    .tx-box::before{ top:10px; left:10px; border-right:none; border-bottom:none; }
+    .tx-box::after{ bottom:10px; right:10px; border-left:none; border-top:none; }
+    .tx-cover.grow .tx-box::before, .tx-cover.grow .tx-box::after{ opacity:1; }
+    .tx-cover.full .tx-box::before, .tx-cover.full .tx-box::after{ opacity:0; }
+
+    @media (prefers-reduced-motion:reduce){
+      #pagewrap.tx-enter,#pagewrap.tx-in{ opacity:1 !important; transition:none !important; }
+      .tx-box,.tx-label,.tx-box::before,.tx-box::after{ transition:none !important; }
+    }
+  </style>
+  <!-- v20260807193000 --></head>
 <body>
   <nav id="nav" class="solid">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
@@ -349,6 +411,7 @@
     </div>
   </nav>
 
+  <div id="pagewrap" class="page-tx">
   <section class="page-hero">
     <a href="/" class="back-link">&larr; Back to Home</a>
     <div class="eyebrow">About</div>
@@ -368,10 +431,10 @@
     </div>
 
     <div class="about-stats">
-      <div class="sg-box"><span class="sg-n">899K</span><span class="sg-l">Organic YT Views</span></div>
-      <div class="sg-box"><span class="sg-n">100+</span><span class="sg-l">Projects Delivered</span></div>
-      <div class="sg-box"><span class="sg-n gold">31K</span><span class="sg-l">Watch Hours</span></div>
-      <div class="sg-box"><span class="sg-n">50+</span><span class="sg-l">Clients Served</span></div>
+      <div class="sg-box"><span class="sg-n" data-count="899" data-suffix="K">899K</span><span class="sg-l">Organic YT Views</span></div>
+      <div class="sg-box"><span class="sg-n" data-count="100" data-suffix="+">100+</span><span class="sg-l">Projects Delivered</span></div>
+      <div class="sg-box"><span class="sg-n gold" data-count="31" data-suffix="K">31K</span><span class="sg-l">Watch Hours</span></div>
+      <div class="sg-box"><span class="sg-n" data-count="50" data-suffix="+">50+</span><span class="sg-l">Clients Served</span></div>
     </div>
 
     <div class="eyebrow" style="margin-top:1rem;margin-bottom:0.5rem;">The Toolkit</div>
@@ -382,6 +445,16 @@
       <div class="disc-item"><span class="disc-name">Craft</span><span class="disc-desc">Cinematic editing &middot; motion graphics &amp; VFX &middot; colour grading &middot; sound design</span></div>
     </div>
   </div>
+
+  <section class="area-section reveal">
+    <div class="eyebrow">Where I Work</div>
+    <h2 class="h-md">Based in Nottinghamshire &mdash;<br/><span class="gold">covering the East Midlands</span></h2>
+    <p class="body-txt" style="margin-top:1rem;max-width:640px;">On-location filming across Nottingham, Derby, Mansfield, Newark and the wider East Midlands. Working with footage you provide? That&rsquo;s handled from anywhere.</p>
+    <div class="area-map-wrap">
+      <div id="areaMap" role="img" aria-label="Map showing DJH service area across the East Midlands, centred on Nottingham"></div>
+    </div>
+    <p class="area-note">Approximate coverage area &mdash; travel beyond it is welcome, just ask.</p>
+  </section>
 
   <section class="cta-strip reveal">
     <h2 class="h-lg">Want to work<br/><span class="gold">together?</span></h2>
@@ -411,6 +484,7 @@
       <span class="footer-copy">contact@djhvsuls.uk &middot; &copy; 2026 &middot; Nottinghamshire, UK</span>
     </div>
   </footer>
+  </div><!-- /#pagewrap -->
 
   <div class="modal" id="modal" onclick="closeModal(event)">
     <div class="modal-inner">
@@ -426,6 +500,36 @@
     }
     const ro = new IntersectionObserver((e) => { e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); ro.unobserve(x.target); } }); }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    /* Count-up stats — vanilla, all browsers, respects reduced-motion */
+    (function(){
+      var els = document.querySelectorAll('[data-count]');
+      if (!els.length) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function run(el){
+        var target = parseFloat(el.getAttribute('data-count'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var prefix = el.getAttribute('data-prefix') || '';
+        if (isNaN(target)) return;
+        if (reduce){ el.textContent = prefix + target + suffix; return; }
+        var dur = 3200, start = null;
+        function step(ts){
+          if (start === null) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);           // easeOutCubic
+          el.textContent = prefix + Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = prefix + target + suffix; // exact final
+        }
+        requestAnimationFrame(step);
+      }
+      var co = new IntersectionObserver(function(entries){
+        entries.forEach(function(x){
+          if (x.isIntersecting){ run(x.target); co.unobserve(x.target); }
+        });
+      }, { threshold: 0.4 });
+      els.forEach(function(el){ co.observe(el); });
+    })();
     function openModal(id, isShort) {
       document.getElementById('modal-iframe').src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
       const inner = document.querySelector('.modal-inner');
@@ -489,6 +593,170 @@
         toggle.addEventListener('click', e => { e.stopPropagation(); float.classList.toggle('open'); });
         document.addEventListener('click', e => { if (!float.contains(e.target)) float.classList.remove('open'); });
       }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      var el = document.getElementById('areaMap');
+      if (!el || typeof L === 'undefined') return;
+
+      // Centred on Nottingham city centre (NOT a private address). ~63km radius = ~39 miles.
+      var CENTRE = [52.9548, -1.1581];
+      var RADIUS_M = 63000;
+
+      var map = L.map(el, {
+        center: CENTRE,
+        zoom: 8,
+        scrollWheelZoom: false,   // don't hijack page scroll
+        zoomControl: true,
+        attributionControl: true
+      });
+
+      // Free dark tiles — no API key, works on GitHub Pages
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+
+      // Soft gold service-area circle
+      L.circle(CENTRE, {
+        radius: RADIUS_M,
+        color: '#E9C840',
+        weight: 1.5,
+        opacity: 0.9,
+        fillColor: '#E9C840',
+        fillOpacity: 0.08
+      }).addTo(map);
+
+      // Labelled town markers (generic, public locations only)
+      var towns = [
+        { name: 'Nottingham', ll: [52.9548, -1.1581] },
+        { name: 'Derby',      ll: [52.9226, -1.4746] },
+        { name: 'Mansfield',  ll: [53.1436, -1.1969] },
+        { name: 'Newark',     ll: [53.0766, -0.8093] },
+        { name: 'Loughborough', ll: [52.7721, -1.2062] }
+      ];
+      towns.forEach(function(t){
+        L.circleMarker(t.ll, {
+          radius: 4, color:'#E9C840', weight:1.5,
+          fillColor:'#E9C840', fillOpacity:1
+        }).addTo(map);
+        L.marker(t.ll, {
+          icon: L.divIcon({
+            className:'area-pin-label',
+            html:'<span>'+t.name+'</span>',
+            iconAnchor:[-8, 8]
+          }),
+          interactive:false, keyboard:false
+        }).addTo(map);
+      });
+
+      // Fit the circle nicely in view, then lock a sensible zoom
+      map.fitBounds(
+        L.latLng(CENTRE).toBounds(RADIUS_M * 2),
+        { padding:[20,20] }
+      );
+
+      // Click map once to enable wheel-zoom; leaving disables it again
+      map.on('focus', function(){ map.scrollWheelZoom.enable(); });
+      map.on('blur',  function(){ map.scrollWheelZoom.disable(); });
+
+      // Redraw if it was laid out while hidden by the reveal transition
+      setTimeout(function(){ map.invalidateSize(); }, 400);
+    })();
+  </script>
+
+  <script>
+    /* ===== PAGE TRANSITION ENGINE — expanding box (shared, identical on every page) ===== */
+    (function(){
+      var wrap = document.getElementById('pagewrap');
+      if (!wrap) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      if (reduce) return;
+
+      var cover = document.createElement('div'); cover.className = 'tx-cover';
+      var box = document.createElement('div'); box.className = 'tx-box';
+      var lbl = document.createElement('div'); lbl.className = 'tx-label';
+      box.appendChild(lbl); cover.appendChild(box);
+      document.body.appendChild(cover);
+
+      // Arrival trigger set up after PAGE_LABELS is defined (below)
+      wrap.classList.add('tx-enter');
+
+      var PAGE_LABELS = {
+        '':'HOME','/':'HOME','index':'HOME','index.html':'HOME',
+        'services':'SERVICES','shop':'SHOP','about':'ABOUT','cars':'CARS',
+        'motion':'MOTION','specads':'SPEC ADS','bts':'BTS','contact':'CONTACT',
+        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS'
+      };
+      function labelFor(a){
+        var href=(a.getAttribute('href')||'').replace(/^\//,'').replace(/\.html$/,'').split(/[?#]/)[0];
+        if (PAGE_LABELS[href]) return PAGE_LABELS[href];
+        var t=(a.textContent||'').trim().replace(/[\s\u2192\u2197\u2190\u2191\u2193\u00bb\u00ab\-]+$/,'').trim();
+        return t.toUpperCase();
+      }
+      function internalTarget(a){
+        if (!a) return null;
+        if (a.target==='_blank' || a.hasAttribute('download')) return null;
+        var href=a.getAttribute('href'); if (!href) return null;
+        if (href.charAt(0)==='#') return null;
+        if (/^(mailto:|tel:)/i.test(href)) return null;
+        if (/^https?:/i.test(href) && a.hostname!==location.hostname) return null;
+        return href;
+      }
+
+      // Arrival: show the covering box with THIS page's name, hold, then open to reveal page
+      (function(){
+        var seg=location.pathname.replace(/\/$/,'').split('/').pop().replace(/\.html$/,'');
+        lbl.textContent = PAGE_LABELS[seg] || PAGE_LABELS[''];
+      })();
+      cover.classList.add('show','full');
+      window.setTimeout(function(){
+        wrap.classList.remove('tx-enter'); wrap.classList.add('tx-in');
+        cover.classList.remove('full');
+        box.style.transition='width .8s cubic-bezier(.7,0,.2,1), height .8s cubic-bezier(.7,0,.2,1)';
+        box.style.width='0'; box.style.height='0';
+      }, 550);
+      window.setTimeout(function(){
+        cover.classList.remove('show'); wrap.classList.remove('tx-in');
+        box.removeAttribute('style'); lbl.textContent='';
+      }, 550 + 850);
+
+      var navigating=false;
+      function go(href,label){
+        if (navigating) return; navigating=true;
+        document.body.classList.remove('menu-open');
+        var tog=document.querySelector('.nav-toggle'); if (tog) tog.classList.remove('open');
+        lbl.textContent=label||'';
+        box.removeAttribute('style');
+        cover.classList.add('show');
+        requestAnimationFrame(function(){
+          cover.classList.add('grow');
+          window.setTimeout(function(){
+            cover.classList.remove('grow'); cover.classList.add('full');
+          }, 900);
+        });
+        window.setTimeout(function(){ location.href=href; }, 900 + 1050 + 1500);
+      }
+
+      document.addEventListener('click', function(e){
+        var a=e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        var href=internalTarget(a); if (!href) return;
+        e.preventDefault(); go(href, labelFor(a));
+      });
+
+      window.addEventListener('pageshow', function(ev){
+        if (ev.persisted){
+          navigating=false;
+          cover.classList.remove('show','grow','full');
+          box.removeAttribute('style');
+          wrap.classList.remove('tx-enter'); wrap.classList.add('tx-in');
+          window.setTimeout(function(){ wrap.classList.remove('tx-in'); }, 50);
+        }
+      });
     })();
   </script>
 
