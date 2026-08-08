@@ -374,7 +374,7 @@
     @media (prefers-reduced-motion: reduce){ .sf-item, .sf-toggle svg { transition:opacity .2s !important; transform:none !important; } }
   </style>
   <style>
-    /* ===== PAGE TRANSITION (box expands from center → page name → reveal next) ===== */
+    /* ===== PAGE TRANSITION (single straight zoom → name → reveal) ===== */
     #pagewrap.page-tx{ will-change:opacity; }
     #pagewrap.tx-enter{ opacity:0; }
     #pagewrap.tx-in{ opacity:1; transition:opacity .45s ease .15s; }
@@ -383,35 +383,109 @@
       display:flex; align-items:center; justify-content:center; }
     .tx-cover.show{ pointer-events:all; }
 
-    /* the box scales via transform (GPU, no reflow = no jitter) */
+    /* box scales straight 0 -> 1 in one move (no intermediate stutter) */
     .tx-box{
       position:absolute; top:50%; left:50%;
       width:100vw; height:100vh;
       transform:translate(-50%,-50%) scale(0);
       transform-origin:center center;
       background:#0d0b08;
-      border:1px solid rgba(233,200,64,0);
-      transition:transform .6s cubic-bezier(.7,0,.2,1), border-color .3s ease;
+      transition:transform .62s cubic-bezier(.65,0,.35,1);
       will-change:transform;
     }
-    .tx-cover.grow .tx-box{ transform:translate(-50%,-50%) scale(.26); border-color:rgba(233,200,64,.55); }
-    .tx-cover.full .tx-box{ transform:translate(-50%,-50%) scale(1); border-color:rgba(233,200,64,0); }
+    .tx-cover.full .tx-box{ transform:translate(-50%,-50%) scale(1); }
 
-    /* label lives in a full-width centred line — its own width can't shift it (kills font-swap jitter) */
-    .tx-label{ position:absolute; top:50%; left:0; right:0; transform:translateY(8px);
+    /* page name — full-width centred line so its width can't shift it (no jitter) */
+    .tx-label{ position:absolute; top:50%; left:0; right:0; transform:translateY(10px);
       text-align:center;
       font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,6vw,4.2rem);
       letter-spacing:.12em; color:var(--gold); white-space:nowrap;
-      opacity:0; transition:opacity .35s ease, transform .35s ease; }
-    .tx-cover.grow .tx-label, .tx-cover.full .tx-label{ opacity:1; transform:translateY(0); }
+      opacity:0; transition:opacity .35s ease .12s, transform .4s ease .12s; }
+    .tx-cover.full .tx-label{ opacity:1; transform:translateY(0); }
 
     @media (prefers-reduced-motion:reduce){
       #pagewrap.tx-enter,#pagewrap.tx-in{ opacity:1 !important; transition:none !important; }
       .tx-box,.tx-label{ transition:none !important; }
     }
   </style>
-<!-- v20260807203000 --></head>
+  <style>
+    /* ===== HOMEPAGE FIRST-LOAD INTRO (once per session) ===== */
+    #djh-intro{ position:fixed; inset:0; z-index:10000; background:var(--black);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0;
+      transition:opacity .6s ease, visibility .6s; }
+    #djh-intro.done{ opacity:0; visibility:hidden; pointer-events:none; }
+    .intro-frame{ position:relative; width:min(300px,64vw); height:min(300px,64vw);
+      display:flex; align-items:center; justify-content:center; }
+    .intro-frame::before, .intro-frame::after{ content:""; position:absolute; inset:0;
+      border:1px solid rgba(233,200,64,.35); }
+    .intro-frame::before{ transform:scaleX(0); transform-origin:left; animation:introEdgeX .6s ease .1s forwards; border-width:1px 0; }
+    .intro-frame::after{ transform:scaleY(0); transform-origin:top; animation:introEdgeY .6s ease .1s forwards; border-width:0 1px; }
+    @keyframes introEdgeX{ to{ transform:scaleX(1);} }
+    @keyframes introEdgeY{ to{ transform:scaleY(1);} }
+    .intro-tick{ position:absolute; width:12px; height:12px; border:1px solid var(--gold); opacity:0; animation:introTick .4s ease .5s forwards; }
+    .intro-tick.tl{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+    .intro-tick.tr{ top:-1px; right:-1px; border-left:none; border-bottom:none; }
+    .intro-tick.bl{ bottom:-1px; left:-1px; border-right:none; border-top:none; }
+    .intro-tick.br{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+    @keyframes introTick{ to{ opacity:1; } }
+    .intro-logo{ width:46%; height:auto; opacity:0; transform:scale(.9);
+      animation:introLogo .7s cubic-bezier(.22,1,.36,1) .45s forwards; }
+    @keyframes introLogo{ to{ opacity:1; transform:scale(1);} }
+    .intro-tagline{ margin-top:1.6rem; font-family:'Bebas Neue',sans-serif; font-size:.9rem;
+      letter-spacing:.32em; color:var(--gold); opacity:0; animation:introTag .6s ease .7s forwards; }
+    @keyframes introTag{ to{ opacity:.85; } }
+    .intro-count{ position:fixed; bottom:2.2rem; left:50%; transform:translateX(-50%);
+      font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:.2em; color:rgba(240,239,233,.4); }
+    @media (prefers-reduced-motion:reduce){
+      #djh-intro .intro-frame::before,#djh-intro .intro-frame::after,.intro-tick,.intro-logo,.intro-tagline{ animation:none !important; opacity:1 !important; transform:none !important; }
+    }
+  </style>
+<!-- v20260807220000 --></head>
 <body>
+  <!-- HOMEPAGE FIRST-LOAD INTRO -->
+  <div id="djh-intro" aria-hidden="true">
+    <div class="intro-frame">
+      <span class="intro-tick tl"></span><span class="intro-tick tr"></span>
+      <span class="intro-tick bl"></span><span class="intro-tick br"></span>
+      <img class="intro-logo" src="LogoDJH_for_pfp.png" alt="DJH" />
+    </div>
+    <div class="intro-tagline">CUT &middot; GRADE &middot; DELIVER</div>
+    <div class="intro-count" id="introCount">000</div>
+  </div>
+  <script>
+    (function(){
+      var intro=document.getElementById('djh-intro');
+      if(!intro) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      // Only show once per browser session
+      var seen;
+      try{ seen = sessionStorage.getItem('djh_intro_seen'); }catch(e){ seen=null; }
+      if(seen){ intro.parentNode && intro.parentNode.removeChild(intro); return; }
+      try{ sessionStorage.setItem('djh_intro_seen','1'); }catch(e){}
+
+      // lock scroll while intro is up
+      document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden';
+
+      function finish(){
+        intro.classList.add('done');
+        document.documentElement.style.overflow=''; document.body.style.overflow='';
+        setTimeout(function(){ intro.parentNode && intro.parentNode.removeChild(intro); }, 700);
+      }
+      if(reduce){ setTimeout(finish, 500); return; }
+
+      // count 000 -> 100 over the intro duration
+      var el=document.getElementById('introCount'), n=0, DUR=1900, t0=null;
+      function tick(ts){
+        if(t0===null) t0=ts;
+        var p=Math.min((ts-t0)/DUR,1);
+        var val=Math.round(p*100);
+        el.textContent=(val<10?'00':val<100?'0':'')+val;
+        if(p<1){ requestAnimationFrame(tick); }
+        else { setTimeout(finish, 250); }
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
 
   <nav id="nav">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
@@ -445,7 +519,7 @@
     </div>
   </nav>
 
-  <div id="pagewrap" class="page-tx">
+  <div id="pagewrap" class="page-tx" data-page="HOME">
   <section class="hero">
     <div class="hero-bg">
       <video autoplay muted loop playsinline preload="auto"><source src="SHOWREEL.mp4" type="video/mp4" /></video>
@@ -772,10 +846,9 @@
       var cover = document.createElement('div'); cover.className = 'tx-cover';
       var box = document.createElement('div'); box.className = 'tx-box';
       var lbl = document.createElement('div'); lbl.className = 'tx-label';
-      box.appendChild(lbl); cover.appendChild(box);
+      cover.appendChild(box); cover.appendChild(lbl);
       document.body.appendChild(cover);
 
-      // Arrival trigger set up after PAGE_LABELS is defined (below)
       wrap.classList.add('tx-enter');
 
       var PAGE_LABELS = {
@@ -800,21 +873,24 @@
         return href;
       }
 
-      // Arrival: show the covering box with THIS page's name, hold, then open to reveal page
+      // Arrival: box is full (covering) with this page's name, then zooms away to reveal page
       (function(){
+        // Prefer an explicit page name on the wrapper (reliable on any URL scheme),
+        // fall back to parsing the URL only if it's missing.
+        var explicit = wrap.getAttribute('data-page');
+        if (explicit){ lbl.textContent = explicit.toUpperCase(); return; }
         var seg=location.pathname.replace(/\/$/,'').split('/').pop().replace(/\.html$/,'');
         lbl.textContent = PAGE_LABELS[seg] || PAGE_LABELS[''];
       })();
-      // arrival: box covers full with name, holds briefly, then collapses to reveal page
       cover.classList.add('show','full');
       window.setTimeout(function(){
         wrap.classList.remove('tx-enter'); wrap.classList.add('tx-in');
-        cover.classList.remove('full');            // box scales back to 0 (reveals page)
-      }, 350);
+        cover.classList.remove('full');            // single straight zoom-out reveals page
+      }, 300);
       window.setTimeout(function(){
         cover.classList.remove('show'); wrap.classList.remove('tx-in');
         lbl.textContent='';
-      }, 350 + 600);
+      }, 300 + 620);
 
       var navigating=false;
       function go(href,label){
@@ -824,12 +900,9 @@
         lbl.textContent=label||'';
         cover.classList.add('show');
         requestAnimationFrame(function(){
-          cover.classList.add('grow');                       // box grows to panel + name
-          window.setTimeout(function(){
-            cover.classList.remove('grow'); cover.classList.add('full');   // expands to fill
-          }, 500);
+          cover.classList.add('full');             // single straight zoom to full + name + bar
         });
-        window.setTimeout(function(){ location.href=href; }, 500 + 500 + 600);
+        window.setTimeout(function(){ location.href=href; }, 620 + 500);  // zoom + brief name hold
       }
 
       document.addEventListener('click', function(e){
@@ -842,7 +915,7 @@
       window.addEventListener('pageshow', function(ev){
         if (ev.persisted){
           navigating=false;
-          cover.classList.remove('show','grow','full');
+          cover.classList.remove('show','full');
           box.removeAttribute('style');
           wrap.classList.remove('tx-enter'); wrap.classList.add('tx-in');
           window.setTimeout(function(){ wrap.classList.remove('tx-in'); }, 50);
