@@ -340,12 +340,20 @@
       opacity:0; transition:opacity .35s ease .12s, transform .4s ease .12s; }
     .tx-cover.full .tx-label{ opacity:1; transform:translateY(0); }
 
+    /* thin loading bar — fills 0→50% on leave, 50→100% on arrival (one continuous story) */
+    .tx-bar{ position:absolute; top:calc(50% + clamp(2.6rem,7vw,4.6rem)); left:50%; transform:translateX(-50%);
+      width:min(280px,52vw); height:2px; background:rgba(233,200,64,.18); overflow:hidden; opacity:0;
+      transition:opacity .3s ease; }
+    .tx-cover.show .tx-bar{ opacity:1; }
+    .tx-bar span{ position:absolute; left:0; top:0; bottom:0; width:0%;
+      background:var(--gold); transition:width .5s cubic-bezier(.4,0,.2,1); }
+
     @media (prefers-reduced-motion:reduce){
       #pagewrap.tx-enter,#pagewrap.tx-in{ opacity:1 !important; transition:none !important; }
-      .tx-box,.tx-label{ transition:none !important; }
+      .tx-box,.tx-label,.tx-bar span{ transition:none !important; }
     }
   </style>
-  <!-- v20260807220000 --></head>
+  <!-- v20260807230000 --></head>
 <body>
   <nav id="nav" class="solid">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
@@ -545,7 +553,9 @@
       var cover = document.createElement('div'); cover.className = 'tx-cover';
       var box = document.createElement('div'); box.className = 'tx-box';
       var lbl = document.createElement('div'); lbl.className = 'tx-label';
-      cover.appendChild(box); cover.appendChild(lbl);
+      var bar = document.createElement('div'); bar.className = 'tx-bar';
+      var barFill = document.createElement('span'); bar.appendChild(barFill);
+      cover.appendChild(box); cover.appendChild(lbl); cover.appendChild(bar);
       document.body.appendChild(cover);
 
       wrap.classList.add('tx-enter');
@@ -582,13 +592,23 @@
         lbl.textContent = PAGE_LABELS[seg] || PAGE_LABELS[''];
       })();
       cover.classList.add('show','full');
+
+      // Arrival always continues the bar 50%→100% (no cross-page syncing needed)
+      barFill.style.transition='none';
+      barFill.style.width='50%';
+      void barFill.offsetWidth;              // commit the 50% start
+      window.setTimeout(function(){
+        barFill.style.transition='width .55s cubic-bezier(.4,0,.2,1)';
+        barFill.style.width='100%';
+      }, 60);
+
       window.setTimeout(function(){
         wrap.classList.remove('tx-enter'); wrap.classList.add('tx-in');
         cover.classList.remove('full');            // single straight zoom-out reveals page
       }, 300);
       window.setTimeout(function(){
         cover.classList.remove('show'); wrap.classList.remove('tx-in');
-        lbl.textContent='';
+        lbl.textContent=''; barFill.style.width='0%';
       }, 300 + 620);
 
       var navigating=false;
@@ -597,11 +617,13 @@
         document.body.classList.remove('menu-open');
         var tog=document.querySelector('.nav-toggle'); if (tog) tog.classList.remove('open');
         lbl.textContent=label||'';
+        try{ sessionStorage.setItem('djh_nav','1'); }catch(e){}   // tells home it was an internal move
         cover.classList.add('show');
         requestAnimationFrame(function(){
-          cover.classList.add('full');             // single straight zoom to full + name + bar
+          cover.classList.add('full');             // straight zoom to full + name
+          requestAnimationFrame(function(){ barFill.style.width='50%'; });  // bar fills 0→50%
         });
-        window.setTimeout(function(){ location.href=href; }, 620 + 500);  // zoom + brief name hold
+        window.setTimeout(function(){ location.href=href; }, 620 + 500);
       }
 
       document.addEventListener('click', function(e){
