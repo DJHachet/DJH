@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop &mdash; DJH</title>
-  <meta name="description" content="Film packs, LUTs and presets from DJH &mdash; coming soon." />
+  <title>Vantom Drive Clips — Free Pack &mdash; DJH</title>
+  <meta name="description" content="Free clips pack from the VANTOMOVERDRIVE event — shot by DJHVSULS. Free download." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <meta property="og:site_name" content="DJH" />
   <meta property="og:title" content="Shop &mdash; DJH" />
-  <meta property="og:description" content="Film packs, LUTs and presets from DJH &mdash; coming soon." />
+  <meta property="og:description" content="Free clips pack from the VANTOMOVERDRIVE event — shot by DJHVSULS. Free download." />
   <meta property="og:image" content="https://djhvsuls.uk/LogoDJH_for_pfp.png" />
-  <meta property="og:url" content="https://djhvsuls.uk/shop" />
-  <link rel="canonical" href="https://djhvsuls.uk/shop" />
+  <meta property="og:url" content="https://djhvsuls.uk/pack-vantom" />
+  <link rel="canonical" href="https://djhvsuls.uk/pack-vantom" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="https://djhvsuls.uk/LogoDJH_for_pfp.png" />
@@ -329,6 +329,62 @@
       .tx-box,.tx-label,.tx-bar span{ transition:none !important; }
     }
   </style>
+  <style>
+    .prod-wrap { max-width:1080px; margin:0 auto; padding:2rem 2.5rem 5rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+    .prod-preview { aspect-ratio:4/3; background:linear-gradient(135deg,#161616,#0b0b0b); border:1px solid var(--border); border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+    .prod-preview .ph-icon { font-family:'Bebas Neue',sans-serif; font-size:4rem; color:var(--gold); letter-spacing:.04em; line-height:.9; text-align:center; }
+    .prod-preview .ph-ev { margin-top:.5rem; font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--grey); }
+    .prod-preview .ph-sub { position:absolute; bottom:1.2rem; font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(240,239,233,.3); }
+    .prod-info .tag { display:inline-block; font-size:.62rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:.28rem .7rem; border-radius:3px; margin-bottom:1rem; color:#7ec98f; background:rgba(126,201,143,.1); border:1px solid rgba(126,201,143,.25); }
+    .prod-info h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.4rem,5vw,3.4rem); letter-spacing:.03em; line-height:1; margin-bottom:.5rem; }
+    .prod-price { font-family:'Bebas Neue',sans-serif; font-size:1.9rem; color:var(--gold); margin-bottom:1.3rem; }
+    .prod-price small { font-size:.85rem; color:var(--grey); letter-spacing:.05em; }
+    .prod-info .lead { font-size:.94rem; color:var(--grey-mid); line-height:1.75; margin-bottom:1.6rem; }
+    .prod-incl { list-style:none; margin:0 0 1.7rem; padding:0; }
+    .prod-incl li { position:relative; padding-left:1.6rem; margin-bottom:.6rem; font-size:.88rem; color:var(--white); line-height:1.5; }
+    .prod-incl li::before { content:"✓"; position:absolute; left:0; color:var(--gold); font-weight:700; }
+    .prod-buy { display:inline-block; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:.1em; color:var(--black); background:var(--gold); padding:1rem 2.6rem; border-radius:4px; text-decoration:none; border:none; cursor:pointer; transition:background .2s,transform .15s; }
+    .prod-buy:hover { background:var(--gold-dim); transform:translateY(-2px); }
+    .prod-back { display:inline-block; margin-bottom:1.4rem; font-size:.72rem; letter-spacing:.13em; text-transform:uppercase; color:var(--grey); text-decoration:none; }
+    .prod-back:hover { color:var(--gold); }
+
+    /* Code + steps box */
+    .code-box { margin:1.6rem 0; border:1px solid var(--border); border-radius:12px; background:var(--mid); padding:1.4rem 1.5rem; }
+    .code-box h4 { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.06em; color:var(--white); margin-bottom:.9rem; }
+    .code-chip { display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:1rem; }
+    .code-chip code { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.12em; color:var(--gold); background:rgba(233,200,64,.09); border:1px dashed rgba(233,200,64,.4); padding:.4rem 1rem; border-radius:6px; }
+    .code-copy { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--grey); background:none; border:1px solid var(--border); border-radius:5px; padding:.4rem .8rem; cursor:pointer; transition:color .2s,border-color .2s; }
+    .code-copy:hover { color:var(--gold); border-color:var(--gold); }
+    .code-steps { list-style:none; margin:0; padding:0; counter-reset:s; }
+    .code-steps li { position:relative; padding-left:1.9rem; margin-bottom:.55rem; font-size:.84rem; color:var(--grey-mid); line-height:1.5; counter-increment:s; }
+    .code-steps li::before { content:counter(s); position:absolute; left:0; top:0; width:1.3rem; height:1.3rem; background:var(--gold); color:var(--black); border-radius:50%; font-family:'Bebas Neue',sans-serif; font-size:.8rem; display:flex; align-items:center; justify-content:center; }
+    .why-price { font-size:.78rem; color:var(--grey); margin-top:.9rem; line-height:1.55; padding-top:.8rem; border-top:1px solid var(--border); }
+    .why-price b { color:var(--gold); }
+    .tag-note { font-size:.85rem; color:var(--white); background:rgba(233,200,64,.06); border-left:2px solid var(--gold); padding:.7rem 1rem; border-radius:0 6px 6px 0; margin:1.4rem 0; line-height:1.5; }
+    .tag-note b { color:var(--gold); }
+    .payhip-note { font-size:.76rem; color:var(--grey); margin-top:1rem; line-height:1.6; }
+    .payhip-note a { color:var(--gold); }
+
+    /* Update popup */
+    .upd-overlay { position:fixed; inset:0; z-index:10001; background:rgba(0,0,0,.75); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; padding:1.5rem; }
+    .upd-overlay.show { opacity:1; pointer-events:all; }
+    .upd-card { background:#0e0d0b; border:1px solid rgba(233,200,64,.25); border-radius:16px; max-width:440px; width:100%; padding:2.5rem 2rem 2rem; text-align:center; transform:scale(.94); transition:transform .3s; }
+    .upd-overlay.show .upd-card { transform:scale(1); }
+    .upd-card h3 { font-family:'Bebas Neue',sans-serif; font-size:1.9rem; letter-spacing:.03em; margin-bottom:.6rem; }
+    .upd-card p { font-size:.9rem; color:var(--grey-mid); line-height:1.6; margin-bottom:1.4rem; }
+    .upd-form { display:flex; flex-direction:column; gap:.7rem; margin-bottom:1rem; }
+    .upd-form input { background:#161514; border:1px solid var(--border); border-radius:6px; padding:.8rem 1rem; color:var(--white); font-size:.9rem; font-family:inherit; }
+    .upd-form input:focus { outline:none; border-color:var(--gold); }
+    .upd-yes { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:.08em; color:var(--black); background:var(--gold); border:none; border-radius:6px; padding:.85rem; cursor:pointer; transition:background .2s; }
+    .upd-yes:hover { background:var(--gold-dim); }
+    .upd-no { background:none; border:none; color:var(--grey); font-size:.82rem; letter-spacing:.04em; cursor:pointer; text-decoration:underline; padding:.3rem; }
+    .upd-no:hover { color:var(--white); }
+    .upd-priv { font-size:.68rem; color:rgba(240,239,233,.35); margin-top:.3rem; line-height:1.5; }
+    @media(max-width:820px){ .prod-wrap { grid-template-columns:1fr; gap:2rem; padding-top:1rem; } }
+  </style>
+  <!-- Payhip overlay checkout -->
+  <script src="https://payhip.com/payhip.js"></script>
+
   <!-- v20260808001000 --></head>
 <body>
   <nav id="nav" class="solid">
@@ -363,66 +419,126 @@
     </div>
   </nav>
 
-  <div id="pagewrap" class="page-tx" data-page="SHOP">
-  <section class="page-hero">
-    <a href="/" class="back-link">&larr; Back to Home</a>
-    <div class="eyebrow">Shop</div>
-    <h1 class="h-xl">The Shop</h1>
-    <p class="body-txt">Clip packs, LUTs and presets &mdash; footage I&rsquo;ve recorded and the tools I use in my own edits, ready for you to drop into your projects. Coming soon.</p>
-  </section>
+  <div id="pagewrap-static">
+  <section class="page-hero" style="padding-bottom:1rem;"></section>
 
-  <div class="shop-soon">
-    <div class="soon-badge">Now Live</div>
-    <h2>Resources for Editors</h2>
-    <p>The first free pack is ready to download &mdash; more packs, LUTs and presets on the way. Grab the free one below.</p>
-  </div>
+  <div class="prod-wrap reveal">
+    <div class="prod-preview">
+      <span class="ph-icon">VANTOM<br/>DRIVE CLIPS</span>
+      <span class="ph-ev">VANTOMOVERDRIVE Event</span>
+      <span class="ph-sub">Free Pack</span>
+    </div>
+    <div class="prod-info">
+      <a href="shop" class="prod-back">&larr; Back to Shop</a>
+      <span class="tag">Free Download</span>
+      <h1>Vantom Drive Clips</h1>
+      <div class="prod-price">FREE <small>&mdash; with code below</small></div>
+      <p class="lead">A free pack of clips shot at the <b style="color:#fff">VANTOMOVERDRIVE</b> event &mdash; real footage, ready to drop straight into your edits. Grab it, use it, make something clean.</p>
+      <ul class="prod-incl">
+        <li>Event clips from VANTOMOVERDRIVE</li>
+        <li>Ready to use in your own projects</li>
+        <li>Free &mdash; just add the code at checkout</li>
+      </ul>
 
-  <div class="shop-grid">
-    <a href="free-packs" class="shop-card shop-card-link">
-      <span class="shop-card-icon">&#127909;</span>
-      <span class="tag free">Free</span>
-      <h3>Free Clip Packs</h3>
-      <p>Free footage packs to drop straight into your edits &mdash; starting with event clips, more added over time.</p>
-      <span class="card-cta">Browse Packs &rarr;</span>
-    </a>
-    <div class="shop-card">
-      <span class="soon-tag">Soon</span>
-      <span class="shop-card-icon">&#127916;</span>
-      <span class="tag paid">Premium</span>
-      <h3>Premium Clip Packs</h3>
-      <p>My best recorded footage, bundled &mdash; cinematic clips shot and graded, ready to use in your own projects.</p>
-    </div>
-    <div class="shop-card">
-      <span class="soon-tag">Soon</span>
-      <span class="shop-card-icon">&#127912;</span>
-      <span class="tag paid">Premium</span>
-      <h3>LUTs</h3>
-      <p>Cinematic colour grades and looks &mdash; the same grading style you see across my car edits.</p>
-    </div>
-    <div class="shop-card">
-      <span class="soon-tag">Soon</span>
-      <span class="shop-card-icon">&#9881;</span>
-      <span class="tag paid">Premium</span>
-      <h3>Presets</h3>
-      <p>Ready-made presets to speed up your workflow and get pro results without the hours.</p>
-    </div>
-  </div>
-
-  <div class="shop-notify">
-    <h3>Stay in the Loop</h3>
-    <p>Shop drops, new work and the occasional offer &mdash; straight to your inbox. No spam, unsubscribe anytime.</p>
-    <form class="notify-form" method="POST" action="https://d3725b92.sibforms.com/serve/MUIFAAHochpj0uRrZ-rcpG2CZ8VugLs3qT6jr4WUdmoobVe4fRKrEcJVvmM-fOSmHld_TBDiNsc-VEFxcMkP1jxjBXEB_YXiGztGLRAX8iDejk6VbbNYiZCv5uTtMnmbZHW_XifZatMbcpNEjRSYmtFLEeTcuencvFBYOt7PGQMUAyBR7PXOV5-AXUclRbZE6RjHUfpwKWU5Hz4f6w==">
-      <div class="notify-row">
-        <input type="email" name="EMAIL" placeholder="you@email.com" required autocomplete="email" />
-        <button type="submit" class="btn-gold notify-btn">Sign Up</button>
+      <div class="code-box">
+        <h4>How to get it free</h4>
+        <div class="code-chip">
+          <code id="promoCode">VANTOMDRIVECLIPS</code>
+          <button class="code-copy" onclick="copyCode()">Copy code</button>
+        </div>
+        <ol class="code-steps">
+          <li>Hit <b>Get the Pack</b> below &mdash; the checkout opens right here.</li>
+          <li>Enter the code <b>VANTOMDRIVECLIPS</b> in the discount box.</li>
+          <li>Price drops to <b>&pound;0</b> &mdash; enter your email and download.</li>
+        </ol>
+        <p class="why-price">Why the price tag? The pack&rsquo;s a big file, and the host needs a price set to upload files this size. The code takes it to <b>&pound;0</b> &mdash; it&rsquo;s completely free, the code just does the work.</p>
       </div>
-      <input type="text" name="email_address_check" value="" class="notify-hp" tabindex="-1" autocomplete="off" />
-      <input type="hidden" name="locale" value="en" />
-      <p class="notify-privacy">By signing up you agree to receive occasional emails from DJH. See the <a href="privacy">Privacy Policy</a>.</p>
-    </form>
-    <p class="notify-alt">In the meantime &mdash; <a href="cars">see the work</a> these come from.</p>
+
+      <div class="tag-note">Using the clips? <b>Tag @djh.vsuls</b> when you post &mdash; love seeing what you make with them.</div>
+
+      <button type="button" class="prod-buy" id="getPackBtn">Get the Pack &rarr;</button>
+
+      <p class="payhip-note"><b>New to Payhip?</b> It&rsquo;s just the secure checkout that delivers the file &mdash; it opens over this page, you don&rsquo;t leave the site. You&rsquo;ll pop in the code, enter your email, and the download is instant. That&rsquo;s it.</p>
+    </div>
   </div>
 
+  <!-- Updates popup (Yes = Brevo signup, No = skip) -->
+  <div class="upd-overlay" id="updOverlay">
+    <div class="upd-card">
+      <h3>Want the drops?</h3>
+      <p>Get a heads up when new free packs and clips land. No spam, unsubscribe anytime &mdash; or skip straight to your download.</p>
+      <form class="upd-form" id="updForm" method="POST" action="https://d3725b92.sibforms.com/serve/MUIFAAHochpj0uRrZ-rcpG2CZ8VugLs3qT6jr4WUdmoobVe4fRKrEcJVvmM-fOSmHld_TBDiNsc-VEFxcMkP1jxjBXEB_YXiGztGLRAX8iDejk6VbbNYiZCv5uTtMnmbZHW_XifZatMbcpNEjRSYmtFLEeTcuencvFBYOt7PGQMUAyBR7PXOV5-AXUclRbZE6RjHUfpwKWU5Hz4f6w==" target="brevo_sink">
+        <input type="email" name="EMAIL" placeholder="you@email.com" required autocomplete="email" />
+        <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" autocomplete="off" />
+        <input type="hidden" name="locale" value="en" />
+        <button type="submit" class="upd-yes">Yes, keep me posted &rarr;</button>
+      </form>
+      <button class="upd-no" id="updNo">No thanks, just the download</button>
+      <p class="upd-priv">By signing up you agree to receive occasional emails from DJH. See the <a href="privacy" style="color:rgba(240,239,233,.5)">Privacy Policy</a>.</p>
+    </div>
+  </div>
+
+  <!-- Second popup: after signup -> go to download -->
+  <div class="upd-overlay" id="dlOverlay">
+    <div class="upd-card">
+      <h3>You&rsquo;re in! &#127881;</h3>
+      <p>Thanks for signing up. Now let&rsquo;s get you the pack &mdash; the checkout opens right here. Don&rsquo;t forget the code <b style="color:var(--gold)">VANTOMDRIVECLIPS</b> to make it free.</p>
+      <button class="upd-yes" id="dlGo">Take me to the download &rarr;</button>
+    </div>
+  </div>
+
+  <!-- hidden sink so the Brevo form submit doesn't navigate away -->
+  <iframe name="brevo_sink" style="display:none" title="signup"></iframe>
+
+
+  <script>
+    (function(){
+      var btn=document.getElementById('getPackBtn');
+      var overlay=document.getElementById('updOverlay');
+      var dlOverlay=document.getElementById('dlOverlay');
+      var noBtn=document.getElementById('updNo');
+      var form=document.getElementById('updForm');
+      var dlGo=document.getElementById('dlGo');
+
+      function openPayhip(){
+        overlay.classList.remove('show');
+        dlOverlay.classList.remove('show');
+        if(window.Payhip && Payhip.Checkout && Payhip.Checkout.open){ Payhip.Checkout.open({ product:'FGZ1q' }); }
+        else { window.open('https://payhip.com/b/FGZ1q','_blank'); }
+      }
+
+      // Get the Pack -> ALWAYS show the updates popup first (never jump to Payhip)
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        overlay.classList.add('show');
+      });
+
+      // No thanks -> straight to Payhip
+      noBtn.addEventListener('click', function(){ openPayhip(); });
+
+      // Yes -> form submits to hidden iframe (no redirect), then show the download popup
+      form.addEventListener('submit', function(){
+        // form posts into brevo_sink iframe; swap popups
+        setTimeout(function(){
+          overlay.classList.remove('show');
+          dlOverlay.classList.add('show');
+        }, 300);
+      });
+
+      // Second popup button -> open Payhip
+      dlGo.addEventListener('click', function(){ openPayhip(); });
+
+      // backdrop click closes either popup
+      overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.classList.remove('show'); });
+      dlOverlay.addEventListener('click', function(e){ if(e.target===dlOverlay) dlOverlay.classList.remove('show'); });
+    })();
+
+    function copyCode(){
+      var t=document.getElementById('promoCode').textContent.trim();
+      navigator.clipboard && navigator.clipboard.writeText(t);
+      var b=event.target; var o=b.textContent; b.textContent='Copied!'; setTimeout(function(){b.textContent=o;},1500);
+    }
+  </script>
   <footer>
     <div class="footer-inner">
       <img src="LogoDJH_for_pfp.png" alt="DJH" />
@@ -515,14 +631,13 @@
         '':'HOME','/':'HOME','index':'HOME','index.html':'HOME',
         'services':'SERVICES','shop':'SHOP','about':'ABOUT','cars':'CARS',
         'motion':'MOTION','specads':'SPEC ADS','bts':'BTS','contact':'CONTACT',
-        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS',
-        'free-packs':'FREE CLIP PACKS','pack-vantom':'FREE PACK','shop':'SHOP'
+        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS'
       };
       function labelFor(a){
         var href=(a.getAttribute('href')||'').replace(/^\//,'').replace(/\.html$/,'').split(/[?#]/)[0];
         if (PAGE_LABELS[href]) return PAGE_LABELS[href];
-        // never dump full card text as a label — use a short fallback
-        return '';
+        var t=(a.textContent||'').trim().replace(/[\s\u2192\u2197\u2190\u2191\u2193\u00bb\u00ab\-]+$/,'').trim();
+        return t.toUpperCase();
       }
       function internalTarget(a){
         if (!a) return null;
