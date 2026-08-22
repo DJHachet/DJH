@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy &mdash; DJH</title>
-  <meta name="description" content="How DJH collects, uses and protects your personal data." />
+  <title>Photos &mdash; DJH</title>
+  <meta name="description" content="Cinematic automotive photography by DJHVSULS." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <meta property="og:site_name" content="DJH" />
-  <meta property="og:title" content="Privacy Policy &mdash; DJH" />
-  <meta property="og:description" content="How DJH collects, uses and protects your personal data." />
+  <meta property="og:title" content="Cars &mdash; DJH" />
+  <meta property="og:description" content="Cinematic car edits, event coverage and dealership content across the East Midlands." />
   <meta property="og:image" content="https://djhvsuls.uk/LogoDJH_for_pfp.png" />
-  <meta property="og:url" content="https://djhvsuls.uk/privacy" />
-  <link rel="canonical" href="https://djhvsuls.uk/privacy" />
+  <meta property="og:url" content="https://djhvsuls.uk/photos" />
+  <link rel="canonical" href="https://djhvsuls.uk/photos" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="https://djhvsuls.uk/LogoDJH_for_pfp.png" />
@@ -198,21 +198,71 @@
     .page-hero { padding:9rem 2.5rem 3.5rem; border-bottom:1px solid var(--border); }
     .page-hero .eyebrow { margin-bottom:1rem; }
     .page-hero h1 { margin-bottom:1.5rem; }
-    .page-hero p { max-width:600px; }
+    .page-hero p { max-width:560px; }
     .back-link { display:inline-flex; align-items:center; gap:.5rem; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--grey); text-decoration:none; margin-bottom:1.5rem; transition:color .2s,gap .2s; }
     .back-link:hover { color:var(--white); gap:.8rem; }
-    .legal { max-width:820px; margin:0 auto; padding:4.5rem 2.5rem; }
-    .legal h2 { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.04em; color:var(--gold); margin:2.5rem 0 1rem; }
-    .legal h2:first-child { margin-top:0; }
-    .legal p, .legal li { font-size:.9rem; color:var(--grey-mid); line-height:1.8; margin-bottom:1rem; }
-    .legal strong { color:var(--white); font-weight:700; }
-    .legal ul { margin:0 0 1rem 1.2rem; }
-    .legal li { margin-bottom:.5rem; }
-    .legal a { color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(233,200,64,.3); }
-    .legal a:hover { border-color:var(--gold); }
-    .legal .updated { font-size:.78rem; color:var(--grey); margin-bottom:2.5rem; }
-    @media(max-width:900px){ .page-hero{padding:7rem 1.5rem 2.5rem;} .legal{padding:3rem 1.5rem;} }
+    .work { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border); min-height:520px; }
+    .work.flip { direction:rtl; }
+    .work.flip > * { direction:ltr; }
+    .work-media { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--mid); }
+    .work-media.portrait { padding:3rem; }
+    .work-media.portrait .vid-9-16 { max-width:300px; }
+    .work-text { padding:4rem 3.5rem; display:flex; flex-direction:column; justify-content:center; border-left:1px solid var(--border); }
+    .work.flip .work-text { border-left:none; border-right:1px solid var(--border); }
+    .work-num { font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:.2em; color:rgba(233,200,64,.4); margin-bottom:1rem; }
+    .work-tag { font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
+    .work-title { margin-bottom:1.1rem; }
+    .work-desc { max-width:380px; }
+    .proc { padding:4rem 2.5rem; border-bottom:1px solid var(--border); }
+    .proc-head { display:flex; align-items:baseline; gap:1rem; margin-bottom:2.25rem; flex-wrap:wrap; }
+    .proc-title { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); }
+    .proc-sub { font-size:.78rem; color:var(--grey); }
+    .proc-stages { display:flex; align-items:flex-start; gap:1rem; }
+    .stage { flex:1; }
+    .stage-thumb { position:relative; aspect-ratio:9/16; border-radius:4px; overflow:hidden; border:1px solid var(--border); margin-bottom:.75rem; background:#000; }
+    .stage-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .stage-name { font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.08em; color:var(--gold); display:block; margin-bottom:.15rem; }
+    .stage-desc { font-size:.72rem; color:var(--grey); line-height:1.45; }
+    .stage-arrow { color:rgba(233,200,64,.4); font-size:1.2rem; align-self:center; flex-shrink:0; padding-bottom:2rem; }
+    .cta-strip { padding:5rem 2.5rem; text-align:center; }
+    .cta-strip h2 { margin-bottom:1.25rem; }
+    .cta-strip p { max-width:440px; margin:0 auto 2rem; }
+    .empty-note { padding:3rem 2.5rem; border-bottom:1px solid var(--border); text-align:center; }
+    .empty-note p { font-size:.85rem; color:var(--grey); max-width:520px; margin:0 auto; line-height:1.8; }
+    @media(max-width:900px){
+      .page-hero { padding:7rem 1.5rem 2.5rem; }
+      .work { grid-template-columns:1fr; min-height:unset; direction:ltr; }
+      .work.flip { direction:ltr; }
+      .work-text { border-left:none!important; border-right:none!important; border-top:1px solid var(--border); padding:2.5rem 1.5rem; }
+      .work-media.portrait { padding:2rem 1.5rem; }
+      .work-media.portrait .vid-9-16 { max-width:240px; margin:0 auto; }
+      .proc { padding:3rem 1.5rem; }
+      .proc-stages { gap:.5rem; }
+      .stage-desc { display:none; }
+      .stage-arrow { font-size:.9rem; }
+      .cta-strip { padding:4rem 1.5rem; }
+    }
 
+    .cat-media, .work-media { overflow: visible !important; }
+    .tilt-wrap { overflow: visible !important; }
+    /* ── Pop-out tilt on video cards ── */
+    .tilt-wrap { perspective: 1100px; }
+    .cat-media .vid-9-16, .cat-media .vid-16-9, .work-media .vid-9-16, .work-media .vid-16-9 {
+      transform-style: preserve-3d;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease, border-radius .4s ease;
+      will-change: transform;
+    }
+    .tilt-active {
+      z-index: 60 !important;
+      transition: transform .12s ease-out !important, box-shadow .3s ease !important;
+      box-shadow: 0 40px 80px -24px rgba(0,0,0,.75), 0 0 0 1px rgba(233,200,64,.18) !important;
+    }
+    .tilt-active iframe { border-radius: 6px; }
+    .tilt-shine { position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.14), transparent 42%); z-index:4; border-radius:inherit; }
+    .tilt-active .tilt-shine { opacity:1; }
+    @media (hover: none) { .tilt-wrap { perspective:none; } }
+    .work.section-lifted { z-index:60 !important; }
+    .work { position:relative; z-index:1; }
     /* ── Staggered side-panel menu (Option B) ── */
     .sm-prelayers { position:fixed; top:0; right:0; bottom:0; width:min(74vw,440px); z-index:404; pointer-events:none; }
     .sm-prelayer { position:absolute; inset:0; transform:translateX(100%); transition:transform .6s cubic-bezier(.5,0,.15,1); }
@@ -308,7 +358,25 @@
       .tx-box,.tx-label,.tx-bar span{ transition:none !important; }
     }
   </style>
-  <!-- v20260822030000 --></head>
+  <!-- v20260822030000 -->  <style>
+    .ph-hero { padding:9rem 2.5rem 2.5rem; }
+    .ph-gallery { columns:3; column-gap:18px; padding:0 2.5rem 5rem; max-width:1400px; margin:0 auto; }
+    .ph-item { break-inside:avoid; margin-bottom:18px; position:relative; overflow:hidden; border-radius:8px; cursor:pointer; background:var(--mid); border:1px solid var(--border); }
+    .ph-item img { width:100%; display:block; transition:transform .6s cubic-bezier(.2,.7,.2,1), filter .4s; filter:brightness(.92); }
+    .ph-item:hover img { transform:scale(1.05); filter:brightness(1.05); }
+    .ph-cap { position:absolute; left:0; right:0; bottom:0; padding:1.4rem 1.2rem .9rem; background:linear-gradient(to top, rgba(8,8,8,.85), transparent); opacity:0; transform:translateY(8px); transition:opacity .4s, transform .4s; }
+    .ph-item:hover .ph-cap { opacity:1; transform:none; }
+    .ph-cap .t { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:.05em; color:var(--white); }
+    .ph-cap .s { font-size:.72rem; color:var(--gold); letter-spacing:.06em; margin-top:2px; }
+    @media(max-width:1000px){ .ph-gallery{ columns:2; } }
+    @media(max-width:600px){ .ph-gallery{ columns:1; padding:0 1.5rem 4rem; } .ph-hero{ padding:7rem 1.5rem 2rem; } }
+    .lb { display:none; position:fixed; inset:0; z-index:2000; background:rgba(5,5,5,.96); align-items:center; justify-content:center; padding:2rem; cursor:zoom-out; }
+    .lb.open { display:flex; }
+    .lb img { max-width:95%; max-height:92%; object-fit:contain; border-radius:6px; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+    .lb-close { position:absolute; top:1.5rem; right:2rem; background:none; border:none; color:var(--white); font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; cursor:pointer; opacity:.6; transition:opacity .2s; }
+    .lb-close:hover { opacity:1; }
+  </style>
+</head>
 <body>
   <nav id="nav" class="solid">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
@@ -325,7 +393,7 @@
       <a href="motion" class="nav-link" data-num="05">Motion</a>
       <a href="specads" class="nav-link" data-num="06">Spec Ads</a>
       <a href="bts" class="nav-link" data-num="07">BTS</a>
-      <a href="photos" class="nav-link" data-num="08">Photos</a>
+      <a href="photos" class="nav-link active" data-num="08">Photos</a>
       <div class="nav-overlay-extra">
         <span class="noe-label">Get in touch</span>
         <a href="mailto:contact@djhvsuls.uk">contact@djhvsuls.uk</a>
@@ -339,73 +407,35 @@
           </form>
         </div>
       </div>
-      <a href="contact" class="nav-book">Contact</a>
+      <a href="contact" class="nav-book">Book This</a>
     </div>
   </nav>
 
-  <div id="pagewrap" class="page-tx" data-page="PRIVACY">
-  <section class="page-hero">
+  <div id="pagewrap" class="page-tx" data-page="PHOTOS">
+  <section class="page-hero ph-hero">
     <a href="/" class="back-link">&larr; Back to Home</a>
-    <div class="eyebrow">Legal</div>
-    <h1 class="h-xl">Privacy<br/>Policy</h1>
-    <p class="body-txt">How DJH collects, uses and protects your personal data when you use this website or get in touch.</p>
+    <div class="eyebrow">Photography</div>
+    <h1 class="h-xl">Photos</h1>
+    <p class="body-txt">Cinematic automotive stills &mdash; shot and edited by DJHVSULS. A growing collection, more added over time.</p>
   </section>
 
-  <div class="legal">
-    <p class="updated">Last updated: July 2026</p>
-
-    <h2>Who I Am</h2>
-    <p>This website is operated by <strong>DJH</strong>, an independent video and content creation business run by Samuel Coupe, based in Nottinghamshire, UK, operating as a sole trader. For any questions about this policy or your data, contact <a href="mailto:contact@djhvsuls.uk">contact@djhvsuls.uk</a>.</p>
-
-    <h2>What Data I Collect</h2>
-    <p>When you submit the contact form on this site, I collect the information you choose to provide, which may include:</p>
-    <ul>
-      <li>Your name</li>
-      <li>Your email address</li>
-      <li>Details about your project or enquiry, including any budget range you select</li>
-    </ul>
-    <p>I do not collect any special category data, and I do not knowingly collect data from anyone under 16.</p>
-
-    <h2>How I Use Your Data</h2>
-    <p>I use the information you provide solely to:</p>
-    <ul>
-      <li>Respond to your enquiry and discuss your project</li>
-      <li>Provide quotes and carry out work you request</li>
-      <li>Keep records of our correspondence for legitimate business purposes</li>
-    </ul>
-    <p>The lawful basis for processing this data is your <strong>consent</strong> (given when you submit the form) and my <strong>legitimate interest</strong> in responding to and managing enquiries about my services. I will never sell your data or use it for unrelated marketing without your clear, separate consent.</p>
-
-    <h2>How Your Data Is Handled</h2>
-    <p>The contact form is powered by a third-party service, <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">Web3Forms</a>, which processes your submission and forwards it to my email inbox. Your message is delivered to an email address managed through <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare</a> and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google (Gmail)</a>. These providers process data on my behalf under their own privacy terms.</p>
-    <p>This website is served over a secure <strong>HTTPS</strong> connection, so information submitted through the form is encrypted in transit.</p>
-
-    <h2>How Long I Keep It</h2>
-    <p>I keep enquiry and project correspondence only for as long as necessary to deal with your enquiry and for a reasonable period afterwards for business and legal record-keeping. If you would like your data deleted sooner, just ask.</p>
-
-    <h2>Your Rights</h2>
-    <p>Under UK GDPR you have the right to:</p>
-    <ul>
-      <li>Access the personal data I hold about you</li>
-      <li>Request correction of inaccurate data</li>
-      <li>Request deletion of your data</li>
-      <li>Object to or restrict how your data is processed</li>
-      <li>Withdraw consent at any time</li>
-    </ul>
-    <p>To exercise any of these rights, email <a href="mailto:contact@djhvsuls.uk">contact@djhvsuls.uk</a> and I&rsquo;ll respond as quickly as I can.</p>
-
-    <h2>Mailing List</h2>
-    <p>If you sign up to the DJH mailing list, your email address is collected and stored by <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener">Brevo</a>, the email service I use, and is used solely to send you occasional updates &mdash; things like shop launches, new work and offers. Your email is never sold or shared for any other purpose.</p>
-    <p>Every email includes an <strong>unsubscribe link</strong>, and you can opt out at any time. You can also email <a href="mailto:contact@djhvsuls.uk">contact@djhvsuls.uk</a> to be removed from the list.</p>
-
-    <h2>Cookies</h2>
-    <p>This website does not use tracking or advertising cookies. Embedded content, such as YouTube videos, may set its own cookies when you interact with it &mdash; these are governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google&rsquo;s privacy policy</a>.</p>
-
-    <h2>Complaints</h2>
-    <p>If you have a concern about how your data is handled, please contact me first and I&rsquo;ll do my best to put it right. You also have the right to complain to the UK&rsquo;s data protection regulator, the <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener">Information Commissioner&rsquo;s Office (ICO)</a>.</p>
-
-    <h2>Changes to This Policy</h2>
-    <p>I may update this policy from time to time. Any changes will be posted on this page with a revised date.</p>
+  <div class="ph-gallery">
+    <div class="ph-item reveal" onclick="openLB('m2_00000.jpg')">
+      <img src="m2_00000.jpg" alt="BMW M2 Competition" loading="lazy" />
+      <div class="ph-cap"><div class="t">BMW M2 Competition</div><div class="s">Edited by DJHVSULS</div></div>
+    </div>
   </div>
+
+  <div class="lb" id="lightbox" onclick="closeLB()">
+    <button class="lb-close" onclick="closeLB()">Close &times;</button>
+    <img id="lb-img" src="" alt="" />
+  </div>
+
+  <script>
+    function openLB(src){ var lb=document.getElementById('lightbox'); document.getElementById('lb-img').src=src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeLB(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLB(); });
+  </script>
 
   <footer>
     <div class="footer-inner">
@@ -477,6 +507,45 @@
       }));
     }
 
+  </script>
+  <script>
+    (function(){
+      if (window.matchMedia('(hover: none)').matches) return;
+      const cards = document.querySelectorAll('.cat-media .vid-9-16, .cat-media .vid-16-9, .work-media .vid-9-16, .work-media .vid-16-9');
+      cards.forEach(card => {
+        const isVertical = card.classList.contains('vid-9-16');
+        const AMP = isVertical ? 6 : 9;          // tilt degrees
+        const POP = isVertical ? 1.04 : 1.08;    // scale (horizontal pops more)
+        if (card.parentElement) card.parentElement.classList.add('tilt-wrap');
+        const shine = document.createElement('div');
+        shine.className = 'tilt-shine';
+        card.appendChild(shine);
+        let raf = null;
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rx = (py - 0.5) * -2 * AMP;
+          const ry = (px - 0.5) * 2 * AMP;
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            card.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(${POP})`;
+            shine.style.setProperty('--mx', (px*100).toFixed(1)+'%');
+            shine.style.setProperty('--my', (py*100).toFixed(1)+'%');
+          });
+        });
+        const section = card.closest('.cat, .work');
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('tilt-active');
+          if (section) section.classList.add('section-lifted');
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('tilt-active');
+          card.style.transform = '';
+          if (section) section.classList.remove('section-lifted');
+        });
+      });
+    })();
   </script>
   <script>
     /* ===== PAGE TRANSITION ENGINE — expanding box (shared, identical on every page) ===== */

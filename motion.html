@@ -150,6 +150,8 @@
     .nav-right.open .nav-link:nth-child(5){ transition-delay:.38s; }
     .nav-right.open .nav-link:nth-child(6){ transition-delay:.44s; }
     .nav-right.open .nav-link:nth-child(7){ transition-delay:.50s; }
+    .nav-right.open .nav-link:nth-child(8){ transition-delay:.56s; }
+    .nav-right.open .nav-link:nth-child(9){ transition-delay:.62s; }
 
     .nav-book{
       margin-top:2.5rem; font-size:1.1rem; padding:.95rem 2.6rem;
@@ -297,6 +299,8 @@
     body.menu-open .sm-panel .nav-link:nth-child(5){ transition-delay:.52s; }
     body.menu-open .sm-panel .nav-link:nth-child(6){ transition-delay:.57s; }
     body.menu-open .sm-panel .nav-link:nth-child(7){ transition-delay:.62s; }
+    body.menu-open .sm-panel .nav-link:nth-child(8){ transition-delay:.67s; }
+    body.menu-open .sm-panel .nav-link:nth-child(9){ transition-delay:.72s; }
     .nav-right.sm-panel .nav-link::after { left:2.4rem; }
     .nav-right.sm-panel .nav-book {
       opacity:0; transform:translateX(40px);
@@ -354,7 +358,7 @@
       .tx-box,.tx-label,.tx-bar span{ transition:none !important; }
     }
   </style>
-  <!-- v20260807233000 --></head>
+  <!-- v20260822030000 --></head>
 <body>
   <nav id="nav" class="solid">
     <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
@@ -371,6 +375,7 @@
       <a href="motion" class="nav-link active" data-num="05">Motion</a>
       <a href="specads" class="nav-link" data-num="06">Spec Ads</a>
       <a href="bts" class="nav-link" data-num="07">BTS</a>
+      <a href="photos" class="nav-link" data-num="08">Photos</a>
       <div class="nav-overlay-extra">
         <span class="noe-label">Get in touch</span>
         <a href="mailto:contact@djhvsuls.uk">contact@djhvsuls.uk</a>
@@ -445,6 +450,7 @@
         <a href="motion">Motion</a>
         <a href="specads">Spec Ads</a>
         <a href="bts">BTS</a>
+        <a href="photos">Photos</a>
         <a href="contact">Contact</a>
       </div>
       <span class="footer-copy">
@@ -564,14 +570,15 @@
       var PAGE_LABELS = {
         '':'HOME','/':'HOME','index':'HOME','index.html':'HOME',
         'services':'SERVICES','shop':'SHOP','about':'ABOUT','cars':'CARS',
-        'motion':'MOTION','specads':'SPEC ADS','bts':'BTS','contact':'CONTACT',
-        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS'
+        'motion':'MOTION','specads':'SPEC ADS','bts':'BTS','photos':'PHOTOS','contact':'CONTACT',
+        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS',
+        'free-packs':'FREE CLIP PACKS','pack-vantom':'FREE PACK','shop':'SHOP'
       };
       function labelFor(a){
         var href=(a.getAttribute('href')||'').replace(/^\//,'').replace(/\.html$/,'').split(/[?#]/)[0];
         if (PAGE_LABELS[href]) return PAGE_LABELS[href];
-        var t=(a.textContent||'').trim().replace(/[\s\u2192\u2197\u2190\u2191\u2193\u00bb\u00ab\-]+$/,'').trim();
-        return t.toUpperCase();
+        // never dump full card text as a label — use a short fallback
+        return '';
       }
       function internalTarget(a){
         if (!a) return null;
