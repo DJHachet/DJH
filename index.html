@@ -452,7 +452,7 @@
       .intro-frame,.intro-tick,.intro-logo,.intro-tagline{ animation:none !important; opacity:1 !important; transform:none !important; }
     }
   </style>
-<!-- v20260807233000 --></head>
+<!-- v20260815000000 --></head>
 <body>
   <!-- HOMEPAGE FIRST-LOAD INTRO -->
   <div id="djh-intro" aria-hidden="true">
@@ -566,9 +566,9 @@
   </section>
 
   <section class="cat reveal">
-    <div class="cat-media portrait">
-      <div class="vid-9-16" onclick="openModal('dpqnbqnSC0g', true)">
-        <iframe src="https://www.youtube.com/embed/dpqnbqnSC0g?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=dpqnbqnSC0g&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" allow="autoplay; encrypted-media" title="Cars"></iframe>
+    <div class="cat-media">
+      <div class="vid-16-9" onclick="openModal('FRaIxEQhnhg')">
+        <iframe src="https://www.youtube.com/embed/FRaIxEQhnhg?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=FRaIxEQhnhg&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" allow="autoplay; encrypted-media" title="BMW M2 Competition"></iframe>
         <div class="vid-overlay"></div>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
@@ -881,13 +881,14 @@
         '':'HOME','/':'HOME','index':'HOME','index.html':'HOME',
         'services':'SERVICES','shop':'SHOP','about':'ABOUT','cars':'CARS',
         'motion':'MOTION','specads':'SPEC ADS','bts':'BTS','contact':'CONTACT',
-        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS'
+        'privacy':'PRIVACY','terms':'TERMS','thanks':'THANKS',
+        'free-packs':'FREE CLIP PACKS','pack-vantom':'FREE PACK','shop':'SHOP'
       };
       function labelFor(a){
         var href=(a.getAttribute('href')||'').replace(/^\//,'').replace(/\.html$/,'').split(/[?#]/)[0];
         if (PAGE_LABELS[href]) return PAGE_LABELS[href];
-        var t=(a.textContent||'').trim().replace(/[\s\u2192\u2197\u2190\u2191\u2193\u00bb\u00ab\-]+$/,'').trim();
-        return t.toUpperCase();
+        // never dump full card text as a label — use a short fallback
+        return '';
       }
       function internalTarget(a){
         if (!a) return null;
