@@ -203,12 +203,13 @@
     .hero-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(170deg,rgba(9,9,9,.05) 0%,rgba(9,9,9,.3) 45%,rgba(9,9,9,.9) 82%,rgba(9,9,9,.97) 100%); }
     .hero-content { position:relative; z-index:3; }
     /* video-in-text hero */
-    .vit-eyebrow { font-family:'Bebas Neue',sans-serif; font-size:clamp(.75rem,1.5vw,1rem); letter-spacing:.3em; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:1.4rem; }
-    .vit-wrap { position:relative; width:min(96vw,1750px); aspect-ratio:1300/330; margin:0 auto; }
+    .vit-eyebrow { font-family:'Bebas Neue',sans-serif; font-size:clamp(1rem,2vw,1.5rem); letter-spacing:.28em; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:2.2rem; }
+    .vit-wrap { position:relative; width:min(96vw,1750px); aspect-ratio:1300/330; margin:0 auto; overflow:hidden; }
     .vit-wrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
     .vit-cut { position:absolute; inset:0; width:100%; height:100%; }
-    .vit-sub { text-align:center; font-size:clamp(.82rem,1.5vw,1rem); color:var(--grey-mid,rgba(240,239,233,0.62)); margin:1.4rem 0 2rem; }
+    .vit-sub { text-align:center; font-size:clamp(.72rem,1.2vw,.85rem); color:var(--grey-mid,rgba(240,239,233,0.62)); margin:1.6rem 0 2rem; letter-spacing:.03em; }
     .vit-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .vit-btns .hero-cta { margin-left:0 !important; }
     .hero-tag { display:inline-flex; align-items:center; gap:.5rem; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:1.4rem; }
     .hero-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
@@ -566,18 +567,16 @@
     <div class="hero-content" style="width:100%;">
       <div class="vit-eyebrow">Video Editor &middot; Videographer &middot; Content Creator</div>
       <div class="vit-wrap">
-        <video autoplay muted loop playsinline preload="auto" poster="poster.jpg"><source src="showreel_web.mp4" type="video/mp4" /></video>
-        <svg class="vit-cut" viewBox="0 0 1300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <video autoplay muted loop playsinline preload="auto"><source src="SHOWREEL NEW.mp4" type="video/mp4" /></video>
+        <svg class="vit-cut" viewBox="0 0 1300 330" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <mask id="vitko">
-              <rect width="1300" height="300" fill="white"/>
-              <text x="650" y="135" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="black">WATCHED.</text>
-              <text x="650" y="285" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="black">NOT SKIPPED.</text>
+              <rect width="1300" height="330" fill="white"/>
+              <text x="650" y="150" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="black">WATCHED.</text>
+              <text x="650" y="305" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="black">NOT SKIPPED.</text>
             </mask>
           </defs>
-          <rect width="1300" height="300" fill="#090909" mask="url(#vitko)"/>
-          <text x="650" y="135" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="none" stroke="rgba(233,200,64,0.28)" stroke-width="1">WATCHED.</text>
-          <text x="650" y="285" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="none" stroke="rgba(233,200,64,0.28)" stroke-width="1">NOT SKIPPED.</text>
+          <rect width="1300" height="330" fill="#090909" mask="url(#vitko)"/>
         </svg>
       </div>
       <div class="vit-sub">Content built to hold attention.</div>
