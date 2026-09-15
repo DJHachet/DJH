@@ -201,7 +201,7 @@
     @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;} *{transition-duration:.01ms!important;animation-duration:.01ms!important;} }
         /* full-page gradient background: gold at very top, fading to black - flows behind all sections */
     #pagebg { position:absolute; top:0; left:0; right:0; height:100%; z-index:-2; background:var(--black); }
-    #pagebg .goldfade { position:absolute; top:0; left:0; right:0; height:130vh; background:linear-gradient(to bottom, #E9C840 0%, #E9C840 18%, #090909 100%); transition:opacity .3s linear; will-change:opacity; }
+    #pagebg .goldfade { position:absolute; top:0; left:0; right:0; height:100vh; background:#E9C840; will-change:opacity; }
     /* ensure body is transparent so the fixed bg shows */
     body { background:var(--black); position:relative; }
     .hero { position:relative; width:100%; height:100vh; min-height:620px; overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:0 clamp(1.5rem,5vw,4rem); background:transparent; }
@@ -218,8 +218,11 @@
     .hero-content { position:relative; z-index:3; }
     /* video-in-text hero */
     .vit-eyebrow { font-family:'Bebas Neue',sans-serif; font-size:clamp(1rem,2vw,1.5rem); letter-spacing:.28em; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:2.2rem; }
-    .vit-wrap { position:relative; width:min(96vw,1750px); aspect-ratio:1300/330; margin:0 auto; overflow:hidden; }
-    .vit-wrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .vit-wrap { position:relative; width:min(96vw,1750px); aspect-ratio:1300/330; margin:0 auto; }
+    .vit-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1300 330'%3E%3Ctext x='650' y='150' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3EWATCHED.%3C/text%3E%3Ctext x='650' y='305' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3ENOT SKIPPED.%3C/text%3E%3C/svg%3E");
+      mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1300 330'%3E%3Ctext x='650' y='150' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3EWATCHED.%3C/text%3E%3Ctext x='650' y='305' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3ENOT SKIPPED.%3C/text%3E%3C/svg%3E");
+      -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-size:contain; mask-size:contain; -webkit-mask-position:center; mask-position:center; }
     .vit-cut { position:absolute; inset:0; width:100%; height:100%; }
     .vit-sub { text-align:center; font-size:clamp(.72rem,1.2vw,.85rem); color:var(--grey-mid,rgba(240,239,233,0.62)); margin:1.6rem 0 2rem; letter-spacing:.03em; }
     .hero-btn-primary { display:inline-block !important; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold) !important; background:var(--black) !important; padding:.85rem 2.2rem !important; border-radius:4px; text-decoration:none; border:none !important; margin:0 !important; transition:transform .2s, background .2s; }
@@ -586,17 +589,9 @@
     <div class="hero-content" style="width:100%;">
       <div class="vit-eyebrow">Video Editor &middot; Videographer &middot; Content Creator</div>
       <div class="vit-wrap">
-        <video autoplay muted loop playsinline preload="auto"><source src="SHOWREEL NEW.mp4" type="video/mp4" /></video>
-        <svg class="vit-cut" viewBox="0 0 1300 330" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <mask id="vitko">
-              <rect width="1300" height="330" fill="white"/>
-              <text x="650" y="150" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="black">WATCHED.</text>
-              <text x="650" y="305" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="180" letter-spacing="2" fill="black">NOT SKIPPED.</text>
-            </mask>
-          </defs>
-          <rect width="1300" height="330" fill="#E9C840" mask="url(#vitko)" id="vitRect"/>
-        </svg>
+        <video class="vit-video" autoplay muted loop playsinline>
+          <source src="SHOWREEL NEW.mp4" type="video/mp4" />
+        </video>
       </div>
       <div class="vit-sub">Content built to hold attention.</div>
       <div class="vit-btns">
@@ -1035,33 +1030,46 @@
   </script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script>
     (function(){
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      if(typeof Lenis === 'undefined') return;
-      var lenis = new Lenis({
-        duration: 1.1,
-        easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 2
-      });
-      function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-      requestAnimationFrame(raf);
+      function initLenis(){
+        if(typeof Lenis === 'undefined'){ return false; }
+        var lenis = new Lenis({
+          duration: 1.05,
+          easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 2
+        });
+        function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        return true;
+      }
+      if(!initLenis()){
+        // retry once the script has had time to load
+        var tries=0;
+        var iv=setInterval(function(){ tries++; if(initLenis() || tries>20){ clearInterval(iv); } }, 150);
+      }
     })();
   </script>
+
   <script>
     (function(){
       var gf=document.querySelector('#pagebg .goldfade');
       if(!gf) return;
       var raf=null;
+      var heroBottom=document.querySelector('.hero .hero-bottom');
+      var vitBtns=document.querySelector('.hero .vit-btns');
+      var vitSub=document.querySelector('.hero .vit-sub');
       function apply(){
         raf=null;
         var vh=window.innerHeight;
-        // fade the gold out over the first ~1.2 screens of scroll
-        var op=Math.max(0, 1 - (window.scrollY/(vh*1.1)));
+        var op=Math.max(0, Math.min(1, 1 - (window.scrollY / (vh*0.4))));
         gf.style.opacity=op;
+        // fade the buttons, sub-text, and stats/divider out with the gold -> clean black page
+        if(vitBtns) vitBtns.style.opacity=op;
+        if(vitSub) vitSub.style.opacity=op;
+        if(heroBottom) heroBottom.style.opacity=op;
       }
       window.addEventListener('scroll', function(){ if(!raf) raf=requestAnimationFrame(apply); }, {passive:true});
       apply();
