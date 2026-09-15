@@ -222,9 +222,10 @@
     .hero-content { position:relative; z-index:3; }
     /* video-in-text hero */
     .vit-eyebrow { font-family:'Bebas Neue',sans-serif; font-size:clamp(1rem,2vw,1.5rem); letter-spacing:.28em; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:2.2rem; }
-    .vit-wrap { position:relative; width:min(96vw,1750px); aspect-ratio:1300/330; margin:0 auto; background:#E9C840; }
-    .vit-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
-      -webkit-mask:url(#vitMask); mask:url(#vitMask); }
+    .vit-wrap { position:relative; width:min(96vw,1350px); margin:0 auto; display:flex; align-items:center; justify-content:center; }
+    .vit-heading { font-family:'Bebas Neue', sans-serif; font-weight:400; color:#090909;
+      font-size:clamp(3.5rem, 13vw, 12rem); line-height:.86; letter-spacing:.02em; text-align:center; margin:0;
+      transition:color .1s linear; }
     .vit-cut { position:absolute; inset:0; width:100%; height:100%; }
     .vit-sub { text-align:center; font-size:clamp(.72rem,1.2vw,.85rem); color:var(--grey-mid,rgba(240,239,233,0.62)); margin:1.6rem 0 2rem; letter-spacing:.03em; }
     .hero-btn-primary { display:inline-block !important; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold) !important; background:var(--black) !important; padding:.85rem 2.2rem !important; border-radius:4px; text-decoration:none; border:none !important; margin:0 !important; transition:transform .2s, background .2s; }
@@ -591,18 +592,7 @@
     <div class="hero-content" style="width:100%;">
       <div class="vit-eyebrow">Video Editor &middot; Videographer &middot; Content Creator</div>
       <div class="vit-wrap" id="vitWrap">
-        <video class="vit-video" autoplay muted loop playsinline preload="auto" id="heroVideo">
-          <source src="SHOWREEL-NEW.mp4" type="video/mp4" />
-        </video>
-        <!-- inline SVG mask definition (real DOM so Bebas Neue loads) -->
-        <svg width="0" height="0" style="position:absolute;pointer-events:none;" aria-hidden="true">
-          <defs>
-            <mask id="vitMask">
-              <text x="50%" y="45%" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-weight="400" font-size="180" letter-spacing="2" fill="white">WATCHED.</text>
-              <text x="50%" y="92%" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-weight="400" font-size="180" letter-spacing="2" fill="white">NOT SKIPPED.</text>
-            </mask>
-          </defs>
-        </svg>
+        <h1 class="vit-heading">WATCHED.<br/>NOT SKIPPED.</h1>
       </div>
       <div class="vit-sub">Content built to hold attention.</div>
       <div class="vit-btns">
@@ -1079,9 +1069,9 @@
         var vh=window.innerHeight;
         var op=Math.max(0, Math.min(1, 1 - (window.scrollY / (vh*0.4))));
         gf.style.opacity=op;
-        // the wrap background (letter surround) fades gold->black with the page
-        var vw=document.getElementById('vitWrap');
-        if(vw){ var r=lerp(9,233,op), g=lerp(9,200,op), b=lerp(9,64,op); vw.style.backgroundColor='rgb('+r+','+g+','+b+')'; }
+        // heading text: black on gold (op=1) -> white on black (op=0), stays readable
+        var vh2=document.querySelector('.vit-heading');
+        if(vh2){ var c=lerp(9,240,1-op); vh2.style.color='rgb('+c+','+c+','+(op>0.5?lerp(9,233,1-op):c)+')'; vh2.style.color = op>0.5 ? '#090909' : '#F0EFE9'; }
         // fade the buttons, sub-text, and stats/divider out with the gold -> clean black page
         if(vitBtns) vitBtns.style.opacity=op;
         if(vitSub) vitSub.style.opacity=op;
@@ -1093,17 +1083,6 @@
       apply();
     })();
   </script>
-  <script>
-    (function(){
-      var v=document.getElementById('heroVideo');
-      if(!v) return;
-      v.muted=true; v.playsInline=true;
-      var tryPlay=function(){ var p=v.play(); if(p&&p.catch){ p.catch(function(){}); } };
-      tryPlay();
-      v.addEventListener('loadeddata', tryPlay);
-      document.addEventListener('click', tryPlay, {once:true});
-      document.addEventListener('touchstart', tryPlay, {once:true});
-    })();
-  </script>
+
 </body>
 </html>
