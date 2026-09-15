@@ -89,6 +89,10 @@
     .nav-toggle { display:flex; flex-direction:column; justify-content:center; gap:6px; background:none; border:none; cursor:pointer; padding:10px; z-index:410; position:relative; width:44px; height:44px; }
     .nav-toggle span { display:block; width:26px; height:2px; background:var(--white); border-radius:2px; transition:transform .45s cubic-bezier(.68,-0.2,.27,1.2), opacity .3s, width .3s; margin-left:auto; }
     .nav-toggle span:nth-child(2){ width:20px; }
+    /* nav colour transition: dark on gold hero, white once scrolled to black */
+    nav.nav-on-gold .nav-toggle span { background:#090909 !important; }
+    nav.nav-on-gold .nav-logo img { filter:brightness(0) !important; } /* makes logo solid black on gold */
+
     .nav-toggle:hover span:nth-child(2){ width:26px; }
     .nav-toggle.open span:nth-child(1){ transform:translateY(8px) rotate(45deg); width:26px; }
     .nav-toggle.open span:nth-child(2){ opacity:0; }
@@ -219,10 +223,8 @@
     /* video-in-text hero */
     .vit-eyebrow { font-family:'Bebas Neue',sans-serif; font-size:clamp(1rem,2vw,1.5rem); letter-spacing:.28em; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:2.2rem; }
     .vit-wrap { position:relative; width:min(96vw,1750px); aspect-ratio:1300/330; margin:0 auto; }
-    .vit-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-      -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1300 330'%3E%3Ctext x='650' y='150' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3EWATCHED.%3C/text%3E%3Ctext x='650' y='305' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3ENOT SKIPPED.%3C/text%3E%3C/svg%3E");
-      mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1300 330'%3E%3Ctext x='650' y='150' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3EWATCHED.%3C/text%3E%3Ctext x='650' y='305' text-anchor='middle' font-family='Bebas Neue,sans-serif' font-size='180' letter-spacing='2' fill='white'%3ENOT SKIPPED.%3C/text%3E%3C/svg%3E");
-      -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-size:contain; mask-size:contain; -webkit-mask-position:center; mask-position:center; }
+    .vit-svg { width:100%; height:100%; display:block; }
+    .vit-video { width:100%; height:100%; object-fit:cover; display:block; }
     .vit-cut { position:absolute; inset:0; width:100%; height:100%; }
     .vit-sub { text-align:center; font-size:clamp(.72rem,1.2vw,.85rem); color:var(--grey-mid,rgba(240,239,233,0.62)); margin:1.6rem 0 2rem; letter-spacing:.03em; }
     .hero-btn-primary { display:inline-block !important; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold) !important; background:var(--black) !important; padding:.85rem 2.2rem !important; border-radius:4px; text-decoration:none; border:none !important; margin:0 !important; transition:transform .2s, background .2s; }
@@ -589,9 +591,20 @@
     <div class="hero-content" style="width:100%;">
       <div class="vit-eyebrow">Video Editor &middot; Videographer &middot; Content Creator</div>
       <div class="vit-wrap">
-        <video class="vit-video" autoplay muted loop playsinline>
-          <source src="SHOWREEL NEW.mp4" type="video/mp4" />
-        </video>
+        <svg class="vit-svg" viewBox="0 0 1300 330" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="vitmask">
+              <rect width="1300" height="330" fill="black"/>
+              <text x="650" y="150" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-weight="400" font-size="180" letter-spacing="2" fill="white">WATCHED.</text>
+              <text x="650" y="305" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-weight="400" font-size="180" letter-spacing="2" fill="white">NOT SKIPPED.</text>
+            </mask>
+          </defs>
+          <foreignObject width="1300" height="330" mask="url(#vitmask)">
+            <video xmlns="http://www.w3.org/1999/xhtml" class="vit-video" autoplay muted loop playsinline>
+              <source src="SHOWREEL NEW.mp4" type="video/mp4" />
+            </video>
+          </foreignObject>
+        </svg>
       </div>
       <div class="vit-sub">Content built to hold attention.</div>
       <div class="vit-btns">
@@ -1061,6 +1074,7 @@
       var heroBottom=document.querySelector('.hero .hero-bottom');
       var vitBtns=document.querySelector('.hero .vit-btns');
       var vitSub=document.querySelector('.hero .vit-sub');
+      var navEl=document.querySelector('nav');
       function apply(){
         raf=null;
         var vh=window.innerHeight;
@@ -1070,6 +1084,8 @@
         if(vitBtns) vitBtns.style.opacity=op;
         if(vitSub) vitSub.style.opacity=op;
         if(heroBottom) heroBottom.style.opacity=op;
+        // nav goes dark while on gold (op>0.5), white once scrolled to black
+        if(navEl){ if(op>0.5){ navEl.classList.add('nav-on-gold'); } else { navEl.classList.remove('nav-on-gold'); } }
       }
       window.addEventListener('scroll', function(){ if(!raf) raf=requestAnimationFrame(apply); }, {passive:true});
       apply();
