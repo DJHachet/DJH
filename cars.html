@@ -870,6 +870,7 @@
     P + ' .be-eyebrow{margin:0;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--be-gold)}',
     P + ' h2{margin:0;font-family:var(--be-display);font-weight:400;font-size:2.6rem;line-height:.98;text-wrap:balance;letter-spacing:.03em;color:var(--be-text)}',
     P + ' p.be-txt{margin:0;color:var(--be-muted);font-size:.85rem;line-height:1.55}',
+    P + ' .be-calm{margin:0;font-size:.78rem;line-height:1.5;color:var(--be-faint);font-style:italic}',
     P + ' .be-pacts{display:flex;align-items:center;gap:1rem;margin-top:.4rem}',
     P + ' .be-x{position:absolute;top:22px;right:8px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(9,9,9,.7);color:var(--be-muted);font-size:1rem;line-height:30px;text-align:center}',
     '#djhbe-big{position:fixed;inset:0;z-index:590;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(5,5,5,.55);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;font-family:"Arimo",Arial,sans-serif;line-height:1.6;color:#F0EFE9;--be-gold:#E9C840;--be-gold-dim:#c9a928;--be-muted:rgba(240,239,233,.64);--be-faint:rgba(240,239,233,.40);--be-text:#F0EFE9;--be-display:"Bebas Neue",Impact,"Arial Narrow",sans-serif}',
@@ -925,9 +926,9 @@
     '#djhbe-su .su-done{display:none;font-family:var(--su-display);font-size:2rem;letter-spacing:.03em;line-height:1}',
     '#djhbe-su.su-signed .su-done{display:block}',
     '#djhbe-su.su-signed .su-form,#djhbe-su.su-signed .su-priv,#djhbe-su.su-signed .su-later{display:none}',
-    '@media(max-width:600px){#djhbe-su{left:.75rem;right:.75rem;width:auto;top:auto;bottom:calc(5.25rem + env(safe-area-inset-bottom,0px));max-height:calc(100vh - 7rem);transform:translateY(calc(100% + 7rem))}#djhbe-su.be-show{transform:none}#djhbe-su .su-ticket{grid-template-columns:minmax(0,1fr)}#djhbe-su .su-stub{padding:.5rem 1rem;justify-content:flex-start}#djhbe-su .su-stub span{writing-mode:horizontal-tb;transform:none;font-size:.95rem;letter-spacing:.28em}#djhbe-su .su-stub::after{top:auto;left:10px;right:10px;bottom:-1px;border-right:0;border-bottom:2px dashed rgba(233,200,64,.55)}#djhbe-su .su-body{padding:1.2rem 1.1rem 1.1rem}#djhbe-su h2{font-size:2.1rem}}',
+    '@media(max-width:600px){#djhbe-su{left:0;right:auto;top:50%;bottom:auto;width:min(290px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);transform:translate(-110%,-50%)}#djhbe-su.be-show{transform:translate(0,-50%)}#djhbe-su .su-ticket{grid-template-columns:30px minmax(0,1fr);border-radius:0 8px 8px 0;border-left:0}#djhbe-su .su-stub span{font-size:.72rem;letter-spacing:.26em}#djhbe-su .su-eb,#djhbe-su .su-txt{display:none}#djhbe-su .su-body{padding:.95rem .95rem 1rem;gap:.5rem}#djhbe-su h2{font-size:1.65rem;padding-right:1.4rem}#djhbe-su .su-x{top:6px;right:6px;width:26px;height:26px;line-height:26px;font-size:.8rem}#djhbe-su .su-form{flex-direction:column}#djhbe-su .su-form input[type=email]{flex:none;padding:.6rem .75rem}#djhbe-su .su-go{font-size:1rem;padding:.6rem 1rem}#djhbe-su .su-priv{font-size:.64rem}}',
     '@media (prefers-reduced-motion:reduce){#djhbe-su,#djhbe-su *{transition:none!important}}',
-    '@media(max-width:600px){' + P + '{left:.75rem;right:.75rem;width:auto;top:auto;bottom:calc(5.25rem + env(safe-area-inset-bottom,0px));max-height:calc(100vh - 7rem);transform:translateY(calc(100% + 7rem))}' + P + '.be-show{transform:none}' + P + ' h2{font-size:2.2rem}}',
+    '@media(max-width:600px){' + P + '{left:0;right:auto;top:50%;bottom:auto;width:min(272px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);border-left:0;border-radius:0 8px 8px 0;transform:translate(-110%,-50%)}' + P + '.be-show{transform:translate(0,-50%)}' + P + ' .be-pframe,' + P + ' .be-eyebrow,' + P + ' p.be-txt{display:none}' + P + ' .be-x{top:8px;right:8px;width:26px;height:26px;line-height:26px;font-size:.85rem}' + P + ' .be-pbody{padding:.95rem 1rem 1rem;gap:.45rem}' + P + ' h2{font-size:1.65rem;padding-right:1.6rem}' + P + ' .be-calm{font-size:.76rem}' + P + ' .be-pacts{flex-wrap:wrap;gap:.6rem;margin-top:.15rem}' + P + ' .be-btn{font-size:1rem;padding:.6rem 1rem}}',
 
     /* buttons */
     X.split(',').map(function(s){return s+' .be-btn';}).join(',') + '{background:var(--be-gold);color:#090909;font-family:var(--be-display);font-size:1.1rem;letter-spacing:.08em;padding:.75rem 1.4rem;border-radius:3px;transition:background .2s,transform .15s;white-space:nowrap}',
@@ -1112,6 +1113,7 @@
         '<p class="be-eyebrow">'+esc(CP.e)+'</p>'+
         '<h2>'+esc(CP.h)+'</h2>'+
         '<p class="be-txt">'+esc(CP.t)+'</p>'+
+        '<p class="be-calm">No perfect brief needed. We\u2019ll work out the details together.</p>'+
         '<div class="be-pacts"><button type="button" class="be-btn" data-be="go">'+esc(CP.b)+' \u2192</button><button type="button" class="be-txtbtn" data-be="close">Not now</button></div>'+
       '</div>';
     document.body.appendChild(pop);
@@ -1198,6 +1200,15 @@
     });
 
     setupTriggers();
+    document.addEventListener('click', function(e){
+      var t = e.target.closest && e.target.closest('[data-build-edit]');
+      if (!t) return;
+      e.preventDefault();
+      var g = t.getAttribute('data-build-edit');
+      if (g && !S.genres.length) S.genres = [g];
+      hidePops(); openDM();
+    });
+    window.DJHBuildYourEdit = { open: function(){ hidePops(); openDM(); } };
     if (location.hash === '#build-your-edit') openDM();
   }
   function $(s){ return document.querySelector('#djhbe-dm ' + s) || document.querySelector(s); }
@@ -1356,7 +1367,7 @@
   function stepHTML(){
     var r = real(), h = '';
     if (step===1) {
-      h = '<h2 class="be-q">What are we filming?</h2><p class="be-hint">Pick everything that applies.</p><div class="be-tiles">';
+      h = '<h2 class="be-q">What are we filming?</h2><p class="be-hint">Pick everything that applies. Not sure yet? That\u2019s fine. Tap what feels closest and we\u2019ll work the rest out together.</p><div class="be-tiles">';
       GENRES.forEach(function(g){ h += '<button type="button" class="be-tile" data-act="genre" data-v="'+g.id+'" aria-pressed="'+on(S.genres.indexOf(g.id)>-1)+'"><span class="be-k">'+g.label+'</span><span class="be-s">'+g.sub+'</span></button>'; });
       h += '</div><button type="button" class="be-unsure" data-act="genre" data-v="unsure" aria-pressed="'+on(S.genres.indexOf('unsure')>-1)+'">Not sure yet, help me work it out</button>';
       return h;
@@ -1407,7 +1418,7 @@
         '<div class="be-field"><label for="be-ig">Instagram <em>(optional, if you\u2019d rather DM)</em></label><input id="be-ig" data-f="ig" placeholder="@yourhandle" value="'+esc(S.ig)+'"></div>';
     }
     if (step===7) {
-      h = '<h2 class="be-q">Your edit</h2><p class="be-hint">Check it reads right. Tap change to fix anything.</p><dl class="be-recap">';
+      h = '<h2 class="be-q">Your edit</h2><p class="be-hint">Check it reads right. Tap change to fix anything. It doesn\u2019t need to be perfect. This just starts the conversation.</p><dl class="be-recap">';
       recapRows().forEach(function(x){ h += '<div class="be-rc"><dt>'+x[0]+'</dt><dd>'+esc(x[1])+'</dd><button type="button" data-act="edit" data-v="'+x[2]+'">Change</button></div>'; });
       h += '</dl>'+
         '<div class="be-terms"><h3>Before you send</h3><ul>'+
