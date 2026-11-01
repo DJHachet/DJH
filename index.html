@@ -227,6 +227,12 @@
       font-size:clamp(3.5rem, 13vw, 12rem); line-height:.86; letter-spacing:.02em; text-align:center; margin:0;
       transition:color .1s linear; }
     .vit-cut { position:absolute; inset:0; width:100%; height:100%; }
+    /* rotating headline: every line sits in the same grid cell, so the hero never jumps in size */
+    .vit-rot, .hero h1.vit-rot { display:grid; justify-items:center; align-items:center; max-width:none; }
+    .vit-rot .vit-line { grid-area:1/1; display:block; white-space:nowrap; visibility:hidden; clip-path:inset(0 0 100% 0); transform:translateY(8%); }
+    .vit-rot .vit-line.is-on { visibility:visible; clip-path:inset(0 0 0 0); transform:none; transition:clip-path .55s cubic-bezier(.77,0,.18,1), transform .55s cubic-bezier(.77,0,.18,1); }
+    .vit-rot .vit-line.is-out { visibility:visible; clip-path:inset(100% 0 0 0); transform:translateY(-8%); transition:clip-path .45s cubic-bezier(.77,0,.18,1), transform .45s cubic-bezier(.77,0,.18,1), visibility 0s .45s; }
+    @media(prefers-reduced-motion:reduce){ .vit-rot .vit-line{transition:none!important} }
     .vit-sub { text-align:center; font-size:clamp(.72rem,1.2vw,.85rem); color:var(--grey-mid,rgba(240,239,233,0.62)); margin:1.6rem 0 2rem; letter-spacing:.03em; }
     .hero-btn-primary { display:inline-block !important; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold) !important; background:var(--black) !important; padding:.85rem 2.2rem !important; border-radius:4px; text-decoration:none; border:none !important; margin:0 !important; transition:transform .2s, background .2s; }
     .hero-btn-primary:hover { transform:translateY(-2px); background:#1a1a1a; }
@@ -639,7 +645,15 @@
     <div class="hero-content" style="width:100%;">
       <div class="vit-eyebrow"><span style="white-space:nowrap">Video Editor</span> &middot; <span style="white-space:nowrap">Videographer</span> &middot; <span style="white-space:nowrap">Automotive Focused</span></div>
       <div class="vit-wrap" id="vitWrap">
-        <h1 class="vit-heading">DON&rsquo;T<br/>BLEND IN.</h1>
+        <!-- Rotating headline: the first line is the real heading (what loads, what Google and screen readers get).
+             To change the lines, edit/add/remove the <span class="vit-line"> rows below. -->
+        <h1 class="vit-heading vit-rot" id="vitRot">
+          <span class="vit-line is-on">DON&rsquo;T<br/>BLEND IN.</span>
+          <span class="vit-line" aria-hidden="true">LOOK<br/>EXPENSIVE.</span>
+          <span class="vit-line" aria-hidden="true">MAKE IT<br/>WANTED.</span>
+          <span class="vit-line" aria-hidden="true">DON&rsquo;T LET IDEAS<br/>BE IDEAS.</span>
+          <span class="vit-line" aria-hidden="true">MAKE IT<br/>HAPPEN.</span>
+        </h1>
       </div>
       <div class="vit-sub">Visual content built to make you stand out.</div>
       <div class="vit-btns">
@@ -1166,6 +1180,43 @@
       }
       window.addEventListener('scroll', function(){ if(!raf) raf=requestAnimationFrame(apply); }, {passive:true});
       apply();
+    })();
+  </script>
+
+  <script>
+    /* Rotating hero headline: holds each line ~3s, wipes to the next, loops.
+       Starts after the loading screen; pauses when the tab is hidden; off for reduced-motion users. */
+    (function(){
+      var h=document.getElementById('vitRot'); if(!h) return;
+      var lines=[].slice.call(h.querySelectorAll('.vit-line')); if(lines.length<2) return;
+      if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      /* shrink the font a touch if the widest line would overflow the screen */
+      function fit(){
+        h.style.fontSize='';
+        var max=h.parentNode.clientWidth, w=0;
+        lines.forEach(function(l){ w=Math.max(w,l.scrollWidth); });
+        if(w>max){ var fs=parseFloat(getComputedStyle(h).fontSize); h.style.fontSize=(fs*max/w*0.98)+'px'; }
+      }
+      fit(); addEventListener('resize',fit);
+      if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      var i=0, HOLD=3000, FIRST=3800, t=null;
+      function next(){
+        var cur=lines[i]; i=(i+1)%lines.length; var nx=lines[i];
+        cur.classList.remove('is-on'); cur.classList.add('is-out');
+        nx.classList.remove('is-out');
+        void nx.offsetWidth;
+        nx.classList.add('is-on');
+        setTimeout(function(){ cur.classList.remove('is-out'); }, 500);
+        t=setTimeout(next, i===0 ? FIRST : HOLD);
+      }
+      function start(){
+        if(document.getElementById('djh-intro')){ setTimeout(start, 300); return; }
+        t=setTimeout(next, FIRST);
+      }
+      document.addEventListener('visibilitychange', function(){
+        if(document.hidden){ clearTimeout(t); t=null; } else if(!t){ t=setTimeout(next, HOLD); }
+      });
+      start();
     })();
   </script>
 
