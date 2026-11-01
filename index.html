@@ -230,8 +230,8 @@
     /* rotating headline: every line sits in the same grid cell, so the hero never jumps in size */
     .vit-rot, .hero h1.vit-rot { display:grid; justify-items:center; align-items:center; max-width:none; }
     .vit-rot .vit-line { grid-area:1/1; display:block; white-space:nowrap; visibility:hidden; clip-path:inset(0 0 100% 0); transform:translateY(8%); }
-    .vit-rot .vit-line.is-on { visibility:visible; clip-path:inset(0 0 0 0); transform:none; transition:clip-path .55s cubic-bezier(.77,0,.18,1), transform .55s cubic-bezier(.77,0,.18,1); }
-    .vit-rot .vit-line.is-out { visibility:visible; clip-path:inset(100% 0 0 0); transform:translateY(-8%); transition:clip-path .45s cubic-bezier(.77,0,.18,1), transform .45s cubic-bezier(.77,0,.18,1), visibility 0s .45s; }
+    .vit-rot .vit-line.is-on { visibility:visible; clip-path:inset(0 0 0 0); transform:none; transition:clip-path .85s cubic-bezier(.77,0,.18,1), transform .85s cubic-bezier(.77,0,.18,1); }
+    .vit-rot .vit-line.is-out { visibility:visible; clip-path:inset(100% 0 0 0); transform:translateY(-8%); transition:clip-path .7s cubic-bezier(.77,0,.18,1), transform .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
     @media(prefers-reduced-motion:reduce){ .vit-rot .vit-line{transition:none!important} }
     .vit-sub { text-align:center; font-size:clamp(.72rem,1.2vw,.85rem); color:var(--grey-mid,rgba(240,239,233,0.62)); margin:1.6rem 0 2rem; letter-spacing:.03em; }
     .hero-btn-primary { display:inline-block !important; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold) !important; background:var(--black) !important; padding:.85rem 2.2rem !important; border-radius:4px; text-decoration:none; border:none !important; margin:0 !important; transition:transform .2s, background .2s; }
@@ -1184,7 +1184,7 @@
   </script>
 
   <script>
-    /* Rotating hero headline: holds each line ~3s, wipes to the next, loops.
+    /* Rotating hero headline: holds each line ~4.5s, wipes to the next, loops.
        Starts after the loading screen; pauses when the tab is hidden; off for reduced-motion users. */
     (function(){
       var h=document.getElementById('vitRot'); if(!h) return;
@@ -1199,14 +1199,14 @@
       }
       fit(); addEventListener('resize',fit);
       if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-      var i=0, HOLD=3000, FIRST=3800, t=null;
+      var i=0, HOLD=4500, FIRST=6000, t=null;   /* ms each line stays up (FIRST = Don't Blend In) */
       function next(){
         var cur=lines[i]; i=(i+1)%lines.length; var nx=lines[i];
         cur.classList.remove('is-on'); cur.classList.add('is-out');
         nx.classList.remove('is-out');
         void nx.offsetWidth;
         nx.classList.add('is-on');
-        setTimeout(function(){ cur.classList.remove('is-out'); }, 500);
+        setTimeout(function(){ cur.classList.remove('is-out'); }, 750);
         t=setTimeout(next, i===0 ? FIRST : HOLD);
       }
       function start(){
