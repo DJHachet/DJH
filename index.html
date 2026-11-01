@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DJH &mdash; Video Editor &amp; Motion Designer</title>
-  <meta name="description" content="Cinematic car edits, motion design and spec ads. UK-based video editor and videographer." />
+  <title>DJH &mdash; Video Editor &amp; Videographer, Automotive Focused</title>
+  <meta name="description" content="Automotive-focused video editor and videographer in the East Midlands. Car edits and dealership content, plus motion design and brand work." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <meta property="og:site_name" content="DJH" />
-  <meta property="og:title" content="DJH &mdash; Video Editor &amp; Motion Designer" />
-  <meta property="og:description" content="Cinematic car edits, motion design and spec ads. UK-based video editor and videographer." />
+  <meta property="og:title" content="DJH &mdash; Video Editor &amp; Videographer, Automotive Focused" />
+  <meta property="og:description" content="Automotive-focused video editor and videographer in the East Midlands. Car edits and dealership content, plus motion design and brand work." />
   <meta property="og:image" content="https://djhvsuls.uk/LogoDJH_for_pfp.png" />
   <meta property="og:url" content="https://djhvsuls.uk/" />
   <link rel="canonical" href="https://djhvsuls.uk/" />
@@ -314,6 +314,53 @@
     }
     @media(max-width:600px){ .stats-grid{grid-template-columns:1fr;} .hero-bottom{gap:1rem;} .hero-cta{margin-left:0;} }
     .about-strip { border-top:1px solid var(--border); padding:5rem 2.5rem; }
+    .notcar a { color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(233,200,64,.35); white-space:nowrap; }
+    .notcar a:hover { border-color:var(--gold); }
+    .notcar { border-top:1px solid var(--border); padding:2.25rem 2.5rem; text-align:center; position:relative; z-index:1; }
+    .notcar p { max-width:720px; margin:0 auto; font-size:.92rem; color:var(--grey-mid); line-height:1.7; }
+    @media(max-width:900px){ .notcar{padding:2rem 1.5rem;} }
+    /* ── Comparison section ── */
+    #compare { scroll-margin-top:90px; }
+    .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+    .cmp-sec { border-top:1px solid var(--border); padding:5rem 2.5rem; position:relative; z-index:1; }
+    .cmp-head { max-width:1100px; margin:0 auto 2.5rem; }
+    .cmp-head .h-md { margin-bottom:.75rem; }
+    .cmp-head .body-txt { max-width:560px; }
+    .cmp-wrap { max-width:1100px; margin:0 auto; }
+    .cmp { width:100%; border-collapse:separate; border-spacing:0; }
+    .cmp th, .cmp td { padding:.95rem 1rem; border-bottom:1px solid var(--border); text-align:center; vertical-align:middle; }
+    .cmp thead th { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.25rem; letter-spacing:.06em; color:var(--white); border-bottom:1px solid rgba(255,255,255,.14); padding-top:1.1rem; }
+    .cmp thead th small { display:block; font-family:'Arimo',sans-serif; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--grey); margin-top:.15rem; }
+    .cmp tbody th { text-align:left; font-size:.86rem; font-weight:400; color:var(--white); width:40%; }
+    .cmp .is-djh { background:rgba(233,200,64,.05); border-left:1px solid rgba(233,200,64,.22); border-right:1px solid rgba(233,200,64,.22); }
+    .cmp thead .is-djh { color:var(--gold); border-top:2px solid var(--gold); border-radius:4px 4px 0 0; }
+    .cmp tbody tr:last-child .is-djh { border-bottom:1px solid rgba(233,200,64,.22); }
+    .mk { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; font-size:.85rem; font-weight:700; line-height:1; }
+    .mk.yes { color:#7ec98f; background:rgba(126,201,143,.12); border:1px solid rgba(126,201,143,.35); }
+    .mk.no { color:rgba(240,239,233,.4); background:transparent; border:1px solid rgba(255,255,255,.12); }
+    .mk.dep { width:auto; height:auto; border-radius:3px; padding:.22rem .5rem; font-size:.62rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--grey-mid); background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); }
+    .cmp-note { max-width:1100px; margin:1rem auto 0; font-size:.72rem; color:var(--grey); }
+    .fit { max-width:1100px; margin:2.5rem auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+    .fit div { background:var(--mid); padding:1.5rem 1.4rem; }
+    .fit .fit-djh { background:linear-gradient(180deg,rgba(233,200,64,.06),rgba(233,200,64,.01)),var(--mid); }
+    .fit h3 { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.15rem; letter-spacing:.05em; margin-bottom:.45rem; }
+    .fit .fit-djh h3 { color:var(--gold); }
+    .fit p { font-size:.82rem; color:var(--grey-mid); line-height:1.65; }
+    .cmp-close { max-width:760px; margin:2.5rem auto 0; text-align:center; font-size:1rem; color:var(--white); line-height:1.75; }
+    @media(max-width:900px){
+      .cmp-sec { padding:3.5rem 1.5rem; }
+      .fit { grid-template-columns:1fr; }
+    }
+    @media(max-width:700px){
+      .cmp thead { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+      .cmp, .cmp tbody { display:block; }
+      .cmp tbody tr { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); border-radius:4px; background:var(--mid); margin-bottom:.6rem; overflow:hidden; }
+      .cmp tbody th { grid-column:1/-1; width:auto; padding:.85rem 1rem .6rem; border-bottom:1px solid var(--border); font-size:.88rem; }
+      .cmp td { display:flex; flex-direction:column; align-items:center; gap:.4rem; padding:.7rem .4rem .8rem; border-bottom:0; }
+      .cmp td::before { content:attr(data-label); font-size:.58rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--grey); }
+      .cmp td.is-djh { border-left:1px solid rgba(233,200,64,.22); border-right:1px solid rgba(233,200,64,.22); border-bottom:0 !important; }
+      .cmp td.is-djh::before { color:var(--gold); }
+    }
     .about-strip-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1400px; margin:0 auto; }
     .about-strip .stats-grid { margin-top:0; }
     @media(max-width:900px){ .about-strip{padding:3.5rem 1.5rem;} .about-strip-inner{grid-template-columns:1fr;gap:2.5rem;} }
@@ -590,11 +637,11 @@
   <div id="pagewrap" class="page-tx" data-page="HOME">
   <section class="hero">
     <div class="hero-content" style="width:100%;">
-      <div class="vit-eyebrow">Video Editor &middot; Videographer &middot; Content Creator</div>
+      <div class="vit-eyebrow"><span style="white-space:nowrap">Video Editor</span> &middot; <span style="white-space:nowrap">Videographer</span> &middot; <span style="white-space:nowrap">Automotive Focused</span></div>
       <div class="vit-wrap" id="vitWrap">
-        <h1 class="vit-heading">WATCHED.<br/>NOT SKIPPED.</h1>
+        <h1 class="vit-heading">DON&rsquo;T<br/>BLEND IN.</h1>
       </div>
-      <div class="vit-sub">Content built to hold attention.</div>
+      <div class="vit-sub">Visual content built to make you stand out.</div>
       <div class="vit-btns">
         <a href="https://calendly.com/djhvsuls" target="_blank" rel="noopener" class="hero-cta hero-btn-primary">Schedule a Call &rarr;</a>
         <a href="contact" class="hero-cta hero-btn-outline">Start a Project</a>
@@ -608,7 +655,6 @@
       </div>
     </div>
   </section>
-
 
   <section class="cat reveal">
     <div class="cat-media">
@@ -661,6 +707,10 @@
     </div>
   </section>
 
+  <section class="notcar reveal">
+    <p>Not a car? I film and edit for businesses too &mdash; products, gyms, property and personal brands. <a href="services#business">See what I do &rarr;</a></p>
+  </section>
+
   <section class="cat flip reveal">
     <div class="cat-media portrait">
       <div class="vid-9-16" onclick="openModal('FApIoRqIEHQ', true)">
@@ -676,6 +726,41 @@
       <p class="cat-includes"><span>Inside:</span> full process breakdowns &middot; sound design &middot; raw &rarr; final comparisons</p>
       <a href="bts" class="btn-ghost">View More &#8599;</a>
     </div>
+  </section>
+
+  <section class="cmp-sec reveal" id="compare">
+    <div class="cmp-head">
+      <div class="eyebrow">Your Options</div>
+      <h2 class="h-md">In-House vs DJH vs Agency</h2>
+      <p class="body-txt">Three ways to create content. Which makes sense for your business?</p>
+    </div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <caption class="sr">Comparison of an in-house employee, DJH and an agency</caption>
+        <thead>
+          <tr><th scope="col"><span class="sr">What you get</span></th><th scope="col">In-House<small>Employee</small></th><th scope="col" class="is-djh">DJH<small>Direct</small></th><th scope="col">Agency<small>Team</small></th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">No permanent salary commitment</th><td data-label="In-house"><span class="mk no" aria-label="No">&#10005;</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk yes" aria-label="Yes">&#10003;</span></td></tr>
+          <tr><th scope="row">No recruitment or onboarding</th><td data-label="In-house"><span class="mk no" aria-label="No">&#10005;</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk yes" aria-label="Yes">&#10003;</span></td></tr>
+          <tr><th scope="row">Direct contact with the creator</th><td data-label="In-house"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk dep">Depends</span></td></tr>
+          <tr><th scope="row">Filming and editing handled</th><td data-label="In-house"><span class="mk dep">Depends</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk yes" aria-label="Yes">&#10003;</span></td></tr>
+          <tr><th scope="row">No equipment investment</th><td data-label="In-house"><span class="mk dep">Depends</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk dep">Depends</span></td></tr>
+          <tr><th scope="row">Flexible, project-based work</th><td data-label="In-house"><span class="mk dep">Depends</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk dep">Depends</span></td></tr>
+          <tr><th scope="row">Same creative on every project</th><td data-label="In-house"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk dep">Depends</span></td></tr>
+          <tr><th scope="row">Access to a wider creative team</th><td data-label="In-house"><span class="mk no" aria-label="No">&#10005;</span></td><td class="is-djh" data-label="DJH"><span class="mk no" aria-label="No">&#10005;</span></td><td data-label="Agency"><span class="mk yes" aria-label="Yes">&#10003;</span></td></tr>
+          <tr><th scope="row">Suitable for large campaigns</th><td data-label="In-house"><span class="mk dep">Depends</span></td><td class="is-djh" data-label="DJH"><span class="mk dep">Depends</span></td><td data-label="Agency"><span class="mk yes" aria-label="Yes">&#10003;</span></td></tr>
+          <tr><th scope="row">No additional employee to manage</th><td data-label="In-house"><span class="mk no" aria-label="No">&#10005;</span></td><td class="is-djh" data-label="DJH"><span class="mk yes" aria-label="Yes">&#10003;</span></td><td data-label="Agency"><span class="mk yes" aria-label="Yes">&#10003;</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-note">Typical arrangements, not guarantees &mdash; every role and agency is set up differently.</p>
+    <div class="fit">
+      <div><h3>In-house makes sense when&hellip;</h3><p>You need someone on site every day, across lots of jobs, all year round.</p></div>
+      <div class="fit-djh"><h3>DJH makes sense when&hellip;</h3><p>You mainly need quality video &mdash; filmed and edited by the person you actually talk to.</p></div>
+      <div><h3>An agency makes sense when&hellip;</h3><p>You&rsquo;re running large campaigns that need a wider team and broader services.</p></div>
+    </div>
+    <p class="cmp-close">Not every business needs an in-house content creator or a full agency. DJH gives you direct access to filming and editing without the commitment of another permanent hire.</p>
   </section>
 
   <section class="about-strip reveal">
@@ -1084,9 +1169,9 @@
     })();
   </script>
 
-  <!-- ===== BUILD YOUR EDIT (side pop-up halfway down or after 20s) =====
+  <!-- ===== TRY DJH FOR £50 OFFER (side pop-up halfway down or after 20s; only comes back on refresh) =====
        Shows again on reload or a new visit. -->
-  <script data-copy="home" data-corner="timer:20,half" data-bottom="off">
+  <script data-copy="home" data-offer="try-djh" data-corner="timer:20,half" data-bottom="off">
 (function () {
   if (window.__djhBE) return; window.__djhBE = true;
 
@@ -1095,6 +1180,8 @@
   var BOTTOM = ((me && me.getAttribute('data-bottom')) || 'on') !== 'off';
   var MODE = (me && me.getAttribute('data-mode')) || 'build';
   var COPYKEY = (me && me.getAttribute('data-copy')) || 'home';
+  var OFFER = (me && me.getAttribute('data-offer')) || '';
+  var KEY_FF = 'djh_ff_dismissed', FF_DAYS = 7;
   var SIGNUP_TRIGGER = (me && me.getAttribute('data-signup')) || 'half';
   var BREVO = 'https://d3725b92.sibforms.com/serve/MUIFAAHochpj0uRrZ-rcpG2CZ8VugLs3qT6jr4WUdmoobVe4fRKrEcJVvmM-fOSmHld_TBDiNsc-VEFxcMkP1jxjBXEB_YXiGztGLRAX8iDejk6VbbNYiZCv5uTtMnmbZHW_XifZatMbcpNEjRSYmtFLEeTcuencvFBYOt7PGQMUAyBR7PXOV5-AXUclRbZE6RjHUfpwKWU5Hz4f6w==';
   var KEY_SU = 'djh_su_seen', KEY_SU_DONE = 'djh_su_done';
@@ -1189,6 +1276,24 @@
     P + ' h2{margin:0;font-family:var(--be-display);font-weight:400;font-size:2.6rem;line-height:.98;text-wrap:balance;letter-spacing:.03em;color:var(--be-text)}',
     P + ' p.be-txt{margin:0;color:var(--be-muted);font-size:.85rem;line-height:1.55}',
     P + ' .be-calm{margin:0;font-size:.78rem;line-height:1.5;color:var(--be-faint);font-style:italic}',
+    P + ' .be-ffline{display:block;margin-top:.35rem;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.08);font-size:.74rem;line-height:1.5;color:var(--be-faint);text-decoration:none}',
+    P + ' .be-ffline b{color:var(--be-gold);font-weight:600}',
+    P + ' .be-ffline:hover{color:#F0EFE9}',
+    P + '.ff .be-pframe{aspect-ratio:16/6}',
+    P + ' .ff-frame{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}',
+    P + ' .ff-frame small{font-size:.55rem;letter-spacing:.32em;text-transform:uppercase;color:var(--be-gold)}',
+    P + ' .ff-frame strong{font-family:var(--be-display);font-weight:400;font-size:2.2rem;letter-spacing:.08em;line-height:1;color:var(--be-text);text-shadow:0 2px 14px rgba(0,0,0,.6)}',
+    P + ' .ff-list{list-style:none;margin:.15rem 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.3rem .9rem}',
+    P + ' .ff-list li{position:relative;padding-left:1.05rem;font-size:.76rem;line-height:1.4;color:var(--be-text)}',
+    P + ' .ff-list li::before{content:"\\2713";position:absolute;left:0;top:0;color:var(--be-gold);font-size:.72rem}',
+    P + ' .ff-list li:last-child{grid-column:1/-1}',
+    P + ' .ff-sum{display:none;margin:0;font-size:.74rem;line-height:1.45;color:var(--be-muted)}',
+    P + ' .ff-price{display:flex;align-items:baseline;gap:.6rem;margin-top:.35rem;padding-top:.7rem;border-top:1px solid var(--be-line)}',
+    P + ' .ff-amt{font-family:var(--be-display);font-size:2.6rem;line-height:.9;color:var(--be-gold);font-variant-numeric:tabular-nums}',
+    P + ' .ff-per{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--be-faint)}',
+    P + ' .ff-cta{display:block;text-align:center;text-decoration:none;margin-top:.2rem}',
+    P + ' .ff-terms{margin:0;font-size:.68rem;line-height:1.5;color:var(--be-faint)}',
+    P + '.ff h2{font-size:2.3rem}',
     P + ' .be-pacts{display:flex;align-items:center;gap:1rem;margin-top:.4rem}',
     P + ' .be-x{position:absolute;top:22px;right:8px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(9,9,9,.7);color:var(--be-muted);font-size:1rem;line-height:30px;text-align:center}',
     '#djhbe-big{position:fixed;inset:0;z-index:590;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(5,5,5,.55);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;font-family:"Arimo",Arial,sans-serif;line-height:1.6;color:#F0EFE9;--be-gold:#E9C840;--be-gold-dim:#c9a928;--be-muted:rgba(240,239,233,.64);--be-faint:rgba(240,239,233,.40);--be-text:#F0EFE9;--be-display:"Bebas Neue",Impact,"Arial Narrow",sans-serif}',
@@ -1247,6 +1352,7 @@
     '@media(max-width:600px){#djhbe-su{left:0;right:auto;top:50%;bottom:auto;width:min(290px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);transform:translate(-110%,-50%)}#djhbe-su.be-show{transform:translate(0,-50%)}#djhbe-su .su-ticket{grid-template-columns:30px minmax(0,1fr);border-radius:0 8px 8px 0;border-left:0}#djhbe-su .su-stub span{font-size:.72rem;letter-spacing:.26em}#djhbe-su .su-eb,#djhbe-su .su-txt{display:none}#djhbe-su .su-body{padding:.95rem .95rem 1rem;gap:.5rem}#djhbe-su h2{font-size:1.65rem;padding-right:1.4rem}#djhbe-su .su-x{top:6px;right:6px;width:26px;height:26px;line-height:26px;font-size:.8rem}#djhbe-su .su-form{flex-direction:column}#djhbe-su .su-form input[type=email]{flex:none;padding:.6rem .75rem}#djhbe-su .su-go{font-size:1rem;padding:.6rem 1rem}#djhbe-su .su-priv{font-size:.64rem}}',
     '@media (prefers-reduced-motion:reduce){#djhbe-su,#djhbe-su *{transition:none!important}}',
     '@media(max-width:600px){' + P + '{left:0;right:auto;top:50%;bottom:auto;width:min(272px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);border-left:0;border-radius:0 8px 8px 0;transform:translate(-110%,-50%)}' + P + '.be-show{transform:translate(0,-50%)}' + P + ' .be-pframe,' + P + ' .be-eyebrow,' + P + ' p.be-txt{display:none}' + P + ' .be-x{top:8px;right:8px;width:26px;height:26px;line-height:26px;font-size:.85rem}' + P + ' .be-pbody{padding:.95rem 1rem 1rem;gap:.45rem}' + P + ' h2{font-size:1.65rem;padding-right:1.6rem}' + P + ' .be-calm{font-size:.76rem}' + P + ' .be-pacts{flex-wrap:wrap;gap:.6rem;margin-top:.15rem}' + P + ' .be-btn{font-size:1rem;padding:.6rem 1rem}}',
+    '@media(max-width:600px){' + P + '.ff{width:min(292px,calc(100vw - 4rem))}' + P + '.ff .be-eyebrow{display:block;font-size:.6rem}' + P + '.ff .ff-list{display:none}' + P + '.ff .ff-sum{display:block}' + P + '.ff h2{font-size:1.6rem}' + P + '.ff .ff-amt{font-size:2.1rem}' + P + '.ff .ff-price{padding-top:.5rem;margin-top:.15rem}' + P + '.ff .ff-cta{font-size:1rem;padding:.65rem .9rem}' + P + '.ff .ff-terms{font-size:.62rem}}',
 
     /* buttons */
     X.split(',').map(function(s){return s+' .be-btn';}).join(',') + '{background:var(--be-gold);color:#090909;font-family:var(--be-display);font-size:1.1rem;letter-spacing:.08em;padding:.75rem 1.4rem;border-radius:3px;transition:background .2s,transform .15s;white-space:nowrap}',
@@ -1417,13 +1523,30 @@
       var a = e.target.closest && e.target.closest('a[href]');
       if (a && !a.target && a.hostname === location.hostname) { try { sessionStorage.setItem('djh_be_hop', String(Date.now())); } catch(x){} }
     }, true);
-    if (/[?&]popup=reset/.test(location.search)) { try { sessionStorage.removeItem(KEY_CORNER); sessionStorage.removeItem(KEY_BIG); sessionStorage.removeItem(KEY_SU); localStorage.removeItem(KEY_SU_DONE); } catch(e){} }
+    if (/[?&]popup=reset/.test(location.search)) { try { sessionStorage.removeItem(KEY_CORNER); sessionStorage.removeItem(KEY_BIG); sessionStorage.removeItem(KEY_SU); localStorage.removeItem(KEY_SU_DONE); localStorage.removeItem(KEY_FF); } catch(e){} }
 
     var st = document.createElement('style'); st.id = 'djhbe-css'; st.textContent = css; document.head.appendChild(st);
     if (MODE === 'signup') { initSignup(); return; }
 
     var pop = document.createElement('aside');
     pop.id = 'djhbe-pop'; pop.setAttribute('aria-label','Build your edit'); pop.setAttribute('aria-hidden','true');
+    if (OFFER === 'try-djh' || OFFER === 'first-film') {
+      pop.className = 'ff';
+      pop.setAttribute('aria-label','Try DJH for \u00a350');
+      pop.innerHTML =
+        '<div class="be-pframe"><div class="be-slate"></div>'+scene('moody','slow')+
+          '<div class="ff-frame"><small>Try DJH</small><strong>\u00a350</strong></div></div>'+
+        '<button type="button" class="be-x" data-be="close" aria-label="Close">\u2715</button>'+
+        '<div class="be-pbody">'+
+          '<p class="be-eyebrow ff-name">Try DJH for \u00a350 \u00b7 Car video</p>'+
+          '<h2>Your car. Presented properly.</h2>'+
+          '<p class="be-txt">Your car, or your stock, filmed and edited properly. Get in touch to see what \u00a350 can do for you.</p>'+
+          '<p class="ff-sum">Get in touch to see what \u00a350 can do for you.</p>'+
+          '<div class="ff-price"><span class="ff-amt">\u00a350</span><span class="ff-per">car video</span></div>'+
+          '<a class="be-btn ff-cta" href="contact?enquiry=try-djh">Try DJH \u2192</a>'+
+          '<p class="ff-terms">Introductory offer for new clients, private sellers and dealerships. The edit is limited at this price; we\u2019ll agree what\u2019s included before anything starts.</p>'+
+        '</div>';
+    } else
     pop.innerHTML =
       '<div class="be-pframe"><div class="be-slate"></div>'+scene('moody','slow')+'</div>'+
       '<button type="button" class="be-x" data-be="close" aria-label="Close">\u2715</button>'+
@@ -1433,6 +1556,7 @@
         '<p class="be-txt">'+esc(CP.t)+'</p>'+
         '<p class="be-calm">No perfect brief needed. We\u2019ll work out the details together.</p>'+
         '<div class="be-pacts"><button type="button" class="be-btn" data-be="go">'+esc(CP.b)+' \u2192</button><button type="button" class="be-txtbtn" data-be="close">Not now</button></div>'+
+        (COPYKEY === 'cars' ? '<a class="be-ffline" href="contact?enquiry=try-djh">First time? <b>Try DJH for \u00a350</b> \u00b7 car video \u2192</a>' : '')+   /* car offer: Cars page only */
       '</div>';
     document.body.appendChild(pop);
 
@@ -1494,6 +1618,10 @@
     [pop, big].forEach(function(el){
       el.addEventListener('click', function(e){
         if (e.target === big) { hidePops(); return; }
+        if (OFFER && el === pop) {
+          if (e.target.closest('[data-be=close]')) hidePops();
+          return;
+        }
         var b = e.target.closest('[data-be]'); if (!b) return;
         hidePops(); if (b.getAttribute('data-be')==='go') { if (PRE && !S.genres.length) S.genres = [PRE]; openDM(); }
       });
@@ -1608,6 +1736,7 @@
     var modal = document.getElementById('modal');
     return document.body.classList.contains('menu-open') || (modal && modal.classList.contains('open')) || document.getElementById('djh-intro') || (function(){ var d=document.getElementById('djhbe-dm'); return !!(d && !d.hidden); })() || !!document.querySelector('.upd-overlay.show, .lb.open');
   }
+  try { localStorage.removeItem(KEY_FF); } catch(e){} /* old 7-day offer block, no longer used: the offer now follows the same reload/new-visit reset as every other pop-up */
   function showCorner(){
     if (seen(KEY_CORNER) || seen(KEY_BIG)) return;
     if (blocked()) { setTimeout(showCorner, 1500); return; }

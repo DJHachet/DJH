@@ -362,6 +362,47 @@
       .tx-box,.tx-label,.tx-bar span{ transition:none !important; }
     }
   </style>
+  <style>
+    /* ── Presentation sections (moved from Services) ── */
+    .svc-section { position:relative; z-index:1; border-bottom:1px solid var(--border); padding:4.5rem 2.5rem; }
+    .svc-head { max-width:1400px; margin:0 auto 2.5rem; }
+    .svc-cat-label { font-size:.68rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
+    .svc-cat-title { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.8rem); letter-spacing:.04em; line-height:1.1; margin-bottom:.75rem; }
+    .svc-cat-sub { font-size:.9rem; color:var(--grey-mid); line-height:1.7; max-width:560px; }
+    /* ── Presentation / comparison sections ── */
+    #presentation { scroll-margin-top:90px; }
+    .pres-sub { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.3rem,2.2vw,1.7rem); letter-spacing:.04em; line-height:1.2; color:var(--white); max-width:640px; margin-top:.25rem; }
+    .aud-grid { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); }
+    .aud { background:var(--mid); padding:2.2rem 2.1rem; }
+    .aud-num { font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:.2em; color:rgba(233,200,64,.5); margin-bottom:.6rem; }
+    .aud h3 { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.65rem; letter-spacing:.05em; margin-bottom:1rem; }
+    .aud ul { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+    .aud li { position:relative; padding-left:1.4rem; font-size:.86rem; color:var(--grey-mid); line-height:1.6; }
+    .aud li::before { content:'\2014'; position:absolute; left:0; color:var(--gold); }
+    .pres-quote { max-width:1400px; margin:2.5rem auto 0; display:grid; grid-template-columns:1.1fr 1fr; gap:3rem; align-items:start; }
+    .pres-quote blockquote { margin:0; font-family:'Bebas Neue',sans-serif; font-size:clamp(1.6rem,2.8vw,2.3rem); letter-spacing:.03em; line-height:1.15; color:var(--white); border-left:3px solid var(--gold); padding-left:1.25rem; text-wrap:balance; }
+    .pres-quote blockquote span { color:var(--gold); }
+    .stock { max-width:1400px; margin:3.5rem auto 0; display:grid; grid-template-columns:.8fr 1.2fr; gap:3rem; align-items:start; border-top:1px solid var(--border); padding-top:3rem; }
+    .stock-h { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:clamp(1.7rem,2.8vw,2.4rem); letter-spacing:.04em; line-height:1.1; color:var(--white); }
+    .stock .body-txt { max-width:620px; }
+    .chips { display:flex; flex-wrap:wrap; gap:.5rem; margin:1.1rem 0 1.25rem; max-width:620px; padding:0; }
+    .chips li { list-style:none; font-size:.76rem; font-weight:500; color:var(--white); background:var(--mid); border:1px solid var(--border); border-radius:3px; padding:.45rem .8rem; }
+    .dealer { max-width:1400px; margin:3rem auto 0; }
+    .dealer-h { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.35rem; letter-spacing:.06em; color:var(--gold); margin-bottom:1rem; }
+    .dealer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+    .dealer-grid div { background:var(--mid); padding:1.5rem 1.4rem; }
+    .dealer-grid h4 { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.15rem; letter-spacing:.05em; color:var(--white); margin-bottom:.45rem; }
+    .dealer-grid p { font-size:.82rem; color:var(--grey-mid); line-height:1.65; }
+    @media(max-width:1100px){ .dealer-grid { grid-template-columns:1fr 1fr; } }
+    @media(max-width:900px){
+      .svc-section { padding:3rem 1.5rem; }
+      .aud-grid, .pres-quote, .stock { grid-template-columns:1fr; }
+      .pres-quote { gap:1.25rem; }
+      .stock { gap:1.25rem; margin-top:2.5rem; padding-top:2.5rem; }
+      .aud { padding:1.75rem 1.4rem; }
+    }
+    @media(max-width:600px){ .dealer-grid { grid-template-columns:1fr; } }
+  </style>
   <!-- v20260909000000 --></head>
 <body>
   <nav id="nav" class="solid">
@@ -523,6 +564,60 @@
       <h2 class="h-md work-title">BMW M3 CS</h2>
       <p class="body-txt work-desc">A slower, more considered piece with infographic overlays highlighting wheel and light detail, plus a custom audio edit. The style that sells a car before the test drive.</p>
       <p class="credit">Edit: DJH &middot; Footage: <a href="https://www.instagram.com/sultra.edit/" target="_blank" rel="noopener">@sultra.edit</a></p>
+    </div>
+  </section>
+
+  <section class="svc-section reveal" id="presentation">
+    <div class="svc-head">
+      <div class="svc-cat-label">Automotive Presentation</div>
+      <h2 class="svc-cat-title">More than just showing the car.</h2>
+      <p class="pres-sub">Anyone can record a car. Knowing how to present it is another thing entirely.</p>
+      <p class="svc-cat-sub" style="margin-top:1rem;">Good automotive content has two audiences, and it needs to work for both of them.</p>
+    </div>
+    <div class="aud-grid">
+      <div class="aud">
+        <div class="aud-num">01</div>
+        <h3>The Potential Buyer</h3>
+        <ul>
+          <li>Clear presentation of the vehicle.</li>
+          <li>Its condition, features and details, properly shown.</li>
+          <li>Helping customers understand exactly what they&rsquo;re looking at.</li>
+          <li>A professional first impression.</li>
+        </ul>
+      </div>
+      <div class="aud">
+        <div class="aud-num">02</div>
+        <h3>The Viewer</h3>
+        <ul>
+          <li>Visually engaging footage.</li>
+          <li>Interesting camera movement and composition.</li>
+          <li>Creative editing and sound design.</li>
+          <li>Content that feels distinctive rather than repetitive.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pres-quote">
+      <blockquote>I understand what a customer wants to see and what makes a viewer want to watch. <span>The best automotive content brings both together.</span></blockquote>
+      <p class="body-txt">A car can be excellent and still look like every other listing if it&rsquo;s presented the same way as everything else. My aim is to help dealerships and private sellers show their vehicles in a more distinctive, professional way &mdash; clear enough to inform, and considered enough to stand apart.</p>
+    </div>
+    <div class="dealer">
+      <h3 class="dealer-h">What that means for a dealership</h3>
+      <div class="dealer-grid">
+        <div><h4>One shoot, two uses</h4><p>A full walkaround for the listing, plus a short cut for socials, from the same session.</p></div>
+        <div><h4>The details buyers check</h4><p>Wheels and tyres, interior condition, and the spec that justifies the price, shown clearly.</p></div>
+        <div><h4>A consistent look across your stock</h4><p>Every car presented the same way, so your page looks like one brand rather than a mix of random videos.</p></div>
+        <div><h4>Works around your forecourt</h4><p>A compact setup that&rsquo;s in and out quickly, around your customers and your day.</p></div>
+      </div>
+    </div>
+    <div class="stock">
+      <h3 class="stock-h">Your stock deserves to stand out.</h3>
+      <div class="stock-body">
+        <p class="body-txt">Recording a car and presenting it are two different jobs. A quick video can show that a car is available. It doesn&rsquo;t automatically show its character, its quality, or why someone would want it. That comes from the decisions made before, during and after filming:</p>
+        <ul class="chips">
+          <li>Intentional filming</li><li>Composition &amp; camera movement</li><li>Creative editing</li><li>Colour grading</li><li>Sound design</li><li>Visual storytelling</li><li>A distinctive approach for every vehicle</li>
+        </ul>
+        <p class="body-txt">The camera matters far less than the decisions behind the finished video. Every vehicle gets its own approach rather than the same template.</p>
+      </div>
     </div>
   </section>
 
@@ -777,6 +872,8 @@
   var BOTTOM = ((me && me.getAttribute('data-bottom')) || 'on') !== 'off';
   var MODE = (me && me.getAttribute('data-mode')) || 'build';
   var COPYKEY = (me && me.getAttribute('data-copy')) || 'home';
+  var OFFER = (me && me.getAttribute('data-offer')) || '';
+  var KEY_FF = 'djh_ff_dismissed', FF_DAYS = 7;
   var SIGNUP_TRIGGER = (me && me.getAttribute('data-signup')) || 'half';
   var BREVO = 'https://d3725b92.sibforms.com/serve/MUIFAAHochpj0uRrZ-rcpG2CZ8VugLs3qT6jr4WUdmoobVe4fRKrEcJVvmM-fOSmHld_TBDiNsc-VEFxcMkP1jxjBXEB_YXiGztGLRAX8iDejk6VbbNYiZCv5uTtMnmbZHW_XifZatMbcpNEjRSYmtFLEeTcuencvFBYOt7PGQMUAyBR7PXOV5-AXUclRbZE6RjHUfpwKWU5Hz4f6w==';
   var KEY_SU = 'djh_su_seen', KEY_SU_DONE = 'djh_su_done';
@@ -871,6 +968,24 @@
     P + ' h2{margin:0;font-family:var(--be-display);font-weight:400;font-size:2.6rem;line-height:.98;text-wrap:balance;letter-spacing:.03em;color:var(--be-text)}',
     P + ' p.be-txt{margin:0;color:var(--be-muted);font-size:.85rem;line-height:1.55}',
     P + ' .be-calm{margin:0;font-size:.78rem;line-height:1.5;color:var(--be-faint);font-style:italic}',
+    P + ' .be-ffline{display:block;margin-top:.35rem;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.08);font-size:.74rem;line-height:1.5;color:var(--be-faint);text-decoration:none}',
+    P + ' .be-ffline b{color:var(--be-gold);font-weight:600}',
+    P + ' .be-ffline:hover{color:#F0EFE9}',
+    P + '.ff .be-pframe{aspect-ratio:16/6}',
+    P + ' .ff-frame{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}',
+    P + ' .ff-frame small{font-size:.55rem;letter-spacing:.32em;text-transform:uppercase;color:var(--be-gold)}',
+    P + ' .ff-frame strong{font-family:var(--be-display);font-weight:400;font-size:2.2rem;letter-spacing:.08em;line-height:1;color:var(--be-text);text-shadow:0 2px 14px rgba(0,0,0,.6)}',
+    P + ' .ff-list{list-style:none;margin:.15rem 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.3rem .9rem}',
+    P + ' .ff-list li{position:relative;padding-left:1.05rem;font-size:.76rem;line-height:1.4;color:var(--be-text)}',
+    P + ' .ff-list li::before{content:"\\2713";position:absolute;left:0;top:0;color:var(--be-gold);font-size:.72rem}',
+    P + ' .ff-list li:last-child{grid-column:1/-1}',
+    P + ' .ff-sum{display:none;margin:0;font-size:.74rem;line-height:1.45;color:var(--be-muted)}',
+    P + ' .ff-price{display:flex;align-items:baseline;gap:.6rem;margin-top:.35rem;padding-top:.7rem;border-top:1px solid var(--be-line)}',
+    P + ' .ff-amt{font-family:var(--be-display);font-size:2.6rem;line-height:.9;color:var(--be-gold);font-variant-numeric:tabular-nums}',
+    P + ' .ff-per{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--be-faint)}',
+    P + ' .ff-cta{display:block;text-align:center;text-decoration:none;margin-top:.2rem}',
+    P + ' .ff-terms{margin:0;font-size:.68rem;line-height:1.5;color:var(--be-faint)}',
+    P + '.ff h2{font-size:2.3rem}',
     P + ' .be-pacts{display:flex;align-items:center;gap:1rem;margin-top:.4rem}',
     P + ' .be-x{position:absolute;top:22px;right:8px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(9,9,9,.7);color:var(--be-muted);font-size:1rem;line-height:30px;text-align:center}',
     '#djhbe-big{position:fixed;inset:0;z-index:590;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(5,5,5,.55);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;font-family:"Arimo",Arial,sans-serif;line-height:1.6;color:#F0EFE9;--be-gold:#E9C840;--be-gold-dim:#c9a928;--be-muted:rgba(240,239,233,.64);--be-faint:rgba(240,239,233,.40);--be-text:#F0EFE9;--be-display:"Bebas Neue",Impact,"Arial Narrow",sans-serif}',
@@ -929,6 +1044,7 @@
     '@media(max-width:600px){#djhbe-su{left:0;right:auto;top:50%;bottom:auto;width:min(290px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);transform:translate(-110%,-50%)}#djhbe-su.be-show{transform:translate(0,-50%)}#djhbe-su .su-ticket{grid-template-columns:30px minmax(0,1fr);border-radius:0 8px 8px 0;border-left:0}#djhbe-su .su-stub span{font-size:.72rem;letter-spacing:.26em}#djhbe-su .su-eb,#djhbe-su .su-txt{display:none}#djhbe-su .su-body{padding:.95rem .95rem 1rem;gap:.5rem}#djhbe-su h2{font-size:1.65rem;padding-right:1.4rem}#djhbe-su .su-x{top:6px;right:6px;width:26px;height:26px;line-height:26px;font-size:.8rem}#djhbe-su .su-form{flex-direction:column}#djhbe-su .su-form input[type=email]{flex:none;padding:.6rem .75rem}#djhbe-su .su-go{font-size:1rem;padding:.6rem 1rem}#djhbe-su .su-priv{font-size:.64rem}}',
     '@media (prefers-reduced-motion:reduce){#djhbe-su,#djhbe-su *{transition:none!important}}',
     '@media(max-width:600px){' + P + '{left:0;right:auto;top:50%;bottom:auto;width:min(272px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);border-left:0;border-radius:0 8px 8px 0;transform:translate(-110%,-50%)}' + P + '.be-show{transform:translate(0,-50%)}' + P + ' .be-pframe,' + P + ' .be-eyebrow,' + P + ' p.be-txt{display:none}' + P + ' .be-x{top:8px;right:8px;width:26px;height:26px;line-height:26px;font-size:.85rem}' + P + ' .be-pbody{padding:.95rem 1rem 1rem;gap:.45rem}' + P + ' h2{font-size:1.65rem;padding-right:1.6rem}' + P + ' .be-calm{font-size:.76rem}' + P + ' .be-pacts{flex-wrap:wrap;gap:.6rem;margin-top:.15rem}' + P + ' .be-btn{font-size:1rem;padding:.6rem 1rem}}',
+    '@media(max-width:600px){' + P + '.ff{width:min(292px,calc(100vw - 4rem))}' + P + '.ff .be-eyebrow{display:block;font-size:.6rem}' + P + '.ff .ff-list{display:none}' + P + '.ff .ff-sum{display:block}' + P + '.ff h2{font-size:1.6rem}' + P + '.ff .ff-amt{font-size:2.1rem}' + P + '.ff .ff-price{padding-top:.5rem;margin-top:.15rem}' + P + '.ff .ff-cta{font-size:1rem;padding:.65rem .9rem}' + P + '.ff .ff-terms{font-size:.62rem}}',
 
     /* buttons */
     X.split(',').map(function(s){return s+' .be-btn';}).join(',') + '{background:var(--be-gold);color:#090909;font-family:var(--be-display);font-size:1.1rem;letter-spacing:.08em;padding:.75rem 1.4rem;border-radius:3px;transition:background .2s,transform .15s;white-space:nowrap}',
@@ -1099,13 +1215,30 @@
       var a = e.target.closest && e.target.closest('a[href]');
       if (a && !a.target && a.hostname === location.hostname) { try { sessionStorage.setItem('djh_be_hop', String(Date.now())); } catch(x){} }
     }, true);
-    if (/[?&]popup=reset/.test(location.search)) { try { sessionStorage.removeItem(KEY_CORNER); sessionStorage.removeItem(KEY_BIG); sessionStorage.removeItem(KEY_SU); localStorage.removeItem(KEY_SU_DONE); } catch(e){} }
+    if (/[?&]popup=reset/.test(location.search)) { try { sessionStorage.removeItem(KEY_CORNER); sessionStorage.removeItem(KEY_BIG); sessionStorage.removeItem(KEY_SU); localStorage.removeItem(KEY_SU_DONE); localStorage.removeItem(KEY_FF); } catch(e){} }
 
     var st = document.createElement('style'); st.id = 'djhbe-css'; st.textContent = css; document.head.appendChild(st);
     if (MODE === 'signup') { initSignup(); return; }
 
     var pop = document.createElement('aside');
     pop.id = 'djhbe-pop'; pop.setAttribute('aria-label','Build your edit'); pop.setAttribute('aria-hidden','true');
+    if (OFFER === 'try-djh' || OFFER === 'first-film') {
+      pop.className = 'ff';
+      pop.setAttribute('aria-label','Try DJH for \u00a350');
+      pop.innerHTML =
+        '<div class="be-pframe"><div class="be-slate"></div>'+scene('moody','slow')+
+          '<div class="ff-frame"><small>Try DJH</small><strong>\u00a350</strong></div></div>'+
+        '<button type="button" class="be-x" data-be="close" aria-label="Close">\u2715</button>'+
+        '<div class="be-pbody">'+
+          '<p class="be-eyebrow ff-name">Try DJH for \u00a350 \u00b7 Car video</p>'+
+          '<h2>Your car. Presented properly.</h2>'+
+          '<p class="be-txt">Your car, or your stock, filmed and edited properly. Get in touch to see what \u00a350 can do for you.</p>'+
+          '<p class="ff-sum">Get in touch to see what \u00a350 can do for you.</p>'+
+          '<div class="ff-price"><span class="ff-amt">\u00a350</span><span class="ff-per">car video</span></div>'+
+          '<a class="be-btn ff-cta" href="contact?enquiry=try-djh">Try DJH \u2192</a>'+
+          '<p class="ff-terms">Introductory offer for new clients, private sellers and dealerships. The edit is limited at this price; we\u2019ll agree what\u2019s included before anything starts.</p>'+
+        '</div>';
+    } else
     pop.innerHTML =
       '<div class="be-pframe"><div class="be-slate"></div>'+scene('moody','slow')+'</div>'+
       '<button type="button" class="be-x" data-be="close" aria-label="Close">\u2715</button>'+
@@ -1115,6 +1248,7 @@
         '<p class="be-txt">'+esc(CP.t)+'</p>'+
         '<p class="be-calm">No perfect brief needed. We\u2019ll work out the details together.</p>'+
         '<div class="be-pacts"><button type="button" class="be-btn" data-be="go">'+esc(CP.b)+' \u2192</button><button type="button" class="be-txtbtn" data-be="close">Not now</button></div>'+
+        (COPYKEY === 'cars' ? '<a class="be-ffline" href="contact?enquiry=try-djh">First time? <b>Try DJH for \u00a350</b> \u00b7 car video \u2192</a>' : '')+   /* car offer: Cars page only */
       '</div>';
     document.body.appendChild(pop);
 
@@ -1176,6 +1310,10 @@
     [pop, big].forEach(function(el){
       el.addEventListener('click', function(e){
         if (e.target === big) { hidePops(); return; }
+        if (OFFER && el === pop) {
+          if (e.target.closest('[data-be=close]')) hidePops();
+          return;
+        }
         var b = e.target.closest('[data-be]'); if (!b) return;
         hidePops(); if (b.getAttribute('data-be')==='go') { if (PRE && !S.genres.length) S.genres = [PRE]; openDM(); }
       });
@@ -1290,6 +1428,7 @@
     var modal = document.getElementById('modal');
     return document.body.classList.contains('menu-open') || (modal && modal.classList.contains('open')) || document.getElementById('djh-intro') || (function(){ var d=document.getElementById('djhbe-dm'); return !!(d && !d.hidden); })() || !!document.querySelector('.upd-overlay.show, .lb.open');
   }
+  try { localStorage.removeItem(KEY_FF); } catch(e){} /* old 7-day offer block, no longer used: the offer now follows the same reload/new-visit reset as every other pop-up */
   function showCorner(){
     if (seen(KEY_CORNER) || seen(KEY_BIG)) return;
     if (blocked()) { setTimeout(showCorner, 1500); return; }

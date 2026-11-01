@@ -809,6 +809,8 @@
   var BOTTOM = ((me && me.getAttribute('data-bottom')) || 'on') !== 'off';
   var MODE = (me && me.getAttribute('data-mode')) || 'build';
   var COPYKEY = (me && me.getAttribute('data-copy')) || 'home';
+  var OFFER = (me && me.getAttribute('data-offer')) || '';
+  var KEY_FF = 'djh_ff_dismissed', FF_DAYS = 7;
   var SIGNUP_TRIGGER = (me && me.getAttribute('data-signup')) || 'half';
   var BREVO = 'https://d3725b92.sibforms.com/serve/MUIFAAHochpj0uRrZ-rcpG2CZ8VugLs3qT6jr4WUdmoobVe4fRKrEcJVvmM-fOSmHld_TBDiNsc-VEFxcMkP1jxjBXEB_YXiGztGLRAX8iDejk6VbbNYiZCv5uTtMnmbZHW_XifZatMbcpNEjRSYmtFLEeTcuencvFBYOt7PGQMUAyBR7PXOV5-AXUclRbZE6RjHUfpwKWU5Hz4f6w==';
   var KEY_SU = 'djh_su_seen', KEY_SU_DONE = 'djh_su_done';
@@ -903,6 +905,24 @@
     P + ' h2{margin:0;font-family:var(--be-display);font-weight:400;font-size:2.6rem;line-height:.98;text-wrap:balance;letter-spacing:.03em;color:var(--be-text)}',
     P + ' p.be-txt{margin:0;color:var(--be-muted);font-size:.85rem;line-height:1.55}',
     P + ' .be-calm{margin:0;font-size:.78rem;line-height:1.5;color:var(--be-faint);font-style:italic}',
+    P + ' .be-ffline{display:block;margin-top:.35rem;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.08);font-size:.74rem;line-height:1.5;color:var(--be-faint);text-decoration:none}',
+    P + ' .be-ffline b{color:var(--be-gold);font-weight:600}',
+    P + ' .be-ffline:hover{color:#F0EFE9}',
+    P + '.ff .be-pframe{aspect-ratio:16/6}',
+    P + ' .ff-frame{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}',
+    P + ' .ff-frame small{font-size:.55rem;letter-spacing:.32em;text-transform:uppercase;color:var(--be-gold)}',
+    P + ' .ff-frame strong{font-family:var(--be-display);font-weight:400;font-size:2.2rem;letter-spacing:.08em;line-height:1;color:var(--be-text);text-shadow:0 2px 14px rgba(0,0,0,.6)}',
+    P + ' .ff-list{list-style:none;margin:.15rem 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.3rem .9rem}',
+    P + ' .ff-list li{position:relative;padding-left:1.05rem;font-size:.76rem;line-height:1.4;color:var(--be-text)}',
+    P + ' .ff-list li::before{content:"\\2713";position:absolute;left:0;top:0;color:var(--be-gold);font-size:.72rem}',
+    P + ' .ff-list li:last-child{grid-column:1/-1}',
+    P + ' .ff-sum{display:none;margin:0;font-size:.74rem;line-height:1.45;color:var(--be-muted)}',
+    P + ' .ff-price{display:flex;align-items:baseline;gap:.6rem;margin-top:.35rem;padding-top:.7rem;border-top:1px solid var(--be-line)}',
+    P + ' .ff-amt{font-family:var(--be-display);font-size:2.6rem;line-height:.9;color:var(--be-gold);font-variant-numeric:tabular-nums}',
+    P + ' .ff-per{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--be-faint)}',
+    P + ' .ff-cta{display:block;text-align:center;text-decoration:none;margin-top:.2rem}',
+    P + ' .ff-terms{margin:0;font-size:.68rem;line-height:1.5;color:var(--be-faint)}',
+    P + '.ff h2{font-size:2.3rem}',
     P + ' .be-pacts{display:flex;align-items:center;gap:1rem;margin-top:.4rem}',
     P + ' .be-x{position:absolute;top:22px;right:8px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(9,9,9,.7);color:var(--be-muted);font-size:1rem;line-height:30px;text-align:center}',
     '#djhbe-big{position:fixed;inset:0;z-index:590;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(5,5,5,.55);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;font-family:"Arimo",Arial,sans-serif;line-height:1.6;color:#F0EFE9;--be-gold:#E9C840;--be-gold-dim:#c9a928;--be-muted:rgba(240,239,233,.64);--be-faint:rgba(240,239,233,.40);--be-text:#F0EFE9;--be-display:"Bebas Neue",Impact,"Arial Narrow",sans-serif}',
@@ -961,6 +981,7 @@
     '@media(max-width:600px){#djhbe-su{left:0;right:auto;top:50%;bottom:auto;width:min(290px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);transform:translate(-110%,-50%)}#djhbe-su.be-show{transform:translate(0,-50%)}#djhbe-su .su-ticket{grid-template-columns:30px minmax(0,1fr);border-radius:0 8px 8px 0;border-left:0}#djhbe-su .su-stub span{font-size:.72rem;letter-spacing:.26em}#djhbe-su .su-eb,#djhbe-su .su-txt{display:none}#djhbe-su .su-body{padding:.95rem .95rem 1rem;gap:.5rem}#djhbe-su h2{font-size:1.65rem;padding-right:1.4rem}#djhbe-su .su-x{top:6px;right:6px;width:26px;height:26px;line-height:26px;font-size:.8rem}#djhbe-su .su-form{flex-direction:column}#djhbe-su .su-form input[type=email]{flex:none;padding:.6rem .75rem}#djhbe-su .su-go{font-size:1rem;padding:.6rem 1rem}#djhbe-su .su-priv{font-size:.64rem}}',
     '@media (prefers-reduced-motion:reduce){#djhbe-su,#djhbe-su *{transition:none!important}}',
     '@media(max-width:600px){' + P + '{left:0;right:auto;top:50%;bottom:auto;width:min(272px,calc(100vw - 4.5rem));max-height:calc(100vh - 8rem);border-left:0;border-radius:0 8px 8px 0;transform:translate(-110%,-50%)}' + P + '.be-show{transform:translate(0,-50%)}' + P + ' .be-pframe,' + P + ' .be-eyebrow,' + P + ' p.be-txt{display:none}' + P + ' .be-x{top:8px;right:8px;width:26px;height:26px;line-height:26px;font-size:.85rem}' + P + ' .be-pbody{padding:.95rem 1rem 1rem;gap:.45rem}' + P + ' h2{font-size:1.65rem;padding-right:1.6rem}' + P + ' .be-calm{font-size:.76rem}' + P + ' .be-pacts{flex-wrap:wrap;gap:.6rem;margin-top:.15rem}' + P + ' .be-btn{font-size:1rem;padding:.6rem 1rem}}',
+    '@media(max-width:600px){' + P + '.ff{width:min(292px,calc(100vw - 4rem))}' + P + '.ff .be-eyebrow{display:block;font-size:.6rem}' + P + '.ff .ff-list{display:none}' + P + '.ff .ff-sum{display:block}' + P + '.ff h2{font-size:1.6rem}' + P + '.ff .ff-amt{font-size:2.1rem}' + P + '.ff .ff-price{padding-top:.5rem;margin-top:.15rem}' + P + '.ff .ff-cta{font-size:1rem;padding:.65rem .9rem}' + P + '.ff .ff-terms{font-size:.62rem}}',
 
     /* buttons */
     X.split(',').map(function(s){return s+' .be-btn';}).join(',') + '{background:var(--be-gold);color:#090909;font-family:var(--be-display);font-size:1.1rem;letter-spacing:.08em;padding:.75rem 1.4rem;border-radius:3px;transition:background .2s,transform .15s;white-space:nowrap}',
@@ -1131,13 +1152,30 @@
       var a = e.target.closest && e.target.closest('a[href]');
       if (a && !a.target && a.hostname === location.hostname) { try { sessionStorage.setItem('djh_be_hop', String(Date.now())); } catch(x){} }
     }, true);
-    if (/[?&]popup=reset/.test(location.search)) { try { sessionStorage.removeItem(KEY_CORNER); sessionStorage.removeItem(KEY_BIG); sessionStorage.removeItem(KEY_SU); localStorage.removeItem(KEY_SU_DONE); } catch(e){} }
+    if (/[?&]popup=reset/.test(location.search)) { try { sessionStorage.removeItem(KEY_CORNER); sessionStorage.removeItem(KEY_BIG); sessionStorage.removeItem(KEY_SU); localStorage.removeItem(KEY_SU_DONE); localStorage.removeItem(KEY_FF); } catch(e){} }
 
     var st = document.createElement('style'); st.id = 'djhbe-css'; st.textContent = css; document.head.appendChild(st);
     if (MODE === 'signup') { initSignup(); return; }
 
     var pop = document.createElement('aside');
     pop.id = 'djhbe-pop'; pop.setAttribute('aria-label','Build your edit'); pop.setAttribute('aria-hidden','true');
+    if (OFFER === 'try-djh' || OFFER === 'first-film') {
+      pop.className = 'ff';
+      pop.setAttribute('aria-label','Try DJH for \u00a350');
+      pop.innerHTML =
+        '<div class="be-pframe"><div class="be-slate"></div>'+scene('moody','slow')+
+          '<div class="ff-frame"><small>Try DJH</small><strong>\u00a350</strong></div></div>'+
+        '<button type="button" class="be-x" data-be="close" aria-label="Close">\u2715</button>'+
+        '<div class="be-pbody">'+
+          '<p class="be-eyebrow ff-name">Try DJH for \u00a350 \u00b7 Car video</p>'+
+          '<h2>Your car. Presented properly.</h2>'+
+          '<p class="be-txt">Your car, or your stock, filmed and edited properly. Get in touch to see what \u00a350 can do for you.</p>'+
+          '<p class="ff-sum">Get in touch to see what \u00a350 can do for you.</p>'+
+          '<div class="ff-price"><span class="ff-amt">\u00a350</span><span class="ff-per">car video</span></div>'+
+          '<a class="be-btn ff-cta" href="contact?enquiry=try-djh">Try DJH \u2192</a>'+
+          '<p class="ff-terms">Introductory offer for new clients, private sellers and dealerships. The edit is limited at this price; we\u2019ll agree what\u2019s included before anything starts.</p>'+
+        '</div>';
+    } else
     pop.innerHTML =
       '<div class="be-pframe"><div class="be-slate"></div>'+scene('moody','slow')+'</div>'+
       '<button type="button" class="be-x" data-be="close" aria-label="Close">\u2715</button>'+
@@ -1147,6 +1185,7 @@
         '<p class="be-txt">'+esc(CP.t)+'</p>'+
         '<p class="be-calm">No perfect brief needed. We\u2019ll work out the details together.</p>'+
         '<div class="be-pacts"><button type="button" class="be-btn" data-be="go">'+esc(CP.b)+' \u2192</button><button type="button" class="be-txtbtn" data-be="close">Not now</button></div>'+
+        (COPYKEY === 'cars' ? '<a class="be-ffline" href="contact?enquiry=try-djh">First time? <b>Try DJH for \u00a350</b> \u00b7 car video \u2192</a>' : '')+   /* car offer: Cars page only */
       '</div>';
     document.body.appendChild(pop);
 
@@ -1208,6 +1247,10 @@
     [pop, big].forEach(function(el){
       el.addEventListener('click', function(e){
         if (e.target === big) { hidePops(); return; }
+        if (OFFER && el === pop) {
+          if (e.target.closest('[data-be=close]')) hidePops();
+          return;
+        }
         var b = e.target.closest('[data-be]'); if (!b) return;
         hidePops(); if (b.getAttribute('data-be')==='go') { if (PRE && !S.genres.length) S.genres = [PRE]; openDM(); }
       });
@@ -1322,6 +1365,7 @@
     var modal = document.getElementById('modal');
     return document.body.classList.contains('menu-open') || (modal && modal.classList.contains('open')) || document.getElementById('djh-intro') || (function(){ var d=document.getElementById('djhbe-dm'); return !!(d && !d.hidden); })() || !!document.querySelector('.upd-overlay.show, .lb.open');
   }
+  try { localStorage.removeItem(KEY_FF); } catch(e){} /* old 7-day offer block, no longer used: the offer now follows the same reload/new-visit reset as every other pop-up */
   function showCorner(){
     if (seen(KEY_CORNER) || seen(KEY_BIG)) return;
     if (blocked()) { setTimeout(showCorner, 1500); return; }
