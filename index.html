@@ -3,16 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DJH &mdash; Video Editor &amp; Videographer, Automotive Focused</title>
-  <meta name="description" content="Car, product and business videos, filmed and edited by Sam Coupe in Nottinghamshire. On-location filming across the East Midlands and a 2&ndash;8 day turnaround." />
+  <title>DJHVSULS | Automotive Videographer &amp; Video Editor in Nottinghamshire</title>
+  <meta name="description" content="DJHVSULS: car, product and business videos filmed and edited by Samuel Coupe in Nottinghamshire, with on-location filming across the East Midlands." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
-  <meta property="og:site_name" content="DJH" />
-  <meta property="og:title" content="DJH &mdash; Video Editor &amp; Videographer, Automotive Focused" />
-  <meta property="og:description" content="Car, product and business videos, filmed and edited by Sam Coupe in Nottinghamshire. On-location filming across the East Midlands and a 2&ndash;8 day turnaround." />
+  <meta property="og:site_name" content="DJHVSULS" />
+  <meta property="og:title" content="DJHVSULS | Automotive Videographer &amp; Video Editor in Nottinghamshire" />
+  <meta property="og:description" content="DJHVSULS: car, product and business videos filmed and edited by Samuel Coupe in Nottinghamshire, with on-location filming across the East Midlands." />
   <meta property="og:image" content="https://djhvsuls.uk/LogoDJH_for_pfp.png" />
   <meta property="og:url" content="https://djhvsuls.uk/" />
   <link rel="canonical" href="https://djhvsuls.uk/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://djhvsuls.uk/#website",
+        "name": "DJHVSULS",
+        "url": "https://djhvsuls.uk/",
+        "inLanguage": "en-GB",
+        "publisher": {
+          "@id": "https://djhvsuls.uk/#person"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://djhvsuls.uk/#person",
+        "name": "Samuel Coupe",
+        "url": "https://djhvsuls.uk/",
+        "jobTitle": "Videographer and Video Editor",
+        "brand": {
+          "@type": "Brand",
+          "name": "DJHVSULS"
+        },
+        "email": "mailto:contact@djhvsuls.uk",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Nottinghamshire",
+          "addressCountry": "GB"
+        },
+        "sameAs": [
+          "https://www.instagram.com/djh.vsuls/"
+        ]
+      }
+    ]
+  }
+  </script>
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="https://djhvsuls.uk/LogoDJH_for_pfp.png" />
@@ -221,6 +258,7 @@
     .hero-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(170deg,rgba(9,9,9,.05) 0%,rgba(9,9,9,.3) 45%,rgba(9,9,9,.9) 82%,rgba(9,9,9,.97) 100%); }
     .hero-content { position:relative; z-index:3; }
     /* video-in-text hero */
+    h1.vit-eyebrow { font-weight:400; margin-top:0; }   /* the eyebrow is the page's main heading; keep it looking exactly like before */
     .vit-eyebrow { font-family:'Bebas Neue',sans-serif; font-size:clamp(1rem,2vw,1.5rem); letter-spacing:.28em; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:2.2rem; }
     .vit-wrap { position:relative; width:min(96vw,1350px); margin:0 auto; display:flex; align-items:center; justify-content:center; }
     .vit-heading { font-family:'Bebas Neue', sans-serif; font-weight:400; color:#090909;
@@ -228,7 +266,7 @@
       transition:color .1s linear; }
     .vit-cut { position:absolute; inset:0; width:100%; height:100%; }
     /* rotating headline: every line sits in the same grid cell, so the hero never jumps in size */
-    .vit-rot, .hero h1.vit-rot { display:grid; justify-items:center; align-items:center; max-width:none; }
+    .vit-rot, .hero p.vit-rot { display:grid; justify-items:center; align-items:center; max-width:none; }
     .vit-rot .vit-line { grid-area:1/1; display:block; white-space:nowrap; visibility:hidden; clip-path:inset(0 0 100% 0); transform:translateY(8%); }
     .vit-rot .vit-line.is-on { visibility:visible; clip-path:inset(0 0 0 0); transform:none; transition:clip-path .85s cubic-bezier(.77,0,.18,1), transform .85s cubic-bezier(.77,0,.18,1); }
     .vit-rot .vit-line.is-out { visibility:visible; clip-path:inset(100% 0 0 0); transform:translateY(-8%); transition:clip-path .7s cubic-bezier(.77,0,.18,1), transform .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
@@ -243,7 +281,7 @@
     .hero-tag { display:inline-flex; align-items:center; gap:.5rem; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:1.4rem; }
     .hero-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
-    .hero h1 { margin-bottom:3rem; max-width:14ch; }
+    .hero .vit-heading { margin-bottom:3rem; }
     .hero-bottom { display:flex; align-items:center; gap:2rem; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,0.08); padding-top:1.75rem; }
     .h-stat { display:flex; flex-direction:column; }
     .h-stat-n { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:var(--white); line-height:1; letter-spacing:.01em; }
@@ -553,7 +591,7 @@
     <div class="intro-frame">
       <span class="intro-tick tl"></span><span class="intro-tick tr"></span>
       <span class="intro-tick bl"></span><span class="intro-tick br"></span>
-      <img class="intro-logo" src="LogoDJH_for_pfp.png" alt="DJH" />
+      <img class="intro-logo" src="LogoDJH_for_pfp.png" alt="DJHVSULS" />
     </div>
     <div class="intro-tagline">CUT &middot; GRADE &middot; DELIVER</div>
     <div class="intro-count" id="introCount">000</div>
@@ -606,7 +644,7 @@
   </script>
 
   <nav id="nav">
-    <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJH" /></a>
+    <a href="/" class="nav-logo"><img src="LogoDJH_for_pfp.png" alt="DJHVSULS" /></a>
     <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     <div class="sm-prelayers" aria-hidden="true">
       <div class="sm-prelayer sm-prelayer-1"></div>
@@ -643,17 +681,17 @@
   <div id="pagewrap" class="page-tx" data-page="HOME">
   <section class="hero">
     <div class="hero-content" style="width:100%;">
-      <div class="vit-eyebrow"><span style="white-space:nowrap">Video Editor</span> &middot; <span style="white-space:nowrap">Videographer</span> &middot; <span style="white-space:nowrap">Automotive Focused</span></div>
+      <h1 class="vit-eyebrow"><span style="white-space:nowrap">Video Editor</span> &middot; <span style="white-space:nowrap">Videographer</span> &middot; <span style="white-space:nowrap">Automotive Focused</span> &middot; <span style="white-space:nowrap">Nottinghamshire</span></h1>
       <div class="vit-wrap" id="vitWrap">
-        <!-- Rotating headline: the first line is the real heading (what loads, what Google and screen readers get).
+        <!-- Rotating slogan (decorative; the page's main heading is the eyebrow line above it). The first line is what loads and what screen readers get.
              To change the lines, edit/add/remove the <span class="vit-line"> rows below. -->
-        <h1 class="vit-heading vit-rot" id="vitRot">
+        <p class="vit-heading vit-rot" id="vitRot">
           <span class="vit-line is-on">DON&rsquo;T<br/>BLEND IN.</span>
           <span class="vit-line" aria-hidden="true">LOOK<br/>EXPENSIVE.</span>
           <span class="vit-line" aria-hidden="true">MAKE IT<br/>WANTED.</span>
           <span class="vit-line" aria-hidden="true">DON&rsquo;T LET IDEAS<br/>BE IDEAS.</span>
           <span class="vit-line" aria-hidden="true">MAKE IT<br/>HAPPEN.</span>
-        </h1>
+        </p>
       </div>
       <div class="vit-sub">Car, product and business videos &mdash; filmed and edited by one person, ready for your listings, website and socials.</div>
       <div class="vit-btns">
@@ -780,7 +818,7 @@
   <section class="about-strip reveal">
     <div class="about-strip-inner">
       <div class="about-strip-left">
-        <div class="eyebrow">About DJH</div>
+        <div class="eyebrow">About DJHVSULS</div>
         <h2 class="h-md" style="margin-bottom:1.25rem;">Motion. Film.<br/>Craft.</h2>
         <p class="body-txt" style="max-width:420px;">I&rsquo;m Sam, a self-taught video editor and videographer in Nottinghamshire, editing since 2020 and now focused on cars and commercial work. I film, edit, colour grade and do the sound design myself, so nothing gets lost being passed between people.</p>
         <a href="about" class="btn-ghost" style="margin-top:1.75rem;">More About Me &#8599;</a>
@@ -835,7 +873,7 @@
 
   <footer>
     <div class="footer-inner">
-      <img src="LogoDJH_for_pfp.png" alt="DJH" />
+      <img src="LogoDJH_for_pfp.png" alt="DJHVSULS" />
       <div class="footer-social">
         <a href="services">Services</a>
         <a href="shop">Shop</a>
@@ -1617,7 +1655,7 @@
     dm.setAttribute('data-lenis-prevent','');
     dm.innerHTML =
       '<div class="be-wrap"><div class="be-head be-inner">'+
-        '<img src="LogoDJH_for_pfp.png" alt="DJH">'+
+        '<img src="LogoDJH_for_pfp.png" alt="DJHVSULS">'+
         '<span class="be-mode">Build your edit</span>'+
         '<span class="be-scn" id="be-scn">Scene 1 of 6</span>'+
         '<button type="button" class="be-close" id="be-close" aria-label="Close">\u2715</button>'+
@@ -1740,7 +1778,7 @@
             '<input type="hidden" name="locale" value="en">'+
             '<button type="submit" class="su-go">Sign me up \u2192</button>'+
           '</form>'+
-          '<p class="su-priv">By signing up you agree to receive occasional emails from DJH. See the <a href="privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>'+
+          '<p class="su-priv">By signing up you agree to receive occasional emails from DJHVSULS. See the <a href="privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>'+
           '<div class="su-done">You\u2019re on the list.</div>'+
           '<button type="button" class="su-later" data-be="close">Maybe later</button>'+
         '</div>'+
