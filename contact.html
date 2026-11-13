@@ -518,6 +518,8 @@
     .calm p { font-size: 0.9rem; color: var(--grey-mid); line-height: 1.8; margin-bottom: 1rem; max-width: 62ch; }
     .calm .calm-close { font-family: 'Bebas Neue', sans-serif; font-size: 1.45rem; letter-spacing: 0.04em; line-height: 1.2; color: var(--gold); margin: 1.5rem 0 0.35rem; max-width: none; }
     .calm .calm-sign { font-size: 0.78rem; color: var(--grey); margin: 0; }
+    .calm-sign-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.9rem; }
+    .calm-avatar { display: block; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(233,200,64,0.45); }
     .start { margin: 0 0 2.5rem; }
     .start-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.06em; margin-bottom: 1rem; }
     .start-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 0.75rem; }
@@ -622,7 +624,10 @@
       <p>You don&rsquo;t need everything figured out before contacting me. You don&rsquo;t need a perfect brief, all the right words, or even a clear idea of exactly what you want yet.</p>
       <p>Just tell me what you can, in whatever way feels comfortable. We can take our time, talk things through properly and work out the details together.</p>
       <p class="calm-close">There&rsquo;s no pressure to get it right from the start. We&rsquo;ll figure it out together.</p>
-      <p class="calm-sign">&mdash; Sam, DJH</p>
+      <div class="calm-sign-row">
+        <picture><source srcset="sam-coupe-avatar.webp" type="image/webp" /><img class="calm-avatar" src="sam-coupe-avatar.jpg" width="160" height="160" alt="Sam Coupe" loading="lazy" /></picture>
+        <p class="calm-sign">&mdash; Sam, DJH</p>
+      </div>
     </section>
 
     <!-- Ways to start -->
