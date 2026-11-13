@@ -201,6 +201,15 @@
     .page-hero .eyebrow { margin-bottom:1rem; }
     .page-hero h1 { margin-bottom:1.5rem; }
     .page-hero p { max-width:600px; }
+    /* portrait beside the name on wider screens, under the intro on phones */
+    .page-hero.has-photo { display:grid; grid-template-columns:minmax(0,1fr) minmax(240px,360px); column-gap:4rem; align-items:end; }
+    .page-hero.has-photo > :not(.about-photo) { grid-column:1; }
+    .about-photo { grid-column:2; grid-row:1 / span 4; align-self:end; display:block; }
+    .about-photo img { display:block; width:100%; height:auto; aspect-ratio:1; object-fit:cover; border:1px solid var(--border); border-radius:4px; }
+    @media(max-width:800px){
+      .page-hero.has-photo { grid-template-columns:1fr; }
+      .about-photo { grid-column:1; grid-row:auto; margin-top:2rem; max-width:420px; }
+    }
     .back-link { display:inline-flex; align-items:center; gap:.5rem; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--grey); text-decoration:none; margin-bottom:1.5rem; transition:color .2s,gap .2s; }
     .back-link:hover { color:var(--white); gap:.8rem; }
     /* SERVICES */
@@ -422,11 +431,15 @@
   </nav>
 
   <div id="pagewrap" class="page-tx" data-page="ABOUT">
-  <section class="page-hero">
+  <section class="page-hero has-photo">
     <a href="/" class="back-link">&larr; Back to Home</a>
     <div class="eyebrow">About</div>
     <h1 class="h-xl">Sam Coupe<br/><span class="gold">/ DJHVSULS</span></h1>
     <p class="body-txt">Video editor, motion designer and videographer based in Nottinghamshire, UK, with a focus on automotive work.</p>
+    <picture class="about-photo">
+      <source srcset="sam-coupe-djhvsuls.webp" type="image/webp" />
+      <img src="sam-coupe-djhvsuls.jpg" width="900" height="900" alt="Sam Coupe of DJHVSULS holding his DJI Osmo Pocket 4P rig" fetchpriority="high" />
+    </picture>
   </section>
 
   <div class="about-page">
